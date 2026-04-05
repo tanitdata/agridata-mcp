@@ -1,0 +1,13 @@
+{
+  "mcpServers": {
+    "tanitdata": {
+      "command": "uv",
+      "args": [
+        "run",
+        "--directory",
+        "C:\\Users\\HP\\Documents\\ClaudeProjects\\TanitData",
+        "tanitdata"
+      ]
+    }
+  }
+}
