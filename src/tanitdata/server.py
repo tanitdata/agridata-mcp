@@ -18,6 +18,7 @@ from mcp.server.fastmcp import FastMCP
 from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
 from tanitdata.tools.climate import query_climate_stations
+from tanitdata.tools.crops import query_crop_production
 from tanitdata.tools.datastore import query_datastore
 from tanitdata.tools.search import (
     get_dataset_details,
@@ -133,6 +134,42 @@ async def list_organizations_tool(query: str = "") -> str:
     """
     await registry.maybe_refresh(client)
     return await list_organizations(client=client, query=query)
+
+
+@mcp.tool()
+async def query_crop_production_tool(
+    crop_type: str | None = None,
+    gouvernorat: str | None = None,
+    year_from: int | None = None,
+    year_to: int | None = None,
+    metric: str = "production",
+) -> str:
+    """Query agricultural crop production data from Tunisia's data portal.
+
+    239 resources across 23+ governorates covering cereals, olives, fruit trees, vegetables, and fodder.
+
+    Modes:
+    - No arguments: inventory of available data by governorate and crop category
+    - With filters: query matching resources, normalize production to tonnes
+
+    crop_type: crop category or name. Accepts French or English: 'céréales'/'cereals',
+               'olives', 'arboriculture'/'fruit trees', 'maraîchères'/'vegetables',
+               'fourragères'/'fodder'. Also specific crops: 'blé'/'wheat', 'orge'/'barley',
+               'tomate', 'pomme de terre'.
+    gouvernorat: governorate name (e.g. 'Béja', 'Jendouba'). Comma or 'vs' for comparison.
+    year_from / year_to: filter by year range (e.g. 2020, 2023).
+    metric: 'production' (default, in tonnes), 'superficie'/'area' (hectares), 'yield' (tonnes/ha).
+    """
+    await registry.maybe_refresh(client)
+    return await query_crop_production(
+        client=client,
+        registry=registry,
+        crop_type=crop_type,
+        gouvernorat=gouvernorat,
+        year_from=year_from,
+        year_to=year_to,
+        metric=metric,
+    )
 
 
 @mcp.tool()

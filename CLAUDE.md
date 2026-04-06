@@ -19,7 +19,7 @@
 │  │ Data Tools   │  │ Knowledge Tools      │  │
 │  │              │  │                      │  │
 │  │ climate  ✅  │  │ search_documents     │  │
-│  │ crops        │  │ search_bibliography  │  │
+│  │ crops    ✅  │  │ search_bibliography  │  │
 │  │ dams         │  │                      │  │
 │  │ fisheries    │  │                      │  │
 │  │ prices       │  │                      │  │
@@ -331,37 +331,26 @@ List all data-producing organizations with dataset counts.
 - Output: sorted-by-count list of org names and dataset counts
 - Implementation: `package_search` with `rows=0`, reads `search_facets.organization.items`
 
-### P0: query_crop_production — not yet built
-Query agricultural production data by crop type, governorate, and campaign year.
-- Input: `crop_type: str?` ("cereales"|"olives"|"arboriculture"|"fourrageres"|"maraicheres"), `gouvernorat: str?`, `year_range: str?`
-- Output: production (normalised to tonnes), cultivated area (hectares), yield ratio
-
-**Schema complexity:** 239 resources with 176 unique field-set signatures. Do NOT try to enumerate schema families upfront. Instead, use **column-name-based unit detection** at query time:
-
-| Production column present | Unit | Normalise to tonnes |
-|---|---|---|
-| `production_tonnes` / `Production_tonne` / `estimation_production_tonnes` | tonnes | ×1 (no-op) |
-| `production_quintaux` / `estimation_production_quintaux` | quintaux | ×0.1 |
-| `production_irriguee_tonnes` | tonnes (irrigated) | ×1 |
-| `production_1000quintaux` | 1000 quintaux | ×100 |
-
-Strategy: call `get_domain_resources("crop_production", gouvernorat=...)`, inspect each resource's field list for known production columns, route to the appropriate SQL fragment, normalise output, annotate units used.
-
-**Most frequent schema clusters** (from schemas.json, top 10 by frequency):
-1. `(10×)` conduite_culturale, olives, production_tonnes, supeficie_cultivee_hectares
-2. `(9×)` production_tonnes, superficie_hectares, type_arbo
-3. `(9×)` production_quintaux, superficie_cultivee_hectares, superficie_recoltee_hectares, type_de_culture
-4. `(9×)` estimation_production_quintaux, superficie_cultivee_hectares, type_de_culture
-5. `(7×)` conduite_culturale, culture, production_tonnes, superficie_cultivee_hectares
-6. `(4×)` Annee, Culture, Superficie_Hectare  ← DGEDA wide-format, year is a value not a column
-7. `(4×)` culture_hiver, production_irriguee_tonnes, superficie_irriguee_hectares
-8. `(3×)` Annee, Culture, Production_tonne
-9. `(3×)` culture, production_irriguee_tonnes, superficie_irriguee_hectares
-10. `(3×)` conduite_culturale, estimation_production_tonnes, olives, supeficie_cultivee_hectares
-
-**Excel overflow:** 1 resource — "Evolution de la superficie d'arbres fruitiers" (1,048,575 rows). Must detect (`records >= 1_048_575`) and skip.
-
-**CRDA vs DGEDA merge:** CRDA resources are tagged to a governorate via org slug; DGEDA resources land as `"national"`. When `gouvernorat` is specified, use CRDA resources first (granular), supplement with DGEDA where CRDA has gaps. When no governorate given, query DGEDA national resources for totals.
+### P0: query_crop_production ✅ Implemented
+Query agricultural production data across 238 resources in 22 governorates + national datasets.
+- Input: `crop_type: str?`, `gouvernorat: str?`, `year_from: int?`, `year_to: int?`, `metric: str = "production"`
+- Modes:
+  - **Inventory** (no args): resource count by governorate + crop category detection (cereals, olives, fruit trees, vegetables, fodder)
+  - **Filtered query** (crop_type and/or gouvernorat): query matching resources, normalize production to tonnes in display
+  - **Multi-governorate comparison** (comma or "vs" in gouvernorat): side-by-side data per governorate
+  - **Yield mode** (metric="yield"): requires resources with both production AND area columns
+- Crop type accepts French or English: 'cereales'/'cereals', 'olives', 'arboriculture'/'fruit trees', 'maraicheres'/'vegetables', 'fourrageres'/'fodder', plus specific crops ('ble'/'wheat', 'orge'/'barley', 'tomate', 'pomme de terre')
+- **Column-name-driven schema detection** (176 unique schemas handled without enumeration):
+  - Production columns detected by prefix (`production_`, `estimation_production_`) or suffix (`_qx`, `_quintaux`, `_tonnes`, `_tonne`, `_t`)
+  - Area columns detected by keyword (`superficie`, `surface`) or suffix (`_ha`, `hectare`)
+  - Unit normalization: `_tonnes`/`_tonne` -> x1, `_quintaux`/`_qx` -> x0.1, `1000quintaux` -> x100
+  - Crop-as-column format (e.g. `Ble dur`, `Orge` as column names): detected and queried without crop SQL filter
+  - Wide-format (year-as-column from DGEDA): flagged in output
+- **SQL strategy**: always `SELECT *` (avoids CKAN DataStore CASE WHEN restriction and URL length issues). Normalization happens in Python display via `prod_mult` dict
+- Excel overflow detection: resources with >= 1,048,575 rows automatically excluded
+- Error handling: per-resource try/except catches 403/409 HTTP errors without aborting the batch
+- Implementation: `src/tanitdata/tools/crops.py` (~480 lines)
+- Benchmark: 10 queries in ~19s total; 9/10 return data, 1 (yield in Siliana) correctly reports no paired production+area columns
 
 ### P0: query_dam_levels — not yet built
 Query dam/reservoir storage levels and compute fill rates.
@@ -449,7 +438,7 @@ tanitdata/
 │       │   ├── search.py       # ✅ search_datasets, get_dataset_details, list_organizations
 │       │   ├── datastore.py    # ✅ query_datastore (SQL + Arabic decode + availability context)
 │       │   ├── climate.py      # ✅ query_climate_stations (3 EAV variants, caching, comparison)
-│       │   ├── crops.py        # planned — does not exist yet
+│       │   ├── crops.py        # ✅ query_crop_production (176 schemas, unit normalization, multi-gov)
 │       │   ├── dams.py         # planned — does not exist yet
 │       │   ├── fisheries.py    # planned — does not exist yet
 │       │   ├── bibliography.py # planned — does not exist yet
@@ -469,7 +458,7 @@ tanitdata/
 ## Development Workflow
 
 1. `pip install -e .` to install in editable mode (or use `uv`)
-2. Test with live portal: `python test_climate.py` or `python test_stress.py`
+2. Test with live portal: `python test_climate.py`, `python test_stress.py`, or `python test_crops.py`
 3. Run unit tests: `pytest tests/`
 4. MCP Inspector for tool testing: `mcp dev src/tanitdata/server.py`
 5. Connect to Claude Desktop for integration testing
@@ -488,16 +477,18 @@ tanitdata/
 - `query_datastore` MCP tool does not expose a `filters` dict parameter (the underlying Python function accepts it but it was intentionally omitted from the server registration).
 - Sensor list caching (`_sensor_cache` dict) in `climate.py` is process-scoped — it resets on server restart but survives the lifetime of a session, making repeated inventory calls fast (~0s after the first).
 - `tests/test_tools/` has only an `__init__.py`. No automated tests for tool outputs yet — development has relied on live benchmark scripts at the project root.
+- **CKAN DataStore SQL restriction**: `CASE WHEN` is not in the DataStore SQL whitelist (returns 409 CONFLICT). All domain tools must use `SELECT *` and normalize values in Python. Some resources also return 403 FORBIDDEN for SQL queries — domain tools must catch these per-resource and continue.
+- **Crop yield limitation**: yield metric requires resources with both production AND area columns. Some governorates (e.g. Siliana cereals) only have crop-as-column format without separate production/area columns, so yield computation is not possible for those resources.
 
 ## Build Sequence for Remaining Phase 1 Tools
 
 Priority order for the next session (highest benchmark impact first):
 
-1. **`query_crop_production`** — fixes the most benchmark failures (queries 4, 5, 6 all PARTIAL). 239 resources, column-name-based unit detection, CRDA+DGEDA merge. Build this while context is fresh — it establishes the domain-tool pattern reused by fisheries.
+1. ~~**`query_crop_production`**~~ — ✅ Done (v1.2). 238 resources, 176 schemas, column-name-driven detection, unit normalization, multi-gov comparison. Benchmark: 9/10 queries return data, ~19s total.
 
 2. **`query_dam_levels`** — 23 resources, 986 records, single clean schema. Validates the computed-field pattern `(Quantite_stockee / Capacite) * 100`. Small scope, quick win after crop complexity.
 
-3. **`search_bibliography`** — single known resource, ILIKE over Titre+Resume, no domain routing. Fixes benchmark query 9 (WEAK). Validates the bibliography search pattern before Phase 2 vector enhancement.
+3. **`search_bibliography`** — single known resource, ILIKE over Titre+Resume, no domain routing. Validates the bibliography search pattern before Phase 2 vector enhancement.
 
 4. **`get_dashboard_link`** — trivial static dict lookup, ~10 minutes.
 
