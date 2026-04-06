@@ -225,21 +225,22 @@ Supporting maps (all in `schema_registry.py`):
 - `domain_resource_index`: 11 domains with curated resource lists, field schemas, record counts
 - `arabic_field_decoding`: mojibake → Arabic/French mapping for 19 Bizerte price datasets
 
-### Key Domain Resource Counts (from static schemas.json)
+### Key Domain Resource Counts (from schemas.json — verified 2026-04)
 
 | Domain | Resources | Records | Key Fields |
 |---|---|---|---|
-| climate_stations | 24 (21 static + 3 live) | ~215,000 | varies by EAV variant (see below) |
-| rainfall | 25 | 2,970 | delegation/station, mois, precipitations_mm |
-| dams | 11 | 271 | Nom du barrage, Capacite, Quantite_stockee |
-| crop_production | 56 | 632 | type_de_culture, superficie_hectares, production_tonnes/quintaux |
-| olive_harvest | 31 | 1,152 | Delegation, Production_Huile_en_tonne, Nb_oliviers |
-| prices | 21 | 1,165 | Variete, prix, prixmin, prixmax (+ mojibake variants) |
-| fisheries | 52 | 2,476 | nature_du_produit, quantite_kilos, societe |
-| investments | 52 | 4,947 | GOUVERNORAT, INV_DECLARE, NBR_EMPLOI |
-| livestock | 23 | 1,049,494 | (warning: 2 resources with Excel overflow at 1,048,575 rows) |
-| water_resources | 51 | 2,643 | Nom de la nappe, Delegation, Ressources_million_m3 |
-| documentation | 7 | 25,992 | Titre, Auteur, Annee, Nom_fichier, Resume |
+| climate_stations | 24 | ~213,700 | varies by EAV variant (see below) |
+| rainfall | 48 | ~213,900 | delegation/station, mois, precipitations_mm |
+| dams | 23 | 986 | Nom du barrage, Capacite, Quantite_stockee |
+| crop_production | 239 | ~1,062,300 | 176 unique schemas — see crop section below |
+| olive_harvest | 49 | 2,983 | Delegation, Production_Huile_en_tonne, Nb_oliviers |
+| prices | 42 | 6,550 | Variete, prix, prixmin, prixmax (+ mojibake variants) |
+| fisheries | 64 | 10,496 | nature_du_produit, quantite_kilos, societe |
+| investments | 59 | 5,167 | GOUVERNORAT, INV_DECLARE, NBR_EMPLOI |
+| livestock | 99 | ~1,053,970 | (warning: Excel overflow resources exist at 1,048,575 rows) |
+| water_resources | 108 | 5,212 | Nom de la nappe, Delegation, Ressources_million_m3 |
+| trade_exports | 28 | 1,002 | produit, valeur_exportation, quantite, pays |
+| documentation | 7 | 25,948 | Titre, Auteur, Annee, Nom_fichier, Resume |
 
 ### Climate Station EAV Schemas (3 variants)
 
@@ -333,8 +334,34 @@ List all data-producing organizations with dataset counts.
 ### P0: query_crop_production — not yet built
 Query agricultural production data by crop type, governorate, and campaign year.
 - Input: `crop_type: str?` ("cereales"|"olives"|"arboriculture"|"fourrageres"|"maraicheres"), `gouvernorat: str?`, `year_range: str?`
-- Output: production data (tonnes/quintaux), cultivated area (hectares), yield
-- Implementation: search registry by domain, handle 3 different schema families (cereals, olives, fruit trees)
+- Output: production (normalised to tonnes), cultivated area (hectares), yield ratio
+
+**Schema complexity:** 239 resources with 176 unique field-set signatures. Do NOT try to enumerate schema families upfront. Instead, use **column-name-based unit detection** at query time:
+
+| Production column present | Unit | Normalise to tonnes |
+|---|---|---|
+| `production_tonnes` / `Production_tonne` / `estimation_production_tonnes` | tonnes | ×1 (no-op) |
+| `production_quintaux` / `estimation_production_quintaux` | quintaux | ×0.1 |
+| `production_irriguee_tonnes` | tonnes (irrigated) | ×1 |
+| `production_1000quintaux` | 1000 quintaux | ×100 |
+
+Strategy: call `get_domain_resources("crop_production", gouvernorat=...)`, inspect each resource's field list for known production columns, route to the appropriate SQL fragment, normalise output, annotate units used.
+
+**Most frequent schema clusters** (from schemas.json, top 10 by frequency):
+1. `(10×)` conduite_culturale, olives, production_tonnes, supeficie_cultivee_hectares
+2. `(9×)` production_tonnes, superficie_hectares, type_arbo
+3. `(9×)` production_quintaux, superficie_cultivee_hectares, superficie_recoltee_hectares, type_de_culture
+4. `(9×)` estimation_production_quintaux, superficie_cultivee_hectares, type_de_culture
+5. `(7×)` conduite_culturale, culture, production_tonnes, superficie_cultivee_hectares
+6. `(4×)` Annee, Culture, Superficie_Hectare  ← DGEDA wide-format, year is a value not a column
+7. `(4×)` culture_hiver, production_irriguee_tonnes, superficie_irriguee_hectares
+8. `(3×)` Annee, Culture, Production_tonne
+9. `(3×)` culture, production_irriguee_tonnes, superficie_irriguee_hectares
+10. `(3×)` conduite_culturale, estimation_production_tonnes, olives, supeficie_cultivee_hectares
+
+**Excel overflow:** 1 resource — "Evolution de la superficie d'arbres fruitiers" (1,048,575 rows). Must detect (`records >= 1_048_575`) and skip.
+
+**CRDA vs DGEDA merge:** CRDA resources are tagged to a governorate via org slug; DGEDA resources land as `"national"`. When `gouvernorat` is specified, use CRDA resources first (granular), supplement with DGEDA where CRDA has gaps. When no governorate given, query DGEDA national resources for totals.
 
 ### P0: query_dam_levels — not yet built
 Query dam/reservoir storage levels and compute fill rates.
@@ -355,6 +382,8 @@ Search ONAGRI's bibliographic catalog (22,782 records) by title, author, year, k
 - Implementation: SQL ILIKE against the ONAGRI base DataStore resource
 - Resource dataset: `base-de-documentation-de-l-onagri` (22,782 records)
 - Fields: Titre, Auteur_affil, Annee, Langue, Resume, Source, M_titre_orig
+- **Phase 1 scope:** search `Titre` AND `Resume` (abstract) via ILIKE — both are text fields and work today without vectors. `Resume` is the primary content field; many records have rich French/Arabic abstracts that contain keywords not present in the title.
+- **Phase 2 bridge:** `Resume` is the target for semantic embedding. Phase 1 SQL ILIKE over `Resume` is the baseline; Phase 2 replaces it with vector similarity search over the same field. Design the tool so the retrieval backend is swappable without changing the tool interface.
 
 ### P0: get_dashboard_link — not yet built
 Map a query topic to the relevant interactive dashboard URL.
@@ -462,17 +491,17 @@ tanitdata/
 
 ## Build Sequence for Remaining Phase 1 Tools
 
-Priority order for the next session:
+Priority order for the next session (highest benchmark impact first):
 
-1. **`search_bibliography`** — simplest: single known resource, ILIKE SQL, no domain routing needed. Resource: `base-de-documentation-de-l-onagri`, 22,782 records. Fields: Titre, Auteur_affil, Annee, Langue, Resume, Source, M_titre_orig.
+1. **`query_crop_production`** — fixes the most benchmark failures (queries 4, 5, 6 all PARTIAL). 239 resources, column-name-based unit detection, CRDA+DGEDA merge. Build this while context is fresh — it establishes the domain-tool pattern reused by fisheries.
 
-2. **`get_dashboard_link`** — trivial: static dict lookup from the Dashboard URL Map above.
+2. **`query_dam_levels`** — 23 resources, 986 records, single clean schema. Validates the computed-field pattern `(Quantite_stockee / Capacite) * 100`. Small scope, quick win after crop complexity.
 
-3. **`query_dam_levels`** — small domain (11 resources, 271 records), clean schema (Nom du barrage, Capacite, Quantite_stockee). Compute fill rate = `(Quantite_stockee / Capacite) * 100`. Use `get_domain_resources("dams")` + SQL per resource.
+3. **`search_bibliography`** — single known resource, ILIKE over Titre+Resume, no domain routing. Fixes benchmark query 9 (WEAK). Validates the bibliography search pattern before Phase 2 vector enhancement.
 
-4. **`query_fisheries`** — medium complexity (52 resources, 2,476 records). Schema: nature_du_produit, quantite_kilos, societe. Use domain routing + governorate filter.
+4. **`get_dashboard_link`** — trivial static dict lookup, ~10 minutes.
 
-5. **`query_crop_production`** — hardest: 56 crop_production resources + 31 olive_harvest resources + more. Three different schema families (cereals, olives, fruit trees). Wide-format with year-as-columns in some resources. Handle with domain routing + per-schema SQL builders.
+5. **`query_fisheries`** — 64 resources, 10,496 records. Follows established domain-tool patterns from crop_production. Schema: nature_du_produit, quantite_kilos, societe.
 
 ## Phase 2 Scope (Knowledge Layer — not for Phase 1)
 
