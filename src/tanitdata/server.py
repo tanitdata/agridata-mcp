@@ -18,8 +18,9 @@ from mcp.server.fastmcp import FastMCP
 from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
 from tanitdata.tools.climate import query_climate_stations
-from tanitdata.tools.crops import query_crop_production
 from tanitdata.tools.datastore import query_datastore
+from tanitdata.tools.explore import explore_domain
+from tanitdata.tools.preview import get_resource_preview
 from tanitdata.tools.search import (
     get_dataset_details,
     list_organizations,
@@ -137,38 +138,49 @@ async def list_organizations_tool(query: str = "") -> str:
 
 
 @mcp.tool()
-async def query_crop_production_tool(
-    crop_type: str | None = None,
+async def explore_domain_tool(
+    domain: str,
     gouvernorat: str | None = None,
-    year_from: int | None = None,
-    year_to: int | None = None,
-    metric: str = "production",
+    keyword: str | None = None,
 ) -> str:
-    """Query agricultural crop production data from Tunisia's data portal.
+    """Explore any domain's resources on catalog.agridata.tn without executing DataStore queries.
 
-    239 resources across 23+ governorates covering cereals, olives, fruit trees, vegetables, and fodder.
+    Browse available resources by domain, governorate, and keyword. Returns resource metadata,
+    field lists, unit hints, coverage summary, and source attribution.
 
-    Modes:
-    - No arguments: inventory of available data by governorate and crop category
-    - With filters: query matching resources, normalize production to tonnes
+    Use this to understand what data is available before querying with query_datastore_tool.
 
-    crop_type: crop category or name. Accepts French or English: 'céréales'/'cereals',
-               'olives', 'arboriculture'/'fruit trees', 'maraîchères'/'vegetables',
-               'fourragères'/'fodder'. Also specific crops: 'blé'/'wheat', 'orge'/'barley',
-               'tomate', 'pomme de terre'.
-    gouvernorat: governorate name (e.g. 'Béja', 'Jendouba'). Comma or 'vs' for comparison.
-    year_from / year_to: filter by year range (e.g. 2020, 2023).
-    metric: 'production' (default, in tonnes), 'superficie'/'area' (hectares), 'yield' (tonnes/ha).
+    domain: one of the 11 registry domains — climate_stations, rainfall, dams, crop_production,
+            olive_harvest, prices, fisheries, investments, livestock, water_resources,
+            trade_exports, documentation.
+    gouvernorat: filter by governorate name (e.g. 'Béja', 'Jendouba', 'Sfax').
+    keyword: filter resources by name, dataset, or field name (e.g. 'céréales', 'olives',
+             'dattes', 'crevettes', 'blé').
     """
     await registry.maybe_refresh(client)
-    return await query_crop_production(
+    return await explore_domain(
         client=client,
         registry=registry,
-        crop_type=crop_type,
+        domain=domain,
         gouvernorat=gouvernorat,
-        year_from=year_from,
-        year_to=year_to,
-        metric=metric,
+        keyword=keyword,
+    )
+
+
+@mcp.tool()
+async def get_resource_preview_tool(resource_id: str) -> str:
+    """Get full schema and 3 sample rows for any DataStore resource on catalog.agridata.tn.
+
+    Returns field names with inferred types (text, likely numeric, likely date),
+    sample records, record count, unit hints from column names, and source attribution.
+
+    Use after explore_domain_tool to inspect a specific resource before writing SQL.
+    """
+    await registry.maybe_refresh(client)
+    return await get_resource_preview(
+        client=client,
+        registry=registry,
+        resource_id=resource_id,
     )
 
 
