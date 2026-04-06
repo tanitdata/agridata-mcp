@@ -17,6 +17,7 @@ from mcp.server.fastmcp import FastMCP
 
 from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
+from tanitdata.tools.climate import query_climate_stations
 from tanitdata.tools.datastore import query_datastore
 from tanitdata.tools.search import (
     get_dataset_details,
@@ -132,6 +133,47 @@ async def list_organizations_tool(query: str = "") -> str:
     """
     await registry.maybe_refresh(client)
     return await list_organizations(client=client, query=query)
+
+
+@mcp.tool()
+async def query_climate_stations_tool(
+    station: str | None = None,
+    parameter: str | None = None,
+    date_from: str | None = None,
+    date_to: str | None = None,
+    aggregation: str = "raw",
+    latest: bool = False,
+) -> str:
+    """Query climate station data from Tunisia's weather monitoring network.
+
+    24 stations across 11 governorates. Sources: DGGREE (FieldClimate, real-time), DGACTA (environmental, periodic).
+
+    Modes:
+    - No arguments: full station inventory with sensor lists per station
+    - station only: station details and available sensors
+    - station + parameter: sensor data (searches all matching stations for the parameter)
+    - parameter only: search all stations for this parameter
+    - latest=True: most recent reading per sensor at matched stations
+
+    station: partial match against station name or governorate (e.g. 'Jendouba', 'Bizerte', 'Ghezala').
+             Use comma or 'vs' to compare multiple stations (e.g. 'Bizerte vs Mahdia').
+    parameter: sensor type. Accepts French ('température', 'vent', 'pluie', 'humidité', 'rayonnement')
+               or English ('temperature', 'wind', 'rain', 'humidity', 'solar').
+    date_from / date_to: ISO date strings (e.g. '2025-01-01').
+    aggregation: 'raw' (default), 'daily', or 'monthly'. Precipitation uses SUM; other sensors use AVG.
+    latest: if True, return the single most recent reading per sensor instead of a time series.
+    """
+    await registry.maybe_refresh(client)
+    return await query_climate_stations(
+        client=client,
+        registry=registry,
+        station=station,
+        parameter=parameter,
+        date_from=date_from,
+        date_to=date_to,
+        aggregation=aggregation,
+        latest=latest,
+    )
 
 
 def main():

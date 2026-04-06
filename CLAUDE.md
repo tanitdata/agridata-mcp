@@ -18,13 +18,13 @@
 │  ┌─────────────┐  ┌──────────────────────┐  │
 │  │ Data Tools   │  │ Knowledge Tools      │  │
 │  │              │  │                      │  │
-│  │ climate      │  │ search_documents     │  │
+│  │ climate  ✅  │  │ search_documents     │  │
 │  │ crops        │  │ search_bibliography  │  │
 │  │ dams         │  │                      │  │
 │  │ fisheries    │  │                      │  │
 │  │ prices       │  │                      │  │
-│  │ generic_sql  │  │                      │  │
-│  │ search       │  │                      │  │
+│  │ generic_sql✅│  │                      │  │
+│  │ search   ✅  │  │                      │  │
 │  └──────┬──────┘  └──────────┬───────────┘  │
 │         │                    │               │
 │  ┌──────▼──────┐  ┌─────────▼────────────┐  │
@@ -43,13 +43,23 @@
 ## Tech Stack
 
 - **Language:** Python 3.11+
-- **MCP SDK:** `mcp` (official Anthropic Python SDK)
-- **HTTP client:** `httpx` (async)
-- **Data validation:** `pydantic`
-- **Vector store (Phase 2):** ChromaDB or Qdrant (local mode)
-- **PDF processing (Phase 2):** PyPDF2, langdetect
-- **Embeddings (Phase 2):** sentence-transformers (multilingual-e5-large)
+- **MCP SDK:** `mcp[cli]` (official Anthropic Python SDK)
+- **HTTP client:** `httpx` (async, lazy-initialized, rate-limited)
+- **Data validation:** `pydantic` (installed, not yet heavily used)
+- **Env config:** `python-dotenv` (supports `CKAN_BASE_URL` override)
 - **Transport:** stdio (local dev), SSE (future remote deployment)
+- **Test framework:** `pytest` + `pytest-asyncio` (asyncio_mode = "strict")
+
+Phase 2 only (not installed): ChromaDB/Qdrant, PyPDF2, langdetect, sentence-transformers.
+
+## Dependencies (actual — from pyproject.toml)
+
+```toml
+dependencies = ["mcp[cli]", "httpx", "pydantic", "python-dotenv"]
+
+[dependency-groups]
+dev = ["pytest", "pytest-asyncio"]
+```
 
 ## Portal Facts
 
@@ -64,8 +74,11 @@
 
 ## CKAN API Patterns (Confirmed Working)
 
-### Basic API Call
+### Basic API Call (with rate limiting)
 ```python
+# CKANClient enforces 0.3s minimum interval between requests
+# Override portal URL: set CKAN_BASE_URL env var
+
 async def api_call(self, action: str, params: dict) -> dict | None:
     url = f"https://catalog.agridata.tn/api/3/action/{action}"
     response = await self.client.get(url, params=params, timeout=30)
@@ -78,67 +91,145 @@ async def api_call(self, action: str, params: dict) -> dict | None:
 ### DataStore SQL (confirmed working — all capabilities)
 ```python
 # Basic query
-result = await self.api_call("datastore_search_sql", {
-    "sql": f'SELECT * FROM "{resource_id}" LIMIT 100'
-})
+result = await client.datastore_sql(f'SELECT * FROM "{resource_id}" LIMIT 100')
 
-# Type casting (CRITICAL: all fields are stored as text)
-# Numeric casting:
-'SELECT "nom_fr", AVG("valeur"::numeric) as avg_val FROM "{rid}" WHERE "valeur" ~ \'^-?[0-9.]+$\' GROUP BY "nom_fr"'
+# Numeric casting (CRITICAL: all fields are stored as text)
+'SELECT "nom_fr", AVG("valeur"::numeric) as avg FROM "{rid}" WHERE "valeur" ~ \'^-?[0-9.]+$\' GROUP BY "nom_fr"'
 
-# Date casting:
+# Date casting
 'SELECT "Date"::timestamp, "nom_fr", "valeur" FROM "{rid}" WHERE "Date" > \'2026-01-01\' LIMIT 50'
 
-# Numeric WHERE:
+# Numeric WHERE with regex guard
 'SELECT * FROM "{rid}" WHERE "valeur"::numeric > 30 AND "nom_fr" = \'Air temperature\' LIMIT 20'
 
-# Cross-resource JOIN (confirmed working):
+# DATE_TRUNC for time series aggregation (confirmed working)
+'SELECT DATE_TRUNC(\'day\', "Date"::timestamp) as day, AVG("valeur"::numeric) as avg_val FROM "{rid}" WHERE ... GROUP BY day ORDER BY day LIMIT 200'
+'SELECT DATE_TRUNC(\'month\', "Date"::timestamp) as month, SUM("valeur"::numeric) as total FROM "{rid}" WHERE ... GROUP BY month ORDER BY month LIMIT 200'
+
+# ILIKE for case-insensitive parameter matching (confirmed working)
+'"nom_fr" ILIKE \'%temperature%\''
+'"nom_fr" ILIKE \'%itesse%vent%\''   # matches "Vitesse du vent"
+
+# DISTINCT ON for latest-per-group (confirmed working — PostgreSQL extension)
+'SELECT DISTINCT ON ("nom_fr") "nom_fr" as sensor, "Date" as reading_time, "valeur"::numeric as value, "unite" as unit FROM "{rid}" WHERE "valeur" ~ \'^-?[0-9.]+$\' ORDER BY "nom_fr", "Date" DESC'
+
+# Cross-resource JOIN (confirmed working)
 'SELECT a.*, b.* FROM "{rid_a}" a, "{rid_b}" b WHERE a."Delegation" = b."delegation" LIMIT 50'
+
+# Live DataStore inventory (used by schema registry live refresh)
+result = await client.datastore_search(resource_id="_table_metadata", limit=5000)
+# Returns: name (= resource_id), alias_of (non-null means it's an alias, skip it)
 ```
 
 ### Confirmed SQL Capabilities
-- SELECT, COUNT, WHERE, ORDER BY, GROUP BY, DISTINCT, LIKE, LIMIT/OFFSET, aliases: **all work**
+- SELECT, COUNT, WHERE, ORDER BY, GROUP BY, DISTINCT, LIKE, ILIKE, LIMIT/OFFSET, aliases: **all work**
 - `::numeric`, `::timestamp` type casting: **works**
+- `DATE_TRUNC('day'|'month'|'year', col::timestamp)`: **works**
+- `DISTINCT ON (col)`: **works** (PostgreSQL-specific)
 - Cross-resource JOINs: **works**
 - Regex filtering (`~` operator): **works**
 - `information_schema` access: **BLOCKED** (use schema registry instead)
 - Result limit: 32,000 rows per query
 - Baseline latency: ~0.45s per query (network-dominated)
+- Rate limit: 0.3s min interval enforced by CKANClient
 
 ### Dataset Search (workaround for organization gap)
 ```python
 # organization_list only returns 25 of 55 orgs — use package_search instead
-result = await self.api_call("package_search", {
-    "q": query,
-    "fq": f"organization:{org_name}" if org_name else "",
-    "rows": rows,
-    "start": offset,
-    "facet.field": '["organization", "groups", "res_format"]',
-})
+result = await client.package_search(
+    query=query,
+    fq=f"organization:{org_name}",
+    rows=rows,
+    start=offset,
+    facet_fields=["organization", "groups", "res_format"],
+)
 ```
 
 ### Schema Discovery (per resource)
 ```python
-result = await self.api_call("datastore_search", {
-    "resource_id": rid,
-    "limit": 0  # returns fields metadata without records
-})
+result = await client.datastore_search(resource_id=rid, limit=0)
 fields = result["fields"]  # [{"id": "Date", "type": "text"}, ...]
 ```
 
-## Schema Registry
+## Schema Registry — Two-Layer Design
 
-The file `schemas.json` contains the pre-computed schema registry built from the portal audit. Structure:
+### Overview
 
-- `meta`: totals (789 resources, 583 unique patterns, 513 singletons)
-- `clusters[]`: shared schema patterns (70 clusters covering 276 resources)
-- `domain_resource_index`: resources grouped by thematic domain with field lists
-- `arabic_field_decoding`: mapping table for mojibake field names in Bizerte price datasets
+`SchemaRegistry` in `schema_registry.py` has two layers:
 
-### Key Domain Resource Counts
+- **Static layer** — loaded once from `schemas.json` at startup via `registry.load()`. Never mutated. Contains: `domain_resource_index`, `clusters`, `arabic_field_decoding`.
+- **Live layer** — seeded from the static layer at startup, then refreshed every 6 hours in the background. Contains: up-to-date resource list, field schemas, record counts, dataset→org mapping.
+
+### Startup sequence
+```
+server lifespan starts
+  → registry.load()          # loads schemas.json (~28ms), seeds live layer
+  → asyncio.create_task(_background_refresh())   # starts live refresh without blocking tools
+tools are immediately callable (static data available)
+~10s later: live refresh completes (789+ resources, 1102 dataset→org mappings)
+```
+
+### maybe_refresh pattern
+Every tool calls `await registry.maybe_refresh(client)` before doing anything. This:
+- Checks if `refresh_interval` (6h) has elapsed
+- If so, acquires a lock and calls `_refresh()` (double-checked locking)
+- Most calls return instantly (~0 µs)
+
+### Key query methods
+
+```python
+# Returns resources for a domain, enriched with live field lists and record counts
+resources = registry.get_domain_resources("climate_stations")
+resources = registry.get_domain_resources("crop_production", gouvernorat="Béja")
+
+# Human-readable availability summary (used in query_datastore responses)
+avail = registry.get_data_availability("dams", gouvernorat="Kairouan")
+# → "Kairouan — 2 DataStore resource(s), 271 total records, 2020–2023"
+
+# Source attribution for a resource (used in all tool response footers)
+source = registry.get_source_attribution("ec7daec9-da4b-47a4-9ea9-f6b5ca820955")
+# → {resource_id, resource_name, dataset_name, dataset_title, organization,
+#    organization_title, portal_url}
+
+# Domain + governorate context for a resource (used in query_datastore)
+ctx = registry.get_resource_context("some-resource-id")
+# → {"domains": ["crop_production"], "gouvernorat": "Béja"}
+
+# Governorate → resource_count map for a domain
+coverage = registry.get_coverage_summary("crop_production")
+# → {"Béja": 3, "Bizerte": 2, "national": 5, ...}
+
+# Schema lookup (live first, then cluster fallback, then domain index)
+fields = registry.get_resource_schema("some-resource-id")
+```
+
+### Governorate extraction (5-tier strategy)
+
+`extract_governorate(org_slug, dataset_slug, resource_name)` tries in order:
+1. **Organization slug** → `CRDA_SLUG_MAP` (e.g. `crda-beja` → `Béja`); `NATIONAL_ORGS` → `"national"`
+2. **Dataset slug** → regex `gouvernorat-de-{name}` / `gouvernorat-{name}`
+3. **Resource display name** → regex `Gouvernorat de {Name}`
+4. **Bare governorate name** in any text (word-boundary match, long keys first to avoid false positives)
+5. **Locality/delegation name** → `LOCALITY_MAP` (e.g. `"bir ben kemla"` → `"Mahdia"`, `"ghezala"` → `"Bizerte"`)
+
+Supporting maps (all in `schema_registry.py`):
+- `GOVERNORATE_MAP`: 27 entries, lower-case key → canonical French name
+- `CRDA_SLUG_MAP`: 24 CRDA org slugs → governorate
+- `NATIONAL_ORGS`: ~20 national-level org slugs (DGGREE, DGACTA, ONAGRI, etc.)
+- `LOCALITY_MAP`: ~50 delegation/station-site names → parent governorate
+
+### schemas.json structure
+
+- `meta`: totals (789 resources, 583 unique patterns, 513 singletons, 70 clusters)
+- `clusters[]`: 70 shared schema patterns covering 276 resources
+- `domain_resource_index`: 11 domains with curated resource lists, field schemas, record counts
+- `arabic_field_decoding`: mojibake → Arabic/French mapping for 19 Bizerte price datasets
+
+### Key Domain Resource Counts (from static schemas.json)
+
 | Domain | Resources | Records | Key Fields |
 |---|---|---|---|
-| climate_stations | 21 | 211,311 | Date, nom_ar, nom_fr, unite, valeur |
+| climate_stations | 24 (21 static + 3 live) | ~215,000 | varies by EAV variant (see below) |
 | rainfall | 25 | 2,970 | delegation/station, mois, precipitations_mm |
 | dams | 11 | 271 | Nom du barrage, Capacite, Quantite_stockee |
 | crop_production | 56 | 632 | type_de_culture, superficie_hectares, production_tonnes/quintaux |
@@ -150,79 +241,126 @@ The file `schemas.json` contains the pre-computed schema registry built from the
 | water_resources | 51 | 2,643 | Nom de la nappe, Delegation, Ressources_million_m3 |
 | documentation | 7 | 25,992 | Titre, Auteur, Annee, Nom_fichier, Resume |
 
-### Climate Station Schema (EAV format — largest clean cluster)
-21 resources share this exact schema:
-- `Date` (text, but castable to timestamp): "2026-03-15 10:00:00"
-- `nom_ar` (text): Arabic parameter name
-- `nom_fr` (text): French parameter name — one of: "Air temperature", "Relative humidity", "Vitesse du vent", "Direction du vent", "Solar radiation", "Precipitations", "DeltaT", "Leaf wetness", "Soil moisture"
-- `unite` (text): unit — "°C", "%", "m/s", "°", "W/m2", "mm", etc.
-- `valeur` (text, castable to numeric): the measurement value
+### Climate Station EAV Schemas (3 variants)
 
-This is Entity-Attribute-Value format. To get a time series for one parameter, filter by `nom_fr` and cast `valeur` to numeric.
+The live inventory has 24 climate resources: 23 sensor stations + 1 metadata-only (Informations générales).
+
+| Variant | Org | Date col | Param col | Value col | Unit col |
+|---|---|---|---|---|---|
+| `standard` | DGGREE (most) | `Date` | `nom_fr` | `valeur` | `unite` |
+| `english` | DGGREE (older) | `date` | `sensor_name` | `value` | `unit` |
+| `dgacta` | DGACTA | `date` | `parameter` | `value` | `unite` |
+
+Metadata-only resources are detected by the presence of `{nom, Longitude, Latitude}` fields — no sensor data, skip for queries.
+
+Sensor stations by governorate (live, as of 2026-04): Bizerte (4), Jendouba (2), Mahdia (3), Nabeul (3), Zaghouan (4), Kasserine (2), Siliana (2), Béja (1), Kairouan (1), Le Kef (1) = **10 sensor governorates**.
+
+Kébili is the **11th governorate** in the domain but holds only 1 metadata-only resource ("Informations générales", fields: nom, Longitude, Latitude, elevation) — no sensor data. The inventory output reports 10 because it counts sensor stations only (`by_gov` is built from `sensor_stations`, not `metadata_stations`).
+
+## Climate Tool — Parameter Mapping
+
+### Natural language → canonical group → ILIKE patterns
+
+```python
+# _PARAM_ALIASES (user input → canonical)
+"température" | "temperature" | "temp" | "air temperature" | "hc air temperature" → "temperature"
+"vent" | "vitesse du vent" | "wind speed" | "wind" | "u-sonic wind speed"          → "wind"
+"direction du vent" | "wind direction"                                               → "wind_direction"
+"pluie" | "rain" | "precipitations" | "précipitations" | "precipitation"            → "rain"
+"humidité" | "humidity" | "humidite" | "relative humidity"                          → "humidity"
+"rayonnement" | "solar" | "radiation" | "solar radiation"                           → "solar"
+"leaf wetness" | "mouillage foliaire"                                                → "leaf_wetness"
+"soil moisture" | "humidité du sol"                                                  → "soil_moisture"
+"deltat"                                                                             → "deltat"
+
+# _PARAM_ILIKE (canonical → SQL ILIKE patterns applied to param column)
+"temperature"    → ["%temperature%"]
+"wind"           → ["%itesse%vent%", "%wind%speed%"]
+"wind_direction" → ["%direction%vent%", "%wind%direction%", "%wind%dir%"]
+"rain"           → ["%recipit%", "%pluie%"]
+"humidity"       → ["%humidit%", "%humidity%"]
+"solar"          → ["%radia%", "%solar%"]
+"leaf_wetness"   → ["%leaf%wetness%", "%mouillage%"]
+"soil_moisture"  → ["%soil%moisture%", "%humidit%sol%"]
+"deltat"         → ["%deltat%"]
+```
+
+Precipitation (`rain` canonical) uses `SUM` aggregation; all other sensors use `AVG`.
+Unrecognised parameter input: falls back to raw `ILIKE '%user_input%'` on the param column.
 
 ## Tool Inventory (Phase 1 — DataStore)
 
-### P0: search_datasets
+### P0: search_datasets ✅ Implemented
 Search portal datasets by keyword, organization, thematic group, format.
 - Input: `query: str`, `organization: str?`, `group: str?`, `format: str?`, `limit: int = 10`
 - Output: list of datasets with id, title, description, organization, groups, num_resources, url
-- API: `package_search`
+- API: `package_search` with `facet_fields=["organization", "groups", "res_format"]`
 
-### P0: get_dataset_details
+### P0: get_dataset_details ✅ Implemented
 Get full metadata and resource list for a specific dataset.
-- Input: `dataset_id_or_name: str`
-- Output: dataset metadata + list of resources with id, name, format, datastore_active, url
+- Input: `dataset_id: str` (slug or UUID)
+- Output: dataset metadata + list of resources with id, name, format, datastore_active
 - API: `package_show`
 
-### P0: query_datastore
-Execute a SQL query against any DataStore resource. Include schema in response.
-- Input: `resource_id: str`, `sql: str?`, `filters: dict?`, `limit: int = 100`
-- Output: schema (field names + inferred types), records, total count
-- API: `datastore_search_sql` (if sql provided) or `datastore_search` (if filters)
+### P0: query_datastore ✅ Implemented
+Execute SQL against any DataStore resource. Returns schema + records + source attribution.
+- Input: `resource_id: str`, `sql: str?`, `limit: int = 100`
+- Output: Arabic field decoding (if applicable), schema, records table, registry schema note, data availability context, source attribution footer
+- If no SQL: uses `datastore_search` (returns schema + first `limit` rows)
+- If SQL: uses `datastore_search_sql`
+- Automatically annotates Arabic/mojibake fields using the registry mapping
+- Appends `get_data_availability()` context if the resource is in the domain index
 
-### P0: query_climate_stations
-Query climate station data by station, parameter, and date range.
-- Input: `station_name: str?`, `parameter: str?` (e.g. "Air temperature"), `date_from: str?`, `date_to: str?`, `aggregation: str?` ("hourly"|"daily"|"monthly")
-- Output: time series data with numeric values, station metadata
-- Implementation: find matching resources from schema registry, build SQL with `valeur::numeric` cast, pivot EAV to columnar if multiple parameters requested
+### P0: query_climate_stations ✅ Implemented
+Query climate station data from Tunisia's weather monitoring network (24 resources across 11 governorates; 23 sensor stations in 10 governorates + 1 metadata-only in Kébili).
+- Input: `station: str?`, `parameter: str?`, `date_from: str?`, `date_to: str?`, `aggregation: str = "raw"` ("raw"|"daily"|"monthly"), `latest: bool = False`
+- Modes:
+  - **Inventory** (no args): full station list with live sensor names, record counts, latest readings, grouped by governorate. First call ~7s (fetches sensor lists); cached, subsequent calls ~0s.
+  - **Station details** (station only): metadata and available sensors with latest reading dates
+  - **Data query** (station + parameter, or parameter only): time series; precipitation uses SUM, others AVG; partial date ranges with station-aware diagnosis when no data found
+  - **Multi-station comparison** (comma or "vs" in station, e.g. "Bizerte vs Mahdia"): side-by-side data
+  - **Latest readings** (latest=True): DISTINCT ON query returning most recent reading per sensor
+- Station matching: partial match on name, governorate, or dataset slug; canonical aliases via GOVERNORATE_MAP
+- Handles 3 EAV schema variants: auto-detected from field names
+- Implementation: `src/tanitdata/tools/climate.py`
 
-### P0: query_crop_production
+### P0: list_organizations ✅ Implemented
+List all data-producing organizations with dataset counts.
+- Input: `query: str = ""`
+- Output: sorted-by-count list of org names and dataset counts
+- Implementation: `package_search` with `rows=0`, reads `search_facets.organization.items`
+
+### P0: query_crop_production — not yet built
 Query agricultural production data by crop type, governorate, and campaign year.
 - Input: `crop_type: str?` ("cereales"|"olives"|"arboriculture"|"fourrageres"|"maraicheres"), `gouvernorat: str?`, `year_range: str?`
 - Output: production data (tonnes/quintaux), cultivated area (hectares), yield
-- Implementation: search schema registry by domain, handle 3 different schema families (cereals, olives, fruit trees)
+- Implementation: search registry by domain, handle 3 different schema families (cereals, olives, fruit trees)
 
-### P0: query_dam_levels
+### P0: query_dam_levels — not yet built
 Query dam/reservoir storage levels and compute fill rates.
 - Input: `barrage_name: str?`, `gouvernorat: str?`
 - Output: dam name, capacity, current storage, fill rate (%), delegation
 - Implementation: query + compute `(quantite_stockee / capacite) * 100`
 
-### P0: query_fisheries
+### P0: query_fisheries — not yet built
 Query fisheries production and export data.
 - Input: `product_type: str?`, `gouvernorat: str?`, `year: str?`
 - Output: species, quantities, exporting companies
 - Implementation: search registry for fisheries domain resources
 
-### P0: search_bibliography
+### P0: search_bibliography — not yet built
 Search ONAGRI's bibliographic catalog (22,782 records) by title, author, year, keyword.
 - Input: `query: str`, `year_from: int?`, `year_to: int?`, `language: str?` ("FR"|"AR"|"EN"), `limit: int = 20`
 - Output: title, author, year, language, abstract, source
-- Implementation: SQL query with ILIKE against the ONAGRI base DataStore resource
+- Implementation: SQL ILIKE against the ONAGRI base DataStore resource
 - Resource dataset: `base-de-documentation-de-l-onagri` (22,782 records)
 - Fields: Titre, Auteur_affil, Annee, Langue, Resume, Source, M_titre_orig
 
-### P0: list_organizations
-List all data-producing organizations with dataset counts.
-- Input: none (or `query: str?` to filter)
-- Output: list of orgs with name, title, dataset count
-- Implementation: use `package_search` with `facet.field=["organization"]` and `rows=0` to get org counts from facets
-
-### P0: get_dashboard_link
+### P0: get_dashboard_link — not yet built
 Map a query topic to the relevant interactive dashboard URL.
 - Input: `topic: str`
 - Output: dashboard title, URL, description
-- Implementation: static mapping from keywords to dashboard URLs at dashboards.agridata.tn
+- Implementation: static dict lookup from CLAUDE.md Dashboard URL Map
 
 ### Dashboard URL Map
 ```python
@@ -245,73 +383,112 @@ DASHBOARDS = {
 }
 ```
 
-## Data Quality Issues to Handle
+## Data Quality Issues
 
-1. **All fields are text** — always cast with `::numeric` or `::timestamp` when doing math/date operations. Guard with regex: `WHERE "valeur" ~ '^-?[0-9.]+$'` before casting.
-2. **Arabic mojibake fields** — 39 resources. Use the decoding table in `schemas.json` for the 19 Bizerte price datasets. For others, present the raw field names and let the LLM work with them.
-3. **`None` field names** — 39 resources have fields literally named "None". Skip these fields in schema presentation.
-4. **Excel overflow** — 2 resources with 1,048,575 rows (Kébili livestock, fruit tree evolution). Flag these as corrupted and exclude from queries.
+1. **All fields are text** — always cast with `::numeric` or `::timestamp` for math/date. Guard numeric casts: `WHERE "valeur" ~ '^-?[0-9.]+$'`.
+2. **Arabic mojibake fields** — 39 resources. The 19 Bizerte price datasets are decoded via `schemas.json` `arabic_field_decoding.field_mapping`. `query_datastore` applies this automatically. For others, present raw field names.
+3. **`None` field names** — 39 resources have fields literally named `"None"`. Skip in schema presentation.
+4. **Excel overflow** — 2 resources with 1,048,575 rows (Kébili livestock, fruit tree evolution). Flag as corrupted and exclude from queries.
 5. **Year-as-column names** — 29 resources use "2007", "2008"... as column names (wide format). Note this in schema presentation so the LLM can unpivot if needed.
 6. **Content-type mismatches** — 86 resources have CSV↔XLSX format mislabeling. Trust `datastore_active` flag, not `format` field.
-7. **Organization gap** — `organization_list` returns 25 of 55 orgs. Always use faceted search via `package_search` instead.
+7. **Organization gap** — `organization_list` returns 25 of 55 orgs. Always use faceted `package_search` instead.
+8. **`_id` and `_full_text` columns** — every DataStore resource has these internal columns. Always skip them in schema/result presentation. `_SKIP_COLS = {"_id", "_full_text"}` in formatting and climate tools.
+9. **EAV format** — climate_stations, and possibly other sensor domains, use Entity-Attribute-Value layout. Filter by `nom_fr`/`sensor_name`/`parameter` and cast `valeur`/`value` to numeric. Never treat these as wide-format tables.
+10. **Windows console encoding** — station names with non-ASCII characters (e.g. "Données climatiques") may appear as `Donn?es` in Windows terminals. This is a terminal display issue, not a data bug; the stored data is correctly UTF-8.
+11. **Source attribution** — every tool response should end with `format_source_footer(sources)` from `utils/formatting.py`. Format: single source → labelled fields; multiple sources → compact list with resource_id + portal URL.
 
 ## Project Structure
+
 ```
 tanitdata/
 ├── CLAUDE.md                   # This file
 ├── README.md
 ├── pyproject.toml
-├── schemas.json                # Pre-computed schema registry
+├── schemas.json                # Pre-computed schema registry (static layer)
+├── audit_full.json             # Raw portal audit data (source for schemas.json)
+├── claude_desktop_config.json  # Example Claude Desktop config
+├── test_climate.py             # Live integration benchmark (3 scenarios)
+├── test_stress.py              # Live stress test (9 scenarios, performance summary)
 ├── src/
 │   └── tanitdata/
-│       ├── __init__.py
-│       ├── server.py           # MCP server entry point
-│       ├── ckan_client.py      # Async CKAN API client
-│       ├── schema_registry.py  # Schema lookup and domain routing
+│       ├── __init__.py         # __version__ = "0.1.0"
+│       ├── server.py           # MCP server: FastMCP, lifespan, tool registrations
+│       ├── ckan_client.py      # Async CKAN API client (rate-limited, lazy-init)
+│       ├── schema_registry.py  # Two-layer registry (static + live, 6h refresh)
 │       ├── tools/
 │       │   ├── __init__.py
-│       │   ├── search.py       # search_datasets, get_dataset_details, list_organizations
-│       │   ├── datastore.py    # query_datastore (generic SQL)
-│       │   ├── climate.py      # query_climate_stations
-│       │   ├── crops.py        # query_crop_production
-│       │   ├── dams.py         # query_dam_levels
-│       │   ├── fisheries.py    # query_fisheries
-│       │   ├── bibliography.py # search_bibliography
-│       │   └── dashboards.py   # get_dashboard_link
+│       │   ├── search.py       # ✅ search_datasets, get_dataset_details, list_organizations
+│       │   ├── datastore.py    # ✅ query_datastore (SQL + Arabic decode + availability context)
+│       │   ├── climate.py      # ✅ query_climate_stations (3 EAV variants, caching, comparison)
+│       │   ├── crops.py        # planned — does not exist yet
+│       │   ├── dams.py         # planned — does not exist yet
+│       │   ├── fisheries.py    # planned — does not exist yet
+│       │   ├── bibliography.py # planned — does not exist yet
+│       │   └── dashboards.py   # planned — does not exist yet
 │       └── utils/
 │           ├── __init__.py
-│           ├── formatting.py   # Result formatting for MCP responses
-│           └── arabic.py       # Arabic field decoding
+│           ├── formatting.py   # format_dataset_list, format_datastore_result, format_source_footer
+│           └── arabic.py       # decode_arabic_fields, annotate_fields_with_arabic
 ├── tests/
-│   ├── test_ckan_client.py
-│   ├── test_schema_registry.py
+│   ├── __init__.py
+│   ├── test_ckan_client.py     # Unit tests: base URL, API base (no network)
+│   ├── test_schema_registry.py # Unit tests: static load, domain lookup, cluster lookup
 │   └── test_tools/
-└── claude_desktop_config.json  # Example Claude Desktop config
+│       └── __init__.py         # placeholder — no tool tests yet
 ```
 
 ## Development Workflow
 
-1. `uv` for dependency management (fast, modern)
-2. Test with MCP Inspector during development: `mcp dev src/tanitdata/server.py`
-3. Connect to Claude Desktop for integration testing
-4. Run against live portal API — no mock needed (all data is public, read-only)
+1. `pip install -e .` to install in editable mode (or use `uv`)
+2. Test with live portal: `python test_climate.py` or `python test_stress.py`
+3. Run unit tests: `pytest tests/`
+4. MCP Inspector for tool testing: `mcp dev src/tanitdata/server.py`
+5. Connect to Claude Desktop for integration testing
+6. Run against live portal API — no mock needed (all data is public, read-only)
 
-## Phase 2 Scope (Knowledge Layer — not for initial build)
+## Known Issues and Limitations
 
-For context only. Do NOT implement these in Phase 1:
+### Portal-side
+- **Jendouba GDA BOUHERTMA** station only has: Battery, Precipitation, Solar Panel, Solar radiation, wind speed/direction. No temperature, humidity, or DeltaT sensor — queries for those return empty.
+- **Sousse governorate** has no climate station DataStore resources (no match for "Sousse" in query_climate_stations).
+- **DGACTA stations** have very sparse data (27–162 records vs. 21,000–38,000 for DGGREE). Data updates appear periodic rather than continuous.
+- **Bizerte multi-sensor station** (`5ae01acd`) data stops at 2024-12-15. A separate multi-sensor Jendouba resource (`91f1c4b8`) also stops at 2024-12. Both show as "Données climatiques de la station" in the portal (truncated display names).
+- **Climate domain count mismatch**: static schemas.json lists 21 climate_stations resources; live inventory shows 24 (3 added since audit). `get_domain_resources()` enriches static with live data.
+
+### Code-side
+- `query_datastore` MCP tool does not expose a `filters` dict parameter (the underlying Python function accepts it but it was intentionally omitted from the server registration).
+- Sensor list caching (`_sensor_cache` dict) in `climate.py` is process-scoped — it resets on server restart but survives the lifetime of a session, making repeated inventory calls fast (~0s after the first).
+- `tests/test_tools/` has only an `__init__.py`. No automated tests for tool outputs yet — development has relied on live benchmark scripts at the project root.
+
+## Build Sequence for Remaining Phase 1 Tools
+
+Priority order for the next session:
+
+1. **`search_bibliography`** — simplest: single known resource, ILIKE SQL, no domain routing needed. Resource: `base-de-documentation-de-l-onagri`, 22,782 records. Fields: Titre, Auteur_affil, Annee, Langue, Resume, Source, M_titre_orig.
+
+2. **`get_dashboard_link`** — trivial: static dict lookup from the Dashboard URL Map above.
+
+3. **`query_dam_levels`** — small domain (11 resources, 271 records), clean schema (Nom du barrage, Capacite, Quantite_stockee). Compute fill rate = `(Quantite_stockee / Capacite) * 100`. Use `get_domain_resources("dams")` + SQL per resource.
+
+4. **`query_fisheries`** — medium complexity (52 resources, 2,476 records). Schema: nature_du_produit, quantite_kilos, societe. Use domain routing + governorate filter.
+
+5. **`query_crop_production`** — hardest: 56 crop_production resources + 31 olive_harvest resources + more. Three different schema families (cereals, olives, fruit trees). Wide-format with year-as-columns in some resources. Handle with domain routing + per-schema SQL builders.
+
+## Phase 2 Scope (Knowledge Layer — not for Phase 1)
 
 - `search_documents` tool: RAG over 994 downloadable PDFs (97 direct + 897 from ONAGRI thematic libraries)
-- Vector store integration (ChromaDB/Qdrant)
-- PDF download pipeline (batch download via Nom_fichier URL pattern)
-- Multilingual chunking and embedding (French + Arabic)
+- Vector store integration (ChromaDB/Qdrant, local mode)
+- PDF download pipeline (batch via Nom_fichier URL pattern)
+- Multilingual chunking and embedding (French + Arabic, sentence-transformers multilingual-e5-large)
 - Document-DataStore cross-referencing by governorate, theme, and year
-- Computed climate indices (ET₀, SPI)
+- Computed climate indices (ET₀ via Penman-Monteith, SPI for drought assessment)
 
 ## Key Decisions
 
 - **Python-only** — no TypeScript, no forking existing CKAN MCP servers
-- **Async throughout** — httpx async client, async tool handlers
-- **Schema registry is static** — loaded from `schemas.json` at startup, not queried live
-- **Tools return structured text** — JSON blocks within markdown, compatible with any MCP client
+- **Async throughout** — httpx async client, async tool handlers, rate-limited (0.3s)
+- **Schema registry has two layers** — static (schemas.json, instant) seeded at startup, enriched by live refresh every 6h in a background task
+- **Tools return structured markdown** — headers, markdown tables, source footer; compatible with any MCP client
 - **Phase 1 = DataStore tools only** — knowledge/RAG layer is Phase 2
 - **Local development** — stdio transport, Claude Desktop for testing
+- **No mock tests for tools** — live portal API is public and fast; real integration tests are more valuable than mocked unit tests for this use case
