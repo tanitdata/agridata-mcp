@@ -19,9 +19,8 @@
 │  │ Data Tools   │  │ Knowledge Tools      │  │
 │  │              │  │                      │  │
 │  │ climate  ✅  │  │ search_documents     │  │
-│  │ explore  ✅  │  │ search_bibliography  │  │
-│  │ preview  ✅  │  │                      │  │
-│  │ generic_sql✅│  │                      │  │
+│  │ generic_sql✅│  │ search_bibliography  │  │
+│  │ read_file ✅ │  │                      │  │
 │  │ search   ✅  │  │                      │  │
 │  └──────┬──────┘  └──────────┬───────────┘  │
 │         │                    │               │
@@ -43,6 +42,7 @@
 - **Language:** Python 3.11+
 - **MCP SDK:** `mcp[cli]` (official Anthropic Python SDK)
 - **HTTP client:** `httpx` (async, lazy-initialized, rate-limited)
+- **XLSX parser:** `openpyxl` (read-only mode for non-DataStore files)
 - **Data validation:** `pydantic` (installed, not yet heavily used)
 - **Env config:** `python-dotenv` (supports `CKAN_BASE_URL` override)
 - **Transport:** stdio (local dev), SSE (future remote deployment)
@@ -53,7 +53,7 @@ Phase 2 only (not installed): ChromaDB/Qdrant, PyPDF2, langdetect, sentence-tran
 ## Dependencies (actual — from pyproject.toml)
 
 ```toml
-dependencies = ["mcp[cli]", "httpx", "pydantic", "python-dotenv"]
+dependencies = ["mcp[cli]", "httpx", "pydantic", "python-dotenv", "openpyxl"]
 
 [dependency-groups]
 dev = ["pytest", "pytest-asyncio"]
@@ -329,24 +329,16 @@ List all data-producing organizations with dataset counts.
 - Output: sorted-by-count list of org names and dataset counts
 - Implementation: `package_search` with `rows=0`, reads `search_facets.organization.items`
 
-### P0: explore_domain ✅ Implemented
-Explore any domain's resources without executing DataStore queries. Read-only context for any of the 11 registry domains.
-- Input: `domain: str`, `gouvernorat: str?`, `keyword: str?`
-- Output: per-resource metadata (ID, name, dataset, governorate, record count, full field list, sample columns, unit hints), coverage summary by governorate, data availability note, source attribution
-- keyword filter matches against resource name, dataset name, or field names
-- Unit hints parsed from column names (e.g. `production_quintaux` -> quintaux, `_tonnes` -> tonnes, `_ha` -> hectares)
-- Excel overflow resources (>= 1,048,575 rows) automatically excluded
-- Implementation: `src/tanitdata/tools/explore.py`
-- Benchmark: instant (0.0s) — reads from schema registry, no DataStore queries
-
-### P0: get_resource_preview ✅ Implemented
-Full schema plus 3 sample rows for any DataStore resource from any domain.
-- Input: `resource_id: str`
-- Output: field names with inferred types (text, likely numeric, likely date), 3 sample records as table, record count, unit hints from column names, source attribution, data availability note
-- Type inference based on sample values: numeric pattern (`^-?\d+([.,]\d+)?$`), date pattern (`YYYY-MM-DD` or `DD/MM/YYYY`)
-- Graceful error handling for invalid or non-DataStore resource IDs
-- Implementation: `src/tanitdata/tools/preview.py`
-- Benchmark: ~0.3s per resource (single DataStore API call)
+### P0: read_resource ✅ Implemented
+Download and parse non-DataStore resource files (CSV, XLSX) on demand.
+- Input: `resource_id: str`, `limit: int = 100`
+- Output: schema + data rows in the same format as query_datastore, source attribution
+- Downloads via `resource_show` URL, parses with stdlib `csv` or `openpyxl`
+- On-demand download with process-scoped in-memory cache (instant on repeat calls)
+- Redirects to query_datastore if resource is DataStore-active
+- Graceful handling: invalid IDs, unsupported formats (PDF etc.), files >5MB
+- Implementation: `src/tanitdata/tools/resource_reader.py`
+- Benchmark: ~0.8s first call (download + parse), ~0s cached
 
 ### P0: search_bibliography — not yet built
 Search ONAGRI's bibliographic catalog (22,782 records) by title, author, year, keyword.
@@ -421,11 +413,10 @@ tanitdata/
 │       │   ├── __init__.py
 │       │   ├── search.py       # ✅ search_datasets, get_dataset_details, list_organizations
 │       │   ├── datastore.py    # ✅ query_datastore (SQL + Arabic decode + availability context)
-│       │   ├── climate.py      # ✅ query_climate_stations (3 EAV variants, caching, comparison)
-│       │   ├── explore.py      # ✅ explore_domain (browse any domain's resources, no queries)
-│       │   ├── preview.py      # ✅ get_resource_preview (schema + 3 sample rows, type inference)
-│       │   ├── bibliography.py # planned — does not exist yet
-│       │   └── dashboards.py   # planned — does not exist yet
+│       │   ├── climate.py          # ✅ query_climate_stations (3 EAV variants, caching, comparison)
+│       │   ├── resource_reader.py # ✅ read_resource (CSV/XLSX download+parse, on-demand cache)
+│       │   ├── bibliography.py    # planned — does not exist yet
+│       │   └── dashboards.py      # planned — does not exist yet
 │       └── utils/
 │           ├── __init__.py
 │           ├── formatting.py   # format_dataset_list, format_datastore_result, format_source_footer
@@ -468,12 +459,13 @@ tanitdata/
 - `query_climate_stations` — 3 EAV schema variants, parameter aliasing, aggregation (SUM/AVG), sensor caching
 - `search_bibliography` (planned) — single known resource, ILIKE over Titre+Resume, Phase 2 vector bridge
 
-**Everything else** goes through the generic 3-step workflow:
-1. `explore_domain_tool` — browse resources by domain/governorate/keyword, see schemas and unit hints
-2. `get_resource_preview_tool` — inspect a specific resource's schema + 3 sample rows
-3. `query_datastore_tool` — write SQL against the resource with full knowledge of column names and types
+**Everything else** goes through the generic workflow:
+1. `search_datasets_tool` — find datasets by keyword/org/group
+2. `get_dataset_details_tool` — see resources, check DataStore active status
+3. If DataStore active → `query_datastore_tool` (SQL access)
+4. If not DataStore active → `read_resource_tool` (download + parse CSV/XLSX)
 
-This replaced the per-domain tool approach (crop_production, dam_levels, fisheries) which required hundreds of lines of schema detection code per domain. The generic tools let the LLM handle schema variability naturally.
+This keeps the server lean (6 tools) and lets the LLM handle schema variability naturally.
 
 ## Build Sequence for Remaining Phase 1 Tools
 

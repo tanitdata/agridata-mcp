@@ -19,8 +19,7 @@ from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
 from tanitdata.tools.climate import query_climate_stations
 from tanitdata.tools.datastore import query_datastore
-from tanitdata.tools.explore import explore_domain
-from tanitdata.tools.preview import get_resource_preview
+from tanitdata.tools.resource_reader import read_resource
 from tanitdata.tools.search import (
     get_dataset_details,
     list_organizations,
@@ -115,6 +114,7 @@ async def query_datastore_tool(
     If no SQL is provided, returns the first `limit` rows with schema info.
     When writing SQL, use double quotes for column names and the resource_id as the table name.
     Example: SELECT "nom_fr", "valeur"::numeric FROM "<resource_id>" WHERE "nom_fr" = 'Air temperature' LIMIT 10
+
     """
     await registry.maybe_refresh(client)
     return await query_datastore(
@@ -122,6 +122,28 @@ async def query_datastore_tool(
         registry=registry,
         resource_id=resource_id,
         sql=sql,
+        limit=limit,
+    )
+
+
+@mcp.tool()
+async def read_resource_tool(
+    resource_id: str,
+    limit: int = 100,
+) -> str:
+    """Read a non-DataStore resource file (CSV or XLSX) from catalog.agridata.tn.
+
+    Use this for resources where DataStore active = No. Downloads the file on first call,
+    parses it, and caches the result. Returns schema + data rows like query_datastore.
+
+    For DataStore-active resources, use query_datastore instead (supports SQL).
+    Max file size: 5 MB. Supported formats: CSV, XLSX.
+    """
+    await registry.maybe_refresh(client)
+    return await read_resource(
+        client=client,
+        registry=registry,
+        resource_id=resource_id,
         limit=limit,
     )
 
@@ -135,53 +157,6 @@ async def list_organizations_tool(query: str = "") -> str:
     """
     await registry.maybe_refresh(client)
     return await list_organizations(client=client, query=query)
-
-
-@mcp.tool()
-async def explore_domain_tool(
-    domain: str,
-    gouvernorat: str | None = None,
-    keyword: str | None = None,
-) -> str:
-    """Explore any domain's resources on catalog.agridata.tn without executing DataStore queries.
-
-    Browse available resources by domain, governorate, and keyword. Returns resource metadata,
-    field lists, unit hints, coverage summary, and source attribution.
-
-    Use this to understand what data is available before querying with query_datastore_tool.
-
-    domain: one of the 11 registry domains — climate_stations, rainfall, dams, crop_production,
-            olive_harvest, prices, fisheries, investments, livestock, water_resources,
-            trade_exports, documentation.
-    gouvernorat: filter by governorate name (e.g. 'Béja', 'Jendouba', 'Sfax').
-    keyword: filter resources by name, dataset, or field name (e.g. 'céréales', 'olives',
-             'dattes', 'crevettes', 'blé').
-    """
-    await registry.maybe_refresh(client)
-    return await explore_domain(
-        client=client,
-        registry=registry,
-        domain=domain,
-        gouvernorat=gouvernorat,
-        keyword=keyword,
-    )
-
-
-@mcp.tool()
-async def get_resource_preview_tool(resource_id: str) -> str:
-    """Get full schema and 3 sample rows for any DataStore resource on catalog.agridata.tn.
-
-    Returns field names with inferred types (text, likely numeric, likely date),
-    sample records, record count, unit hints from column names, and source attribution.
-
-    Use after explore_domain_tool to inspect a specific resource before writing SQL.
-    """
-    await registry.maybe_refresh(client)
-    return await get_resource_preview(
-        client=client,
-        registry=registry,
-        resource_id=resource_id,
-    )
 
 
 @mcp.tool()

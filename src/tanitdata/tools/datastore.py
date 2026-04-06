@@ -2,12 +2,17 @@
 
 from __future__ import annotations
 
+import logging
 from typing import Any
 
 from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
 from tanitdata.utils.arabic import annotate_fields_with_arabic
 from tanitdata.utils.formatting import format_datastore_result, format_source_footer
+
+logger = logging.getLogger(__name__)
+
+_SKIP_COLS = {"_id", "_full_text"}
 
 
 async def query_datastore(
@@ -77,9 +82,8 @@ async def query_datastore(
     # Append data availability context if we know the domain/governorate
     ctx = registry.get_resource_context(resource_id)
     if ctx:
-        domains = ctx.get("domains", [])
         gov = ctx.get("gouvernorat")
-        for domain in domains:
+        for domain in ctx.get("domains", []):
             avail = registry.get_data_availability(domain, gouvernorat=gov)
             if avail:
                 lines.append("")

@@ -104,3 +104,25 @@ class CKANClient:
     async def package_show(self, dataset_id: str) -> dict | None:
         """Get full metadata for a single dataset."""
         return await self.api_call("package_show", {"id": dataset_id})
+
+    async def resource_show(self, resource_id: str) -> dict | None:
+        """Get metadata for a single resource (URL, format, name, etc.)."""
+        return await self.api_call("resource_show", {"id": resource_id})
+
+    async def download_file(self, url: str, max_bytes: int = 5_242_880) -> bytes | None:
+        """Download a file from a URL, respecting a size cap. Returns None if too large."""
+        client = await self._ensure_client()
+        await self._rate_limit()
+        async with client.stream("GET", url) as resp:
+            resp.raise_for_status()
+            length = resp.headers.get("content-length")
+            if length and int(length) > max_bytes:
+                return None
+            chunks: list[bytes] = []
+            total = 0
+            async for chunk in resp.aiter_bytes():
+                total += len(chunk)
+                if total > max_bytes:
+                    return None
+                chunks.append(chunk)
+        return b"".join(chunks)

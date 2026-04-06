@@ -395,6 +395,8 @@ class SchemaRegistry:
         self._coverage: dict[str, dict[str, list[str]]] = {}
         self._resource_domains: dict[str, list[str]] = {}
         self._resource_gov: dict[str, str] = {}
+        # resource_id → (dataset_slug, resource_name) for O(1) source attribution
+        self._resource_to_dataset: dict[str, tuple[str, str]] = {}
         self._last_refreshed: datetime | None = None
         self._refresh_lock = asyncio.Lock()
 
@@ -446,6 +448,9 @@ class SchemaRegistry:
                         "org_slug": res.get("organization", ""),
                         "org_title": res.get("organization_title", ""),
                     }
+                # O(1) lookup for get_source_attribution
+                if rid not in self._resource_to_dataset:
+                    self._resource_to_dataset[rid] = (ds_slug, res.get("name", ""))
         for cluster in self._clusters:
             for res in cluster.get("resources", []):
                 rid = res["id"]
@@ -786,16 +791,12 @@ class SchemaRegistry:
         dataset_slug = live.dataset if live else ""
         resource_name = live.name if live else ""
 
-        # Try to find dataset_slug from domain_resource_index if not in live
+        # O(1) fallback from pre-built lookup
         if not dataset_slug:
-            for domain_data in self._domain_index.values():
-                for res in domain_data.get("resources", []):
-                    if res["id"] == resource_id:
-                        dataset_slug = res.get("dataset", "")
-                        resource_name = resource_name or res.get("name", "")
-                        break
-                if dataset_slug:
-                    break
+            cached = self._resource_to_dataset.get(resource_id)
+            if cached:
+                dataset_slug, fallback_name = cached
+                resource_name = resource_name or fallback_name
 
         if not dataset_slug and not resource_name:
             return None
