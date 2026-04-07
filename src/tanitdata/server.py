@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import asyncio
 import logging
+import re
 from contextlib import asynccontextmanager
 from datetime import datetime, timezone
 
@@ -18,6 +19,7 @@ from mcp.server.fastmcp import FastMCP
 from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
 from tanitdata.tools.climate import query_climate_stations
+from tanitdata.tools.dashboards import get_dashboard_link
 from tanitdata.tools.datastore import query_datastore
 from tanitdata.tools.resource_reader import read_resource
 from tanitdata.tools.search import (
@@ -63,6 +65,56 @@ async def _background_refresh():
 
 mcp = FastMCP("tanitdata", lifespan=lifespan)
 
+_UUID_RE = re.compile(
+    r"^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+    re.IGNORECASE,
+)
+
+
+async def _resolve_to_resource(identifier: str) -> tuple[str, str]:
+    """Resolve an identifier to a DataStore resource UUID.
+
+    Returns (resource_id, note). If identifier is already a UUID, note is empty.
+    If it's a dataset slug, looks up the dataset and picks the first DataStore-active resource.
+    """
+    if _UUID_RE.match(identifier):
+        return identifier, ""
+
+    # Treat as dataset slug
+    try:
+        result = await client.package_show(identifier)
+    except Exception:
+        result = None
+    if not result:
+        return identifier, ""  # let downstream error handle it
+
+    ds_title = result.get("title", identifier)
+    resources = result.get("resources", [])
+
+    # Prefer first DataStore-active resource
+    for res in resources:
+        if res.get("datastore_active"):
+            rid = res["id"]
+            name = res.get("name", "Unnamed")
+            note = (
+                f"**Auto-resolved** dataset slug `{identifier}` → "
+                f"resource `{rid}` ({name}) from *{ds_title}*\n\n"
+            )
+            return rid, note
+
+    # Fallback: first resource (may not be DataStore-active)
+    if resources:
+        rid = resources[0]["id"]
+        name = resources[0].get("name", "Unnamed")
+        note = (
+            f"**Auto-resolved** dataset slug `{identifier}` → "
+            f"resource `{rid}` ({name}) from *{ds_title}* "
+            f"(warning: not DataStore-active — query may fail, try read_resource instead)\n\n"
+        )
+        return rid, note
+
+    return identifier, ""  # no resources, let downstream error handle it
+
 
 @mcp.tool()
 async def search_datasets_tool(
@@ -101,11 +153,16 @@ async def get_dataset_details_tool(dataset_id: str) -> str:
 
 @mcp.tool()
 async def query_datastore_tool(
-    resource_id: str,
+    resource_id: str | None = None,
+    dataset_id: str | None = None,
     sql: str | None = None,
     limit: int = 100,
 ) -> str:
     """Query any DataStore resource on catalog.agridata.tn using SQL or simple browse.
+
+    Accepts a resource_id (UUID like 'ec7daec9-...') or a dataset_id (slug like 'pluviometrie-gouvernorat-de-beja').
+    If a dataset slug is provided, auto-resolves to the first DataStore-active resource in that dataset.
+    Prefer resource_id when you have it — it's faster (skips the lookup).
 
     Returns the resource schema (column names and types) plus data records.
     All fields are stored as text — use ::numeric or ::timestamp casts for math/date operations.
@@ -116,14 +173,28 @@ async def query_datastore_tool(
     Example: SELECT "nom_fr", "valeur"::numeric FROM "<resource_id>" WHERE "nom_fr" = 'Air temperature' LIMIT 10
 
     """
+    identifier = resource_id or dataset_id
+    if not identifier:
+        return "Please provide a `resource_id` (UUID) or `dataset_id` (slug)."
+
+    resolved_id, resolution_note = await _resolve_to_resource(identifier)
+
+    # If SQL references the original slug, swap in the resolved UUID
+    if sql and resolution_note and identifier in sql:
+        sql = sql.replace(identifier, resolved_id)
+
     await registry.maybe_refresh(client)
-    return await query_datastore(
+    result = await query_datastore(
         client=client,
         registry=registry,
-        resource_id=resource_id,
+        resource_id=resolved_id,
         sql=sql,
         limit=limit,
     )
+
+    if resolution_note:
+        return resolution_note + result
+    return result
 
 
 @mcp.tool()
@@ -198,6 +269,20 @@ async def query_climate_stations_tool(
         aggregation=aggregation,
         latest=latest,
     )
+
+
+@mcp.tool()
+async def get_dashboard_link_tool(topic: str) -> str:
+    """Find interactive dashboards on dashboards.agridata.tn for a given topic.
+
+    Maps a topic (in French or English) to the relevant dashboard URL(s).
+    18 dashboards available: climate, cereals, olive oil, dates, citrus, fisheries,
+    vegetables, dams, investments, forest fires, rainfall, cereal prices, and more.
+
+    Returns one link for a clear match, or a ranked list when multiple dashboards are relevant.
+    Examples: 'céréales', 'olive oil', 'dattes export', 'agrumes', 'climate change'.
+    """
+    return get_dashboard_link(topic=topic)
 
 
 def main():

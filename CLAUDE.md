@@ -211,10 +211,10 @@ fields = registry.get_resource_schema("some-resource-id")
 5. **Locality/delegation name** → `LOCALITY_MAP` (e.g. `"bir ben kemla"` → `"Mahdia"`, `"ghezala"` → `"Bizerte"`)
 
 Supporting maps (all in `schema_registry.py`):
-- `GOVERNORATE_MAP`: 27 entries, lower-case key → canonical French name
+- `GOVERNORATE_MAP`: 31 entries, lower-case key → canonical French name
 - `CRDA_SLUG_MAP`: 24 CRDA org slugs → governorate
-- `NATIONAL_ORGS`: ~20 national-level org slugs (DGGREE, DGACTA, ONAGRI, etc.)
-- `LOCALITY_MAP`: ~50 delegation/station-site names → parent governorate
+- `NATIONAL_ORGS`: 24 national-level org slugs (DGGREE, DGACTA, ONAGRI, etc.)
+- `LOCALITY_MAP`: 60 delegation/station-site names → parent governorate
 
 ### schemas.json structure
 
@@ -303,7 +303,9 @@ Get full metadata and resource list for a specific dataset.
 
 ### P0: query_datastore ✅ Implemented
 Execute SQL against any DataStore resource. Returns schema + records + source attribution.
-- Input: `resource_id: str`, `sql: str?`, `limit: int = 100`
+- Input: `resource_id: str?`, `dataset_id: str?`, `sql: str?`, `limit: int = 100`
+- Accepts either a resource UUID or a dataset slug — auto-resolves slugs to the first DataStore-active resource via `package_show` lookup
+- If SQL references the original slug, it is rewritten with the resolved UUID
 - Output: Arabic field decoding (if applicable), schema, records table, registry schema note, data availability context, source attribution footer
 - If no SQL: uses `datastore_search` (returns schema + first `limit` rows)
 - If SQL: uses `datastore_search_sql`
@@ -350,32 +352,16 @@ Search ONAGRI's bibliographic catalog (22,782 records) by title, author, year, k
 - **Phase 1 scope:** search `Titre` AND `Resume` (abstract) via ILIKE — both are text fields and work today without vectors. `Resume` is the primary content field; many records have rich French/Arabic abstracts that contain keywords not present in the title.
 - **Phase 2 bridge:** `Resume` is the target for semantic embedding. Phase 1 SQL ILIKE over `Resume` is the baseline; Phase 2 replaces it with vector similarity search over the same field. Design the tool so the retrieval backend is swappable without changing the tool interface.
 
-### P0: get_dashboard_link — not yet built
-Map a query topic to the relevant interactive dashboard URL.
+### P0: get_dashboard_link ✅ Implemented
+Map a query topic to the relevant interactive dashboard URL(s).
 - Input: `topic: str`
-- Output: dashboard title, URL, description
-- Implementation: static dict lookup from CLAUDE.md Dashboard URL Map
-
-### Dashboard URL Map
-```python
-DASHBOARDS = {
-    "climate": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-changement-climatique/",
-    "cereals_annual": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-annuels-des-cereales/",
-    "cereals_monthly": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-mensuels-des-cereales/",
-    "cereal_prices": "https://dashboards.agridata.tn/fr/detail_dashboard/evolution-des-prix-fob-du-ble-dur-selon-lorigine/",
-    "olive_oil": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-de-lhuile-dolive/",
-    "fisheries": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-de-la-peche-et-de-laquaculture/",
-    "dates": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-de-la-production-des-dattes/",
-    "vegetables": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-annuels-des-cultures-maraicheres/",
-    "dams": "https://dashboards.agridata.tn/fr/detail_dashboard/situation-hydraulique-de-la-societe-dexploitation-du-canal-et-des-adductions-des-eaux-du-nord/",
-    "investments": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-indicateurs-de-linvestissement-dans-le-secteur-de-lagriculture-et-de-la-peche/",
-    "citrus": "https://dashboards.agridata.tn/fr/detail_dashboard/indicateurs-de-performance-de-la-filiere-agrumicole/",
-    "citrus_exports": "https://dashboards.agridata.tn/fr/detail_dashboard/exportations-des-agrumes-tunisiens-indicateurs-cles-en-quantite-et-en-valeur/",
-    "forest_fires": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-incendies-de-foret/",
-    "rainfall": "https://dashboards.agridata.tn/fr/detail_dashboard/tableau-de-bord-des-quantites-journalieres-de-pluie-enregistrees/",
-    "citrus_production": "https://dashboards.agridata.tn/fr/detail_dashboard/analyse-spatiale-et-temporelle-de-la-production-dagrumes-en-tonnes/",
-}
-```
+- Output: dashboard title, URL, description (single match) or ranked list (multiple matches)
+- 18 dashboards indexed with bilingual keyword matching (French + English)
+- Accent-normalized matching: "céréales" and "cereales" both work
+- Multi-match support: broad topics (e.g. "dattes") return all relevant dashboards
+- No-match fallback: returns the full list of 18 dashboards
+- Implementation: `src/tanitdata/tools/dashboards.py`
+- Benchmark: instant (pure local lookup, no API calls)
 
 ## Data Quality Issues
 
@@ -415,8 +401,8 @@ tanitdata/
 │       │   ├── datastore.py    # ✅ query_datastore (SQL + Arabic decode + availability context)
 │       │   ├── climate.py          # ✅ query_climate_stations (3 EAV variants, caching, comparison)
 │       │   ├── resource_reader.py # ✅ read_resource (CSV/XLSX download+parse, on-demand cache)
+│       │   ├── dashboards.py      # ✅ get_dashboard_link (18 dashboards, keyword matching)
 │       │   ├── bibliography.py    # planned — does not exist yet
-│       │   └── dashboards.py      # planned — does not exist yet
 │       └── utils/
 │           ├── __init__.py
 │           ├── formatting.py   # format_dataset_list, format_datastore_result, format_source_footer
@@ -432,11 +418,13 @@ tanitdata/
 ## Development Workflow
 
 1. `pip install -e .` to install in editable mode (or use `uv`)
-2. Test with live portal: `python test_climate.py`, `python test_stress.py`, or `python test_foundation.py`
+2. Test with live portal: `python test_climate.py`, `python test_stress.py`
 3. Run unit tests: `pytest tests/`
 4. MCP Inspector for tool testing: `mcp dev src/tanitdata/server.py`
 5. Connect to Claude Desktop for integration testing
 6. Run against live portal API — no mock needed (all data is public, read-only)
+
+Note: `test_foundation.py` tests removed tools (explore_domain, resource_preview) and is no longer runnable.
 
 ## Known Issues and Limitations
 
@@ -453,7 +441,7 @@ tanitdata/
 - `tests/test_tools/` has only an `__init__.py`. No automated tests for tool outputs yet — development has relied on live benchmark scripts at the project root.
 - **CKAN DataStore SQL restriction**: `CASE WHEN` is not in the DataStore SQL whitelist (returns 409 CONFLICT). Some resources also return 403 FORBIDDEN for SQL queries.
 
-## Tool Strategy (v1.3+)
+## Tool Strategy (v1.4+)
 
 **Domain-specific tools** are only built where there's a bounded, single-schema pattern that benefits from specialized logic:
 - `query_climate_stations` — 3 EAV schema variants, parameter aliasing, aggregation (SUM/AVG), sensor caching
@@ -465,13 +453,13 @@ tanitdata/
 3. If DataStore active → `query_datastore_tool` (SQL access)
 4. If not DataStore active → `read_resource_tool` (download + parse CSV/XLSX)
 
-This keeps the server lean (6 tools) and lets the LLM handle schema variability naturally.
+**Shortcut:** The LLM can skip step 2 and pass a dataset slug directly to `query_datastore_tool(dataset_id=slug)`. The tool auto-resolves the slug to the first DataStore-active resource via `package_show`. This eliminates the most common LLM error (passing a dataset slug where a resource UUID is expected).
+
+This keeps the server lean (7 tools) and lets the LLM handle schema variability naturally.
 
 ## Build Sequence for Remaining Phase 1 Tools
 
 1. **`search_bibliography`** — single known resource, ILIKE over Titre+Resume, no domain routing. Validates the bibliography search pattern before Phase 2 vector enhancement.
-
-2. **`get_dashboard_link`** — trivial static dict lookup, ~10 minutes.
 
 ## Phase 2 Scope (Knowledge Layer — not for Phase 1)
 
@@ -491,3 +479,4 @@ This keeps the server lean (6 tools) and lets the LLM handle schema variability 
 - **Phase 1 = DataStore tools only** — knowledge/RAG layer is Phase 2
 - **Local development** — stdio transport, Claude Desktop for testing
 - **No mock tests for tools** — live portal API is public and fast; real integration tests are more valuable than mocked unit tests for this use case
+- **Auto-resolve dataset slugs** — `query_datastore_tool` accepts both resource UUIDs and dataset slugs; non-UUID identifiers are resolved via `package_show` to the first DataStore-active resource. Turns the most common LLM error into a valid workflow.

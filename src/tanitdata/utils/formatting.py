@@ -24,7 +24,7 @@ def format_dataset_list(datasets: list[dict[str, Any]]) -> str:
         ds_slug = ds.get("name", ds.get("id", "N/A"))
 
         lines.append(f"### {i}. {title}")
-        lines.append(f"- **ID:** `{ds_slug}`")
+        lines.append(f"- **Dataset slug:** `{ds_slug}`")
         lines.append(f"- **Organization:** {org_title}")
         lines.append(f"- **Groups:** {group_str}")
         lines.append(f"- **Resources:** {num_resources}")

@@ -76,7 +76,7 @@ async def get_dataset_details(client: CKANClient, dataset_id: str) -> str:
     for res in result.get("resources", []):
         ds_active = "Yes" if res.get("datastore_active") else "No"
         lines.append(f"- **{res.get('name', 'Unnamed')}**")
-        lines.append(f"  - ID: `{res['id']}`")
+        lines.append(f"  - Resource ID: `{res['id']}`")
         lines.append(f"  - Format: {res.get('format', 'N/A')}")
         lines.append(f"  - DataStore active: {ds_active}")
 
