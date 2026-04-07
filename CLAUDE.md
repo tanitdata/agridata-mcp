@@ -470,7 +470,6 @@ This keeps the server lean (8 tools) and lets the LLM handle schema variability 
 - PDF download pipeline (batch via Nom_fichier URL pattern)
 - Multilingual chunking and embedding (French + Arabic, sentence-transformers multilingual-e5-large)
 - Document-DataStore cross-referencing by governorate, theme, and year
-- Computed climate indices (ET₀ via Penman-Monteith, SPI for drought assessment)
 
 ## Key Decisions
 
