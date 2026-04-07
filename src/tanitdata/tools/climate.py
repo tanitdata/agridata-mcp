@@ -93,6 +93,13 @@ _PARAM_ALIASES: dict[str, str] = {
     "soil moisture": "soil_moisture",
     "humidité du sol": "soil_moisture",
     "deltat": "deltat",
+    # Rainfall (additional aliases for rainfall domain integration)
+    "pluviométrie": "rain",
+    "pluviometrie": "rain",
+    "rainfall": "rain",
+    "drought": "rain",
+    "sécheresse": "rain",
+    "secheresse": "rain",
 }
 
 # Canonical group → ILIKE patterns to match against the param column
@@ -799,6 +806,203 @@ async def _latest_readings(
 
 
 # ---------------------------------------------------------------------------
+# Rainfall domain integration
+# ---------------------------------------------------------------------------
+
+_MONTH_COLS = {
+    "septembre", "octobre", "novembre", "decembre",
+    "janvier", "fevrier", "mars", "avril", "mai", "juin", "juillet", "aout",
+}
+
+_PRECIP_MARKERS = {"pluviom", "precipit", "pluie", "cumul_mm", "rainfall"}
+
+
+def _has_precip_field(fields: list[str]) -> bool:
+    """Check if any field name contains a precipitation-related term."""
+    for f in fields:
+        fl = f.lower()
+        if any(m in fl for m in _PRECIP_MARKERS):
+            return True
+    return False
+
+
+def _is_rain_parameter(parameter: str) -> bool:
+    """Check if the parameter should trigger rainfall domain search."""
+    canonical = _PARAM_ALIASES.get(parameter.lower().strip())
+    return canonical == "rain"
+
+
+def _detect_rainfall_schema(fields: list[str]) -> str | None:
+    """Detect rainfall resource schema: 'eav', 'monthly', 'pivoted', 'annual', or None."""
+    fset = {f.lower() for f in fields}
+    # EAV format (same as climate stations — skip, already queried)
+    if ("nom_fr" in fset and "valeur" in fset) or \
+       ("sensor_name" in fset and "value" in fset) or \
+       ("parameter" in fset and "value" in fset):
+        return "eav"
+    # Monthly aggregate: has a mois column
+    if "mois" in fset:
+        return "monthly"
+    # Pivoted: has month-name columns (>= 6 months present)
+    if len(fset & _MONTH_COLS) >= 6:
+        return "pivoted"
+    # Annual: has Annee + precipitation-related field (campaign/annual summaries)
+    if "annee" in fset and _has_precip_field(fields):
+        return "annual"
+    return None
+
+
+def _find_field(fields: list[str], *candidates: str) -> str | None:
+    """Find actual field name matching candidates (case-insensitive)."""
+    field_map = {f.lower(): f for f in fields}
+    for c in candidates:
+        if c.lower() in field_map:
+            return field_map[c.lower()]
+    return None
+
+
+def _build_rainfall_sql(
+    rid: str,
+    fields: list[str],
+    schema_type: str,
+    date_from: str | None,
+    date_to: str | None,
+    limit: int = 200,
+) -> str | None:
+    """Build SQL for a rainfall domain resource."""
+    skip = {"_id", "_full_text"}
+    select_cols = [f'"{f}"' for f in fields if f not in skip]
+
+    if schema_type == "monthly":
+        mois = _find_field(fields, "Mois", "mois")
+        annee = _find_field(fields, "Annee", "annee")
+        if not mois:
+            return None
+        where = [f'"{mois}" IS NOT NULL']
+        if annee and date_from:
+            y = date_from[:4]
+            where.append(f'"{annee}" ~ \'^\\d{{4}}$\' AND "{annee}" >= \'{y}\'')
+        if annee and date_to:
+            y = date_to[:4]
+            where.append(f'"{annee}" <= \'{y}\'')
+        order = f'"{annee}", "{mois}"' if annee else f'"{mois}"'
+        return (
+            f"SELECT {', '.join(select_cols)} "
+            f'FROM "{rid}" '
+            f"WHERE {' AND '.join(where)} "
+            f"ORDER BY {order} LIMIT {limit}"
+        )
+
+    if schema_type in ("pivoted", "annual"):
+        annee = _find_field(fields, "Annee", "annee")
+        where_parts = []
+        if annee and date_from:
+            y = date_from[:4]
+            where_parts.append(
+                f'"{annee}" ~ \'^\\d{{4}}$\' AND "{annee}" >= \'{y}\''
+            )
+        if annee and date_to:
+            y = date_to[:4]
+            where_parts.append(f'"{annee}" <= \'{y}\'')
+        where_clause = f"WHERE {' AND '.join(where_parts)} " if where_parts else ""
+        order = f'ORDER BY "{annee}" ' if annee else ""
+        return (
+            f"SELECT {', '.join(select_cols)} "
+            f'FROM "{rid}" '
+            f"{where_clause}"
+            f"{order}LIMIT {limit}"
+        )
+
+    return None
+
+
+async def _query_rainfall_domain(
+    client: CKANClient,
+    registry: SchemaRegistry,
+    station: str | None,
+    date_from: str | None,
+    date_to: str | None,
+    exclude_rids: set[str],
+) -> str:
+    """Query historical pluviometry from the rainfall domain.
+
+    Returns formatted markdown, or empty string if no data found.
+    """
+    gov_filter: str | None = None
+    if station:
+        q = station.lower().strip()
+        gov_filter = GOVERNORATE_MAP.get(q)
+        if not gov_filter:
+            # Check if input is already a canonical name
+            for v in GOVERNORATE_MAP.values():
+                if v.lower() == q:
+                    gov_filter = v
+                    break
+
+    resources = registry.get_domain_resources("rainfall", gouvernorat=gov_filter)
+    if not resources:
+        return ""
+
+    # Exclude resources already queried via climate_stations domain
+    resources = [r for r in resources if r["id"] not in exclude_rids]
+    if not resources:
+        return ""
+
+    lines = ["# Historical Pluviometry Records", ""]
+    sources: list[dict] = []
+    found_data = False
+
+    for res in resources:
+        rid = res["id"]
+        fields = res.get("fields", [])
+        schema_type = _detect_rainfall_schema(fields)
+
+        # Skip EAV resources (already handled by climate_stations domain)
+        if not schema_type or schema_type == "eav":
+            continue
+
+        sql = _build_rainfall_sql(rid, fields, schema_type, date_from, date_to)
+        if not sql:
+            continue
+
+        try:
+            result = await client.datastore_sql(sql)
+        except Exception:
+            continue
+
+        if not result:
+            continue
+        records = result.get("records", [])
+        if not records:
+            continue
+
+        found_data = True
+        gov = registry._resource_gov.get(rid, "")
+        name = res.get("name", "Unnamed")
+
+        lines.append(f"## {name}")
+        header = f"Governorate: {gov} | Records: {len(records)}"
+        if schema_type == "pivoted":
+            header += " | Format: yearly summary with monthly columns"
+        lines.append(header)
+        lines.append("")
+        lines.extend(_records_table(records, max_rows=40))
+        lines.append("")
+
+        source = registry.get_source_attribution(rid)
+        if source:
+            sources.append(source)
+
+    if not found_data:
+        return ""
+
+    if sources:
+        lines.append(format_source_footer(sources))
+
+    return "\n".join(lines)
+
+
+# ---------------------------------------------------------------------------
 # Main entry point
 # ---------------------------------------------------------------------------
 
@@ -844,6 +1048,10 @@ async def query_climate_stations(
             "_source": source,
         })
 
+    # Check if this is a rain-related query that should also search rainfall domain
+    rain_query = parameter is not None and _is_rain_parameter(parameter)
+    climate_rids = {s["id"] for s in stations}
+
     # --- Inventory mode ---
     if not station and not parameter and not latest:
         return await _build_inventory(client, registry, stations)
@@ -860,13 +1068,35 @@ async def query_climate_stations(
                 return await _latest_readings(
                     client, registry, all_matched, parameter
                 )
-            return await _multi_station_compare(
+            result = await _multi_station_compare(
                 client, registry, stations, multi,
                 parameter, date_from, date_to, aggregation,
             )
+            if rain_query:
+                for q in multi:
+                    rainfall = await _query_rainfall_domain(
+                        client, registry, q, date_from, date_to, climate_rids,
+                    )
+                    if rainfall:
+                        result += "\n\n---\n\n" + rainfall
+            return result
 
         matched = _filter_stations(stations, station)
         if not matched:
+            if rain_query:
+                # No climate stations, but rainfall domain may have data
+                rainfall = await _query_rainfall_domain(
+                    client, registry, station, date_from, date_to, climate_rids,
+                )
+                if rainfall:
+                    return (
+                        f"No climate sensor stations found for **{station}**.\n\n"
+                        + rainfall
+                    )
+                return (
+                    f"No climate stations or historical rainfall data "
+                    f"available for **{station}**."
+                )
             return _available_stations_msg(stations, station)
     else:
         # No station filter — all sensor resources
@@ -878,10 +1108,17 @@ async def query_climate_stations(
 
     # --- Data query ---
     if parameter:
-        return await _query_parameter(
+        result = await _query_parameter(
             client, registry, matched, parameter,
             date_from, date_to, aggregation,
         )
+        if rain_query:
+            rainfall = await _query_rainfall_domain(
+                client, registry, station, date_from, date_to, climate_rids,
+            )
+            if rainfall:
+                result += "\n\n---\n\n" + rainfall
+        return result
 
     # --- Station details ---
     return await _station_details(client, registry, matched)

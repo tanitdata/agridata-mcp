@@ -241,9 +241,12 @@ async def query_climate_stations_tool(
     aggregation: str = "raw",
     latest: bool = False,
 ) -> str:
-    """Query climate station data from Tunisia's weather monitoring network.
+    """Queries climate station sensor data AND historical pluviometry records.
 
-    24 stations across 11 governorates. Sources: DGGREE (FieldClimate, real-time), DGACTA (environmental, periodic).
+    For real-time weather data, uses the DGGREE/DGACTA sensor network (24 stations, 11 governorates).
+    For historical monthly rainfall by delegation (useful for drought analysis), uses CRDA pluviometry
+    datasets covering 10+ governorates. Rainfall-related parameters ('pluie', 'rainfall', 'précipitations',
+    'pluviométrie', 'drought', 'sécheresse') automatically search both domains.
 
     Modes:
     - No arguments: full station inventory with sensor lists per station
@@ -256,6 +259,7 @@ async def query_climate_stations_tool(
              Use comma or 'vs' to compare multiple stations (e.g. 'Bizerte vs Mahdia').
     parameter: sensor type. Accepts French ('température', 'vent', 'pluie', 'humidité', 'rayonnement')
                or English ('temperature', 'wind', 'rain', 'humidity', 'solar').
+               Also accepts 'rainfall', 'pluviométrie', 'drought', 'sécheresse' for historical rainfall.
     date_from / date_to: ISO date strings (e.g. '2025-01-01').
     aggregation: 'raw' (default), 'daily', or 'monthly'. Precipitation uses SUM; other sensors use AVG.
     latest: if True, return the single most recent reading per sensor instead of a time series.
