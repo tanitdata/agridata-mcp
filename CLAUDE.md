@@ -19,7 +19,7 @@
 │  │ Data Tools   │  │ Knowledge Tools      │  │
 │  │              │  │                      │  │
 │  │ climate  ✅  │  │ search_documents     │  │
-│  │ generic_sql✅│  │ search_bibliography  │  │
+│  │ generic_sql✅│  │ bibliography ✅      │  │
 │  │ read_file ✅ │  │                      │  │
 │  │ search   ✅  │  │                      │  │
 │  └──────┬──────┘  └──────────┬───────────┘  │
@@ -342,15 +342,21 @@ Download and parse non-DataStore resource files (CSV, XLSX) on demand.
 - Implementation: `src/tanitdata/tools/resource_reader.py`
 - Benchmark: ~0.8s first call (download + parse), ~0s cached
 
-### P0: search_bibliography — not yet built
-Search ONAGRI's bibliographic catalog (22,782 records) by title, author, year, keyword.
-- Input: `query: str`, `year_from: int?`, `year_to: int?`, `language: str?` ("FR"|"AR"|"EN"), `limit: int = 20`
-- Output: title, author, year, language, abstract, source
-- Implementation: SQL ILIKE against the ONAGRI base DataStore resource
-- Resource dataset: `base-de-documentation-de-l-onagri` (22,782 records)
-- Fields: Titre, Auteur_affil, Annee, Langue, Resume, Source, M_titre_orig
-- **Phase 1 scope:** search `Titre` AND `Resume` (abstract) via ILIKE — both are text fields and work today without vectors. `Resume` is the primary content field; many records have rich French/Arabic abstracts that contain keywords not present in the title.
-- **Phase 2 bridge:** `Resume` is the target for semantic embedding. Phase 1 SQL ILIKE over `Resume` is the baseline; Phase 2 replaces it with vector similarity search over the same field. Design the tool so the retrieval backend is swappable without changing the tool interface.
+### P0: search_bibliography ✅ Implemented
+Search ONAGRI's bibliographic catalogs (25,944 records across 6 resources) by keyword, year, language, theme.
+- Input: `query: str`, `year_from: int?`, `year_to: int?`, `language: str?` ("FR"|"AR"|"EN"), `theme: str?` ("agriculture"|"water"|"forestry"|"fisheries"), `limit: int = 20`
+- Output: ranked results with title, author, year, language, abstract (if available), PDF links, source attribution
+- **Tiered execution:**
+  - **Tier 1** (Base ONAGRI 22,782 + Fonds ONAGRI 2,265 = 25,047 records): SQL ILIKE on `Titre` + `Resume`. Queried first.
+  - **Tier 2** (4 thematic libraries: Agriculture 665, Water 80, Forestry 72, Fisheries 40 = 897 records): SQL blocked (409 CONFLICT) — fetched via `datastore_search` + Python-side keyword/year filtering. Process-scoped cache (~0s on repeat).
+  - Tier 2 only queried if Tier 1 returns fewer than `limit` results, or if a `theme` is specified.
+- **Scoring:** Titre match = 2 points, Resume match = 1 point per keyword. Results sorted by score descending.
+- **PDF URLs:** Fonds records contain full URLs in `source` field (resolved to `onagri.nat.tn`). Thematic library records use `Nom_fichier` → `https://www.onagri.nat.tn/uploads/docagri/{Nom_fichier}.pdf`.
+- **Year filter:** String comparison with `^\d{4}$` regex guard (handles `'ND'`, `'SD'`, `None` values in Annee).
+- **Language filter:** ILIKE `'%FR%'` (handles `(FR)`, `(Fr)`, `FR`, compound values like `(EN, FR, ES, AR)`). Tier 1 only (Tier 2 has no Langue column).
+- Implementation: `src/tanitdata/tools/bibliography.py`
+- Benchmark: ~0.6s (Tier 1 only), ~1.8s (Tier 1 + Tier 2), ~0.01s (Tier 2 cached theme query)
+- **Phase 2 bridge:** `Resume` field is the target for semantic embedding. SQL ILIKE is the baseline; Phase 2 replaces it with vector similarity search over the same field.
 
 ### P0: get_dashboard_link ✅ Implemented
 Map a query topic to the relevant interactive dashboard URL(s).
@@ -402,7 +408,7 @@ tanitdata/
 │       │   ├── climate.py          # ✅ query_climate_stations (3 EAV variants, caching, comparison)
 │       │   ├── resource_reader.py # ✅ read_resource (CSV/XLSX download+parse, on-demand cache)
 │       │   ├── dashboards.py      # ✅ get_dashboard_link (18 dashboards, keyword matching)
-│       │   ├── bibliography.py    # planned — does not exist yet
+│       │   ├── bibliography.py    # ✅ search_bibliography (6 resources, tiered, cached)
 │       └── utils/
 │           ├── __init__.py
 │           ├── formatting.py   # format_dataset_list, format_datastore_result, format_source_footer
@@ -439,13 +445,13 @@ Note: `test_foundation.py` tests removed tools (explore_domain, resource_preview
 - `query_datastore` MCP tool does not expose a `filters` dict parameter (the underlying Python function accepts it but it was intentionally omitted from the server registration).
 - Sensor list caching (`_sensor_cache` dict) in `climate.py` is process-scoped — it resets on server restart but survives the lifetime of a session, making repeated inventory calls fast (~0s after the first).
 - `tests/test_tools/` has only an `__init__.py`. No automated tests for tool outputs yet — development has relied on live benchmark scripts at the project root.
-- **CKAN DataStore SQL restriction**: `CASE WHEN` is not in the DataStore SQL whitelist (returns 409 CONFLICT). Some resources also return 403 FORBIDDEN for SQL queries.
+- **CKAN DataStore SQL restriction**: `CASE WHEN` is not in the DataStore SQL whitelist (returns 409 CONFLICT). Some resources also return 403 FORBIDDEN for SQL queries. The 4 ONAGRI thematic library resources (Agriculture, Water, Forestry, Fisheries) block all SQL queries (409); `search_bibliography` works around this via `datastore_search` + Python filtering.
 
 ## Tool Strategy (v1.4+)
 
 **Domain-specific tools** are only built where there's a bounded, single-schema pattern that benefits from specialized logic:
 - `query_climate_stations` — 3 EAV schema variants, parameter aliasing, aggregation (SUM/AVG), sensor caching
-- `search_bibliography` (planned) — single known resource, ILIKE over Titre+Resume, Phase 2 vector bridge
+- `search_bibliography` — 6 bibliographic resources (2 Tier 1 SQL + 4 Tier 2 cached), tiered execution, keyword scoring, PDF URL construction
 
 **Everything else** goes through the generic workflow:
 1. `search_datasets_tool` — find datasets by keyword/org/group
@@ -455,11 +461,7 @@ Note: `test_foundation.py` tests removed tools (explore_domain, resource_preview
 
 **Shortcut:** The LLM can skip step 2 and pass a dataset slug directly to `query_datastore_tool(dataset_id=slug)`. The tool auto-resolves the slug to the first DataStore-active resource via `package_show`. This eliminates the most common LLM error (passing a dataset slug where a resource UUID is expected).
 
-This keeps the server lean (7 tools) and lets the LLM handle schema variability naturally.
-
-## Build Sequence for Remaining Phase 1 Tools
-
-1. **`search_bibliography`** — single known resource, ILIKE over Titre+Resume, no domain routing. Validates the bibliography search pattern before Phase 2 vector enhancement.
+This keeps the server lean (8 tools) and lets the LLM handle schema variability naturally.
 
 ## Phase 2 Scope (Knowledge Layer — not for Phase 1)
 

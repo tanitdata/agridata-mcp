@@ -1,8 +1,8 @@
 # MEMORY.md — Development Log
 
 ## Current State
-- **Server version:** v1.4 (dashboard tool + dataset slug auto-resolution)
-- **Tools registered (7):**
+- **Server version:** v1.5 (bibliography search tool)
+- **Tools registered (8):**
   1. `search_datasets_tool` — keyword/org/group search across 1,102 datasets
   2. `get_dataset_details_tool` — dataset metadata + resource list
   3. `query_datastore_tool` — SQL against any DataStore resource (789 resources); accepts `resource_id` (UUID) or `dataset_id` (slug) with auto-resolution
@@ -10,9 +10,13 @@
   5. `list_organizations_tool` — 55 orgs with dataset counts
   6. `query_climate_stations_tool` — 24 stations, 3 EAV variants, caching, comparison
   7. `get_dashboard_link_tool` — 18 interactive dashboards, bilingual keyword matching
-- **Git tags:** `v1.0-foundation`, `v1.1-climate`, `v1.2-crops`, `v1.3-foundation-pivot`, `v1.4-dashboards-autoresolve`
+  8. `search_bibliography_tool` — 25,944 records across 6 ONAGRI resources, tiered execution, keyword scoring
+- **Git tags:** `v1.0-foundation`, `v1.1-climate`, `v1.2-crops`, `v1.3-foundation-pivot`, `v1.4-dashboards-autoresolve`, `v1.5-bibliography`
 
-## Recent Changes (v1.3 → v1.4)
+## Recent Changes (v1.4 → v1.5)
+- **search_bibliography tool** — searches 6 ONAGRI bibliographic resources (25,944 records total). Tiered execution: Tier 1 (Base 22,782 + Fonds 2,265) via SQL ILIKE on Titre+Resume; Tier 2 (4 thematic libraries, 897 records) via datastore_search + Python filtering (SQL blocked on these resources). Keyword scoring (Titre=2pts, Resume=1pt). PDF URL construction via onagri.nat.tn. Year filter with regex guard. Language ILIKE filter. Process-scoped Tier 2 cache. 10/10 test scenarios pass.
+
+## Previous Changes (v1.3 → v1.4)
 - **get_dashboard_link tool** — 18 dashboards indexed, accent-normalized bilingual keyword matching, top-score-only filtering. 19/19 tests pass.
 - **Dataset slug auto-resolution** — `query_datastore_tool` now accepts `dataset_id` (slug) alongside `resource_id` (UUID). Non-UUID identifiers are resolved via `package_show` to the first DataStore-active resource. SQL references to the slug are rewritten with the resolved UUID. Eliminates the most common LLM error.
 - **Label disambiguation** — `formatting.py` changed `**ID:**` to `**Dataset slug:**`; `search.py` changed `ID:` to `Resource ID:` for resource entries. Reduces LLM confusion between dataset slugs and resource UUIDs.
@@ -31,6 +35,7 @@
 - **query_climate_stations:** 3 EAV schema variants auto-detected. Modes: inventory, station details, data query, multi-station comparison (`vs`), latest readings. Precipitation uses SUM, all others AVG. Sensor list caching (first call ~7s, cached ~0s). 5-tier governorate extraction covers 10 sensor governorates + 1 metadata-only (Kebili).
 - **read_resource:** CSV (multi-encoding) and XLSX (openpyxl read-only) parsing. Process-scoped cache. Redirects DataStore-active resources to query_datastore. 5MB size limit. ~0.8s first call, ~0s cached.
 - **get_dashboard_link:** 18 dashboards indexed. Accent-normalized bilingual keyword matching (FR+EN). Single match -> direct link; multi-match -> ranked list (top-score only); no match -> full list. Instant (pure local, no API calls). 19/19 test scenarios pass.
+- **search_bibliography:** 6 ONAGRI resources (25,944 records). Tiered execution: Tier 1 SQL ILIKE (Titre+Resume), Tier 2 datastore_search+Python filter (SQL blocked). Keyword scoring, year regex guard, language ILIKE, PDF URL construction (onagri.nat.tn). Process-scoped Tier 2 cache. 10/10 test scenarios pass.
 - **Schema registry:** Static layer from schemas.json (12 domains, 70 clusters, 789 resources). Live layer refreshes every 6h in background. Governorate extraction (CRDA slug map, national orgs, locality map). Coverage summaries, data availability, source attribution all work.
 
 ## What Was Built and Removed (with reasons)
@@ -59,6 +64,9 @@
 - Windows `python3` command requires symlink to work (`mklink C:\Python314\python3.exe C:\Python314\python.exe`).
 - Climate domain count mismatch: static schemas.json lists 21; live inventory shows 24.
 - `test_foundation.py` at project root tests removed tools (explore_domain, resource_preview) and is no longer runnable.
+- **ONAGRI thematic libraries block SQL** — 4 Tier 2 bibliography resources (Agriculture, Water, Forestry, Fisheries) return 409 CONFLICT on all SQL queries. Worked around via `datastore_search` + Python filtering.
+- **Bibliography Annee field** — contains non-numeric values (`'ND'`, `'SD'`, `'N.D.'`, `None`). Year filter uses string comparison with `^\d{4}$` regex guard.
+- **Bibliography Langue field** — inconsistent format: `(FR)`, `(Fr)`, `FR`, compound `(EN, FR, ES, AR)`. Filter uses ILIKE `'%FR%'` instead of exact match.
 
 ## Completed
 - [x] Foundation tools: search_datasets, get_dataset_details, query_datastore, list_organizations (`d600148`)
@@ -73,9 +81,9 @@
 - [x] get_dashboard_link tool: 18 dashboards, bilingual keyword matching, 19/19 tests pass
 - [x] Dataset slug auto-resolution in query_datastore_tool (UUID regex check, package_show fallback, SQL rewrite)
 - [x] Label disambiguation: "Dataset slug" vs "Resource ID" in search output
+- [x] search_bibliography tool: 6 ONAGRI resources, tiered execution, keyword scoring, PDF URLs, 10/10 tests pass
 
 ## Next Steps
-- [ ] Build search_bibliography (ONAGRI catalog, 22,782 records, ILIKE over Titre+Resume)
 - [ ] Rerun full benchmark with final Phase 1 toolset (8 tools)
 - [ ] Phase 2: RAG pipeline over 994 documents
 
@@ -99,6 +107,20 @@
 | Q7 | Latest temperature — Mahdia | Latest + parameter filter combined |
 | Q8 | Station inventory (repeat) | Cache hit: should be ~0s after Q1 |
 | Q9 | Nonexistent station (Sousse) | Graceful error handling |
+
+## Bibliography Test Results (10/10 pass)
+| # | Scenario | Results | Time |
+|---|---|---|---|
+| Q1 | Broad keyword: cereales | 10 found (5 shown) | 0.63s |
+| Q2 | Multi-keyword: olive Sfax | 6 found | 0.63s |
+| Q3 | Year filter: irrigation 2015-2020 | 9 found (Tier 1+2) | 1.84s |
+| Q4 | Language filter: cereales AR | 13 found (Tier 1+2) | 0.63s |
+| Q5 | Theme filter: thon fisheries | 0 (40 records, no match) | 0.00s |
+| Q6 | Tiered: foret incendie | 9 found | 0.62s |
+| Q7 | No results: xyznonexistent | 0 | 0.62s |
+| Q8 | Year range only: 2023-2024 | 52 found | 0.60s |
+| Q9 | Theme agriculture: climat | 27 found | 0.01s |
+| Q10 | Cache hit: eau agriculture | 34 found | 0.01s |
 
 ## Dashboard Test Results (19/19 pass)
 All keyword matching scenarios validated after two fix rounds:
@@ -126,3 +148,4 @@ Tested explore_domain + query_datastore workflow on 3 queries (before v1.3 pivot
 | `ea2a92e` | — | Replace crop_production with explore_domain + resource_preview |
 | `cbd86dd` | — | explore_domain: topic-filtered national resources |
 | `d216a6e` | `v1.3-foundation-pivot` | V1.3: replace explore_domain + resource_preview with read_resource |
+| `213f68d` | `v1.4-dashboards-autoresolve` | V1.4: dashboard tool + dataset slug auto-resolution |

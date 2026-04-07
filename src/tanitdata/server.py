@@ -18,6 +18,7 @@ from mcp.server.fastmcp import FastMCP
 
 from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
+from tanitdata.tools.bibliography import search_bibliography
 from tanitdata.tools.climate import query_climate_stations
 from tanitdata.tools.dashboards import get_dashboard_link
 from tanitdata.tools.datastore import query_datastore
@@ -283,6 +284,39 @@ async def get_dashboard_link_tool(topic: str) -> str:
     Examples: 'céréales', 'olive oil', 'dattes export', 'agrumes', 'climate change'.
     """
     return get_dashboard_link(topic=topic)
+
+
+@mcp.tool()
+async def search_bibliography_tool(
+    query: str,
+    year_from: int | None = None,
+    year_to: int | None = None,
+    language: str | None = None,
+    theme: str | None = None,
+    limit: int = 20,
+) -> str:
+    """Search ONAGRI's bibliographic catalogs (25,000+ records) for publications, reports, and studies.
+
+    Covers agriculture, water resources, forestry, and fisheries in Tunisia.
+    Keywords can be in French, Arabic, or English. Searches titles and abstracts.
+
+    Examples: 'céréales production rendement', 'olive Sfax', 'irrigation Kairouan'.
+
+    year_from / year_to: filter by publication year (e.g. 2010, 2023).
+    language: 'FR', 'AR', or 'EN'.
+    theme: restrict to a thematic library — 'agriculture', 'water', 'forestry', or 'fisheries'.
+    """
+    await registry.maybe_refresh(client)
+    return await search_bibliography(
+        client=client,
+        registry=registry,
+        query=query,
+        year_from=year_from,
+        year_to=year_to,
+        language=language,
+        theme=theme,
+        limit=min(limit, 100),
+    )
 
 
 def main():
