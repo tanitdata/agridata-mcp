@@ -173,6 +173,7 @@ async def query_datastore_tool(
     When writing SQL, use double quotes for column names and the resource_id as the table name.
     Example: SELECT "nom_fr", "valeur"::numeric FROM "<resource_id>" WHERE "nom_fr" = 'Air temperature' LIMIT 10
 
+    When analyzing a specific governorate, ensure consistency across dimensions. If you retrieve cereal production data for Bizerte, also retrieve rainfall or climate data for Bizerte — not a different governorate. Cross-dimensional analysis should be geographically aligned.
     """
     identifier = resource_id or dataset_id
     if not identifier:
@@ -258,6 +259,8 @@ async def query_climate_stations_tool(
     date_from / date_to: ISO date strings (e.g. '2025-01-01').
     aggregation: 'raw' (default), 'daily', or 'monthly'. Precipitation uses SUM; other sensors use AVG.
     latest: if True, return the single most recent reading per sensor instead of a time series.
+
+    When analyzing a specific governorate, ensure consistency across dimensions. If you retrieve cereal production data for Bizerte, also retrieve rainfall or climate data for Bizerte — not a different governorate. Cross-dimensional analysis should be geographically aligned.
     """
     await registry.maybe_refresh(client)
     return await query_climate_stations(
@@ -282,6 +285,8 @@ async def get_dashboard_link_tool(topic: str) -> str:
 
     Returns one link for a clear match, or a ranked list when multiple dashboards are relevant.
     Examples: 'céréales', 'olive oil', 'dattes export', 'agrumes', 'climate change'.
+
+    Dashboards are for interactive exploration, not a substitute for answering data questions. If the user asks about current dam levels or current rainfall, query the actual data first using query_datastore or query_climate_stations, then offer the dashboard link as a supplement for further exploration. Never respond with only a dashboard link when actual data can be queried.
     """
     return get_dashboard_link(topic=topic)
 
