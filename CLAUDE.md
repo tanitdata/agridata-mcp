@@ -2,7 +2,7 @@
 
 ## Project Identity
 
-**tanitdata** is an MCP (Model Context Protocol) server that provides AI-mediated access to Tunisia's agricultural open data portal (agridata.tn). It bridges structured numerical data (DataStore tables) with unstructured knowledge (PDF reports and bibliographic records) so that researchers can query both simultaneously through natural language.
+**tanitdata** is an MCP (Model Context Protocol) server that provides AI-mediated access to Tunisia's agricultural open data portal (agridata.tn), covering structured numerical data (DataStore tables) and bibliographic catalogs (25,944 records with PDF links) so that researchers can query both simultaneously through natural language.
 
 ## Architecture
 
@@ -18,17 +18,15 @@
 │  ┌─────────────┐  ┌──────────────────────┐  │
 │  │ Data Tools   │  │ Knowledge Tools      │  │
 │  │              │  │                      │  │
-│  │ climate  ✅  │  │ search_documents     │  │
-│  │ generic_sql✅│  │ bibliography ✅      │  │
+│  │ climate  ✅  │  │ bibliography ✅      │  │
+│  │ generic_sql✅│  │                      │  │
 │  │ read_file ✅ │  │                      │  │
 │  │ search   ✅  │  │                      │  │
 │  └──────┬──────┘  └──────────┬───────────┘  │
 │         │                    │               │
-│  ┌──────▼──────┐  ┌─────────▼────────────┐  │
-│  │ CKAN Client  │  │ Vector Store         │  │
-│  │ + Schema     │  │ (Phase 2)            │  │
-│  │   Registry   │  │                      │  │
-│  └──────┬──────┘  └──────────────────────┘  │
+│  ┌──────▼────────────────────▼───────────┐  │
+│  │ CKAN Client + Schema Registry         │  │
+│  └──────┬────────────────────────────────┘  │
 └─────────┼───────────────────────────────────┘
           │ HTTPS
 ┌─────────▼───────────────────────────────────┐
@@ -47,8 +45,6 @@
 - **Env config:** `python-dotenv` (supports `CKAN_BASE_URL` override)
 - **Transport:** stdio (local dev), SSE (future remote deployment)
 - **Test framework:** `pytest` + `pytest-asyncio` (asyncio_mode = "strict")
-
-Phase 2 only (not installed): ChromaDB/Qdrant, PyPDF2, langdetect, sentence-transformers.
 
 ## Dependencies (actual — from pyproject.toml)
 
@@ -287,7 +283,7 @@ Kébili is the **11th governorate** in the domain but holds only 1 metadata-only
 Precipitation (`rain` canonical) uses `SUM` aggregation; all other sensors use `AVG`.
 Unrecognised parameter input: falls back to raw `ILIKE '%user_input%'` on the param column.
 
-## Tool Inventory (Phase 1 — DataStore)
+## Tool Inventory
 
 ### P0: search_datasets ✅ Implemented
 Search portal datasets by keyword, organization, thematic group, format.
@@ -356,8 +352,6 @@ Search ONAGRI's bibliographic catalogs (25,944 records across 6 resources) by ke
 - **Language filter:** ILIKE `'%FR%'` (handles `(FR)`, `(Fr)`, `FR`, compound values like `(EN, FR, ES, AR)`). Tier 1 only (Tier 2 has no Langue column).
 - Implementation: `src/tanitdata/tools/bibliography.py`
 - Benchmark: ~0.6s (Tier 1 only), ~1.8s (Tier 1 + Tier 2), ~0.01s (Tier 2 cached theme query)
-- **Phase 2 bridge:** `Resume` field is the target for semantic embedding. SQL ILIKE is the baseline; Phase 2 replaces it with vector similarity search over the same field.
-
 ### P0: get_dashboard_link ✅ Implemented
 Map a query topic to the relevant interactive dashboard URL(s).
 - Input: `topic: str`
@@ -463,13 +457,14 @@ Note: `test_foundation.py` tests removed tools (explore_domain, resource_preview
 
 This keeps the server lean (8 tools) and lets the LLM handle schema variability naturally.
 
-## Phase 2 Scope (Knowledge Layer — not for Phase 1)
+## Phase 2 — RAG (Deferred)
 
-- `search_documents` tool: RAG over 994 downloadable PDFs (97 direct + 897 from ONAGRI thematic libraries)
-- Vector store integration (ChromaDB/Qdrant, local mode)
-- PDF download pipeline (batch via Nom_fichier URL pattern)
-- Multilingual chunking and embedding (French + Arabic, sentence-transformers multilingual-e5-large)
-- Document-DataStore cross-referencing by governorate, theme, and year
+A knowledge layer (search_documents tool with vector store over PDF corpus) was prototyped and
+abandoned in April 2026. OCR assessment found 85% of the 2,423 downloadable PDFs are poorly
+scanned 1970s fiches techniques, and most remaining untextable PDFs are Arabic documents
+incompatible with available OCR. The 357 text-extractable PDFs are mostly regulatory/registry
+content — insufficient analytical narrative to justify a RAG pipeline. search_bibliography
+covers document discovery adequately with 25,944 keyword-searchable records and PDF download links.
 
 ## Key Decisions
 
@@ -477,7 +472,7 @@ This keeps the server lean (8 tools) and lets the LLM handle schema variability 
 - **Async throughout** — httpx async client, async tool handlers, rate-limited (0.3s)
 - **Schema registry has two layers** — static (schemas.json, instant) seeded at startup, enriched by live refresh every 6h in a background task
 - **Tools return structured markdown** — headers, markdown tables, source footer; compatible with any MCP client
-- **Phase 1 = DataStore tools only** — knowledge/RAG layer is Phase 2
+- **Lean tool set** — 8 tools covering structured data + bibliography; RAG deferred (see Phase 2 section)
 - **Local development** — stdio transport, Claude Desktop for testing
 - **No mock tests for tools** — live portal API is public and fast; real integration tests are more valuable than mocked unit tests for this use case
 - **Auto-resolve dataset slugs** — `query_datastore_tool` accepts both resource UUIDs and dataset slugs; non-UUID identifiers are resolved via `package_show` to the first DataStore-active resource. Turns the most common LLM error into a valid workflow.
