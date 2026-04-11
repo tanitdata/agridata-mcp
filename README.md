@@ -43,6 +43,21 @@ Add to your config (`%APPDATA%\Claude\claude_desktop_config.json` on Windows, `~
 
 Requires Node.js installed. The `mcp-remote` package is fetched automatically on first launch.
 
+### VS Code / GitHub Copilot
+
+Add to `.vscode/mcp.json` in your workspace:
+
+```json
+{
+  "servers": {
+    "tanitdata": {
+      "url": "https://mcp.tanitdata.org/mcp",
+      "type": "http"
+    }
+  }
+}
+```
+
 ### Cursor / Windsurf
 
 ```json
