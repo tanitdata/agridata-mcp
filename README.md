@@ -20,6 +20,12 @@ https://mcp.tanitdata.org/mcp
 
 No authentication needed — all data is public.
 
+### Claude Code
+
+```bash
+claude mcp add --transport http tanitdata https://mcp.tanitdata.org/mcp
+```
+
 ### Claude Desktop
 
 Add to your config (`%APPDATA%\Claude\claude_desktop_config.json` on Windows, `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
@@ -38,6 +44,20 @@ Add to your config (`%APPDATA%\Claude\claude_desktop_config.json` on Windows, `~
 Requires Node.js installed. The `mcp-remote` package is fetched automatically on first launch.
 
 ### Cursor / Windsurf
+
+```json
+{
+  "mcpServers": {
+    "tanitdata": {
+      "url": "https://mcp.tanitdata.org/mcp"
+    }
+  }
+}
+```
+
+### Gemini CLI
+
+Add to `~/.gemini/settings.json`:
 
 ```json
 {
