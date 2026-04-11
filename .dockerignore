@@ -1,0 +1,16 @@
+.venv/
+.git/
+.github/
+data/
+tests/
+scripts/
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+audit_full.json
+test_*.py
+CLAUDE.md
+claude_desktop_config.json
