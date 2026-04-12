@@ -1,3 +1,7 @@
+<p align="center">
+  <img src="tanitdata_logo.png" alt="tanitdata" height="140">
+</p>
+
 # tanitdata
 
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-blue)](https://www.python.org/downloads/)
