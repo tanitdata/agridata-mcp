@@ -4,6 +4,8 @@
 
 **tanitdata** is an MCP (Model Context Protocol) server that provides AI-mediated access to Tunisia's agricultural open data portal (agridata.tn), covering structured numerical data (DataStore tables) and bibliographic catalogs (25,944 records with PDF links) so that researchers can query both simultaneously through natural language.
 
+See RESEARCH.md for academic research context and evaluation methodology.
+
 ## Architecture
 
 ```
@@ -31,7 +33,7 @@
           │ HTTPS
 ┌─────────▼───────────────────────────────────┐
 │  catalog.agridata.tn (CKAN 2.9+)            │
-│  789 DataStore resources · 1,102 datasets    │
+│  1,248 DataStore resources · 1,108 datasets   │
 └─────────────────────────────────────────────┘
 ```
 
@@ -59,8 +61,8 @@ dev = ["pytest", "pytest-asyncio"]
 
 - **Portal URL:** https://catalog.agridata.tn
 - **API base:** https://catalog.agridata.tn/api/3/action
-- **Datasets:** 1,102
-- **Resources:** 1,614 (789 DataStore-active, 48.9%)
+- **Datasets:** 1,108
+- **Resources:** ~1,571 (1,248 DataStore-active)
 - **Organizations:** 55 (but `organization_list` only returns 25 — use faceted search via `package_search` instead)
 - **Groups:** 21 thematic groups
 - **License:** All data under Licence Nationale de Données Publiques Ouvertes
@@ -160,7 +162,7 @@ server lifespan starts
   → registry.load()          # loads schemas.json (~28ms), seeds live layer
   → asyncio.create_task(_background_refresh())   # starts live refresh without blocking tools
 tools are immediately callable (static data available)
-~10s later: live refresh completes (789+ resources, 1102 dataset→org mappings)
+~10s later: live refresh completes (1,248+ resources, 1,108 dataset→org mappings)
 ```
 
 ### maybe_refresh pattern
@@ -302,7 +304,7 @@ Execute SQL against any DataStore resource. Returns schema + records + source at
 - Input: `resource_id: str?`, `dataset_id: str?`, `sql: str?`, `limit: int = 100`
 - Accepts either a resource UUID or a dataset slug — auto-resolves slugs to the first DataStore-active resource via `package_show` lookup
 - If SQL references the original slug, it is rewritten with the resolved UUID
-- Output: Arabic field decoding (if applicable), schema, records table, registry schema note, data availability context, source attribution footer
+- Output: Arabic field decoding (if applicable), schema, records table, value hints for categorical columns, registry schema note, data availability context, source attribution footer
 - If no SQL: uses `datastore_search` (returns schema + first `limit` rows)
 - If SQL: uses `datastore_search_sql`
 - Automatically annotates Arabic/mojibake fields using the registry mapping
@@ -387,6 +389,7 @@ tanitdata/
 ├── Dockerfile                  # Multi-stage Docker build for AWS deployment
 ├── .dockerignore
 ├── schemas.json                        # Pre-computed schema registry (static layer)
+├── value_hints.json                    # Per-resource categorical values (runtime, 236 KB)
 ├── claude_desktop_config.example.json  # Example Claude Desktop config
 ├── .github/
 │   └── workflows/
@@ -402,7 +405,7 @@ tanitdata/
 │       ├── tools/
 │       │   ├── __init__.py
 │       │   ├── search.py       # ✅ search_datasets, get_dataset_details, list_organizations
-│       │   ├── datastore.py    # ✅ query_datastore (SQL + Arabic decode + availability context)
+│       │   ├── datastore.py    # ✅ query_datastore (SQL + Arabic decode + value hints + availability)
 │       │   ├── climate.py          # ✅ query_climate_stations (3 EAV variants, caching, comparison)
 │       │   ├── resource_reader.py # ✅ read_resource (CSV/XLSX download+parse, on-demand cache)
 │       │   ├── dashboards.py      # ✅ get_dashboard_link (18 dashboards, keyword matching)
@@ -412,7 +415,10 @@ tanitdata/
 │           ├── formatting.py   # format_dataset_list, format_datastore_result, format_source_footer
 │           └── arabic.py       # decode_arabic_fields, annotate_fields_with_arabic
 ├── scripts/
-│   └── regenerate_domains.py   # Rebuild domain_resource_index in schemas.json
+│   ├── regenerate_domains.py   # Rebuild domain_resource_index in schemas.json
+│   ├── extract_vocabulary.py   # Phase 3 Step 1: mine portal vocabulary → vocabulary_raw.json
+│   ├── build_value_catalog.py  # Phase 3 Step 2: local processing → value_catalog.json
+│   └── extract_value_hints.py  # Phase 3 Step 4b: vocabulary_raw.json → value_hints.json
 ├── tests/
 │   ├── __init__.py
 │   ├── test_ckan_client.py     # Unit tests: base URL, API base (no network)
@@ -467,7 +473,7 @@ Override defaults with env vars: `MCP_TRANSPORT`, `FASTMCP_HOST`, `FASTMCP_PORT`
 
 This keeps the server lean (8 tools) and lets the LLM handle schema variability naturally.
 
-## Phase 2 — RAG (Deferred)
+## Phase 2 — RAG (Deferred, Spun Off)
 
 A knowledge layer (search_documents tool with vector store over PDF corpus) was prototyped and
 abandoned in April 2026. OCR assessment found 85% of the 2,423 downloadable PDFs are poorly
@@ -476,17 +482,118 @@ incompatible with available OCR. The 357 text-extractable PDFs are mostly regula
 content — insufficient analytical narrative to justify a RAG pipeline. search_bibliography
 covers document discovery adequately with 25,944 keyword-searchable records and PDF download links.
 
+Spun off to `Z:/Tanitdata_KnowledgeRAG/` as an independent project. Full knowledge transfer
+document generated 2026-04-14 covering corpus assessment, chunking, embedding model, and
+integration plan. See that project's CLAUDE.md for details.
+
+## Phase 3 — Semantic Layer Enrichment (Complete)
+
+Strengthening schemas.json with comprehensive vocabulary and concept mappings to improve
+query accuracy. The current schemas.json has resource→domain mappings but lacks the actual
+column values and concept relationships that tools need to construct correct SQL.
+
+### Problem Statement
+
+The LLM handles multilingual translation natively (user says "wheat" → LLM knows "blé").
+But it fails downstream: constructs `WHERE "culture" ILIKE '%blé%'` when the actual column
+value is `Ble_dur_qx`. The fix is making portal-side vocabulary visible to the LLM — what
+exact strings exist in which columns — not expanding user-facing vocabulary.
+
+### Agreed Plan (4 Steps)
+
+**Step 1 — Vocabulary Extraction** (COMPLETE — 2026-04-14):
+Script `scripts/extract_vocabulary.py` mines the portal via CKAN API.
+Output: `vocabulary_raw.json` (1,792 KB, gitignored). Runtime: ~11 min (~1,200 API calls).
+Results: 1,108 datasets, 21 groups, 1,248 resource schemas, 1,106 categorical columns
+sampled (14,044 distinct values across 750 resources). Top columns by frequency:
+Delegation (307), unite (112), nom_ar/nom_fr (103/100), Gouvernorat (63).
+Uses schemas.json as baseline for known field lists (saves ~734 API calls), fetches
+remaining schemas live. Fallback to `datastore_search` for SQL-blocked resources (409).
+
+**Step 2 — Value Catalog** (COMPLETE — 2026-04-14):
+Script `scripts/build_value_catalog.py` — output: `value_catalog.json` (145 KB, gitignored).
+Pure local processing of vocabulary_raw.json + schemas.json (no API calls, instant runtime).
+Results: 20 semantic concepts, 3,642 canonical values (deduplicated, noise-filtered),
+14 abbreviation patterns (562 field name matches), 12 domain vocabulary summaries.
+Top concepts by resource count: delegation (372 resources, 802 values), unit (120, 63),
+gouvernorat (117, 189), climate_parameter (113, 492), crop_type (57, 279), secteur (48, 401).
+Key abbreviations: `_ha` (hectares, 348 fields), `_t` (tonnes, 73), `_qx` (quintaux, 18),
+`_mm` (millimètres, 17), `_tete` (nombre de têtes, 13), `_md` (millions de dinars, 10).
+Value deduplication handles accent variants (Béja/Beja), mojibake (BÃ©ja), and data noise
+(pure numbers, long note strings accidentally in categorical columns).
+
+**Step 3 — Concept Annotations** (SKIPPED — folded into Step 4):
+Step 2's value catalog already covers concept→value mappings, domain associations, and the
+abbreviation dictionary. The remaining useful pieces (temporal notes, unit context, geographic
+relevance) are small and descriptive — they belong in tool descriptions where the LLM reads
+them upfront, not in a separate JSON layer that requires discovery at query time.
+Decision agreed with research collaborator 2026-04-14.
+
+**Step 4 — Context Delivery Optimization** (COMPLETE — 2026-04-14):
+Two-point intervention delivering semantic layer data at the right moment in the LLM's
+decision cycle. Informed by research collaborator's insight: "the semantic layer is not a
+vocabulary expansion project — it's a context delivery optimization."
+
+**Point A — Tool description enrichment** (before any query):
+Enriched `query_datastore_tool` description in `server.py` with targeted additions.
+Changes (query_datastore_tool only, +7 lines):
+- **Abbreviation dictionary** (1 line): field suffix → unit mapping (_ha=hectares, _t=tonnes,
+  _qx=quintaux, _mm=millimètres, _tete=têtes, _md=millions de dinars, _dt=dinars tunisiens,
+  _cube=mille m³, _kg=kilogrammes). Not inferable from column names alone.
+- **Wide-format warning** (2 lines): many crop resources encode the crop name IN the column name
+  (Ble_dur_ha, Orge_qx, Fourrages_t) — SELECT directly, do NOT use WHERE/ILIKE. This targets
+  the #1 LLM SQL error pattern.
+- **Crop name examples** (1 line): Ble_dur (durum wheat), Ble_tendre (soft wheat), Orge (barley),
+  Triticale, Fourrages (fodder), Legumineuses (legumes), Olivier (olive), Palmier (palm).
+- **Query strategy hint** (2 lines): "If unsure about exact column names or values, call with
+  no SQL first to preview the schema and sample data." Universal recovery path.
+Other tool descriptions unchanged — their responses already surface the relevant vocabulary.
+
+**Point B — Response value hints** (after query runs):
+New runtime artifact `value_hints.json` (236 KB, committed) contains per-resource categorical
+values extracted from vocabulary_raw.json: 735 resources, 1,077 columns, 11,721 values.
+Script: `scripts/extract_value_hints.py`. Loaded at startup by SchemaRegistry alongside
+schemas.json. New method `registry.get_column_hints(resource_id, column_names)` returns
+exact categorical values for columns in the query result. `query_datastore` appends these
+as "Value hints for follow-up queries" after the records table. Zero API calls — local
+dictionary lookup only. Example output:
+```
+**Value hints for follow-up queries:**
+- `Delegation`: 9 values — Beja Nord, Beja Sud, Nefza, Testour, Amdoun, ...
+- `nom_fr`: 9 values — Direction du vent, Humidité relative, Température, ...
+```
+The LLM now sees exact strings for WHERE clauses before writing follow-up SQL.
+Coverage: 735 of 1,248 DataStore resources (59%). Resources without hints are those
+with no categorical columns or with only single-value columns.
+
+### Benchmarking (Complete — 2026-04-14)
+
+10-query A/B benchmark run by research collaborator using Claude Sonnet 4.6.
+L2 (baseline `87fd3a4`): 4/10 COMPLETE. L3 (semantic layer): 6/10 COMPLETE.
+Significant improvement on 2/10 (dataset discovery), marginal efficiency on 3/10,
+no difference on 5/10. Total tool calls: L2 104, L3 98.
+See RESEARCH.md Section 4 for full statistics and per-query analysis.
+
+### Constraints
+
+- schemas.json must remain a static file loadable at startup — no database, no API calls during concept lookup
+- File size: current 641 KB, target under 1 MB after enrichment
+- Every concept mapping must be traceable to actual portal content — no hallucinated terms
+- Existing 12 domain structure stays. Concepts are an additional layer on top, not a replacement
+- All existing registry methods (get_domain_resources, get_coverage_summary, get_data_availability) must continue to work unchanged
+
 ## Deployment (AWS)
 
 ### Transport
 - `MCP_TRANSPORT=stdio` (default, local) or `MCP_TRANSPORT=streamable-http` (remote)
 - Remote mode: FastMCP spins up Uvicorn/Starlette on `FASTMCP_HOST:FASTMCP_PORT` (default `127.0.0.1:8000`; container overrides to `0.0.0.0`)
 - `FASTMCP_STATELESS_HTTP=true` — each POST to `/mcp` is independent (no session state in transport layer)
-- `/health` endpoint returns `{"status": "ok", "version": "2.0.0"}` for ALB and Docker health checks
+- `/health` endpoint returns `{"status": "ok", "version": "2.1.0"}` for ALB and Docker health checks
 
-### schemas.json in containers
+### Static data in containers
 - `SchemaRegistry(schemas_path=...)` accepts `SCHEMAS_PATH` env var (default: relative to source tree)
 - Container sets `SCHEMAS_PATH=/app/schemas.json` — baked into the Docker image
+- `value_hints.json` is copied alongside schemas.json (same directory); loaded automatically by the registry
 - The 6-hour live refresh updates the live layer from the CKAN portal; the static layer from schemas.json never mutates at runtime
 
 ### AWS architecture

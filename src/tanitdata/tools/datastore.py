@@ -66,6 +66,27 @@ async def query_datastore(
         )
     )
 
+    # Value hints for categorical columns (helps LLM write exact WHERE clauses)
+    result_col_names = [
+        f["id"] if isinstance(f, dict) else f
+        for f in fields
+        if (f["id"] if isinstance(f, dict) else f) not in ("_id", "_full_text")
+    ]
+    hints = registry.get_column_hints(resource_id, result_col_names)
+    if hints:
+        lines.append("")
+        lines.append("**Value hints for follow-up queries:**")
+        for col, values in hints.items():
+            if len(values) <= 20:
+                val_str = ", ".join(values)
+                lines.append(f"- `{col}`: {len(values)} values — {val_str}")
+            else:
+                val_str = ", ".join(values[:20])
+                lines.append(
+                    f"- `{col}`: {len(values)} values — {val_str}, "
+                    f"... (+{len(values) - 20} more)"
+                )
+
     # Add a note about the known schema from the registry
     if known_fields:
         lines.append("")

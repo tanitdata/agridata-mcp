@@ -385,6 +385,9 @@ class SchemaRegistry:
         self._arabic_decoding: dict[str, Any] = {}
         self._static_loaded = False
 
+        # Value hints (per-resource categorical values, loaded from value_hints.json)
+        self._value_hints: dict[str, dict[str, list[str]]] = {}
+
         # Live layer
         self._live: dict[str, LiveResource] = {}
         # dataset_slug → organisation slug (populated during live refresh)
@@ -414,6 +417,17 @@ class SchemaRegistry:
         self._clusters = data.get("clusters", [])
         self._arabic_decoding = data.get("arabic_field_decoding", {})
         self._static_loaded = True
+
+        # Load value hints (per-resource categorical values) if available
+        hints_path = self._path.parent / "value_hints.json"
+        if hints_path.exists():
+            with open(hints_path, encoding="utf-8") as f:
+                hints_data = json.load(f)
+            self._value_hints = hints_data.get("resource_values", {})
+            logger.info(
+                "Schema registry: value hints loaded (%d resources)",
+                len(self._value_hints),
+            )
 
         # Seed the live layer so tools work before the first live refresh
         self._seed_from_static()
@@ -860,6 +874,28 @@ class SchemaRegistry:
                 if res["id"] == resource_id:
                     return res.get("fields", [])
         return None
+
+    def get_column_hints(
+        self,
+        resource_id: str,
+        column_names: list[str],
+    ) -> dict[str, list[str]]:
+        """Return known categorical values for columns in a resource.
+
+        Used by query_datastore to append value hints to tool responses,
+        so the LLM knows exact strings for follow-up WHERE clauses.
+
+        Returns: {column_name: [value1, value2, ...]} for columns with
+        known categorical values.  Omits columns with no hints.
+        """
+        resource_hints = self._value_hints.get(resource_id, {})
+        if not resource_hints:
+            return {}
+        return {
+            col: resource_hints[col]
+            for col in column_names
+            if col in resource_hints
+        }
 
     def get_arabic_field_mapping(self) -> dict[str, Any]:
         self._ensure_loaded()

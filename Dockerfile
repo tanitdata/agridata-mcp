@@ -14,6 +14,7 @@ WORKDIR /app
 COPY --from=builder /usr/local/lib/python3.11/site-packages /usr/local/lib/python3.11/site-packages
 COPY --from=builder /usr/local/bin/tanitdata /usr/local/bin/tanitdata
 COPY schemas.json /app/schemas.json
+COPY value_hints.json /app/value_hints.json
 
 ENV MCP_TRANSPORT=streamable-http
 ENV FASTMCP_HOST=0.0.0.0

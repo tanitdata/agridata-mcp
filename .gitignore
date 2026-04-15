@@ -20,8 +20,13 @@ venv/
 .vscode/
 .idea/
 
-# Regeneratable data (run scripts/regenerate_domains.py to rebuild)
+# Regeneratable data (run scripts/ to rebuild)
 audit_full.json
+vocabulary_raw.json
+value_catalog.json
+
+# Research (local only, not for public repo)
+RESEARCH.md
 
 # Ad-hoc scripts
 list_stations.py

@@ -182,6 +182,17 @@ async def query_datastore_tool(
     When writing SQL, use double quotes for column names and the resource_id as the table name.
     Example: SELECT "nom_fr", "valeur"::numeric FROM "<resource_id>" WHERE "nom_fr" = 'Air temperature' LIMIT 10
 
+    Field name suffixes encode units: _ha=hectares, _t=tonnes, _qx=quintaux, _mm=millimètres,
+    _tete=têtes, _md=millions de dinars, _dt=dinars tunisiens, _cube=mille m³, _kg=kilogrammes.
+
+    Many crop/production resources use WIDE FORMAT: the crop name IS the column name (e.g. Ble_dur_ha,
+    Orge_qx, Fourrages_t). SELECT these columns directly — do NOT use WHERE/ILIKE on them.
+    Common crop prefixes: Ble_dur (durum wheat), Ble_tendre (soft wheat), Orge (barley),
+    Triticale, Fourrages (fodder), Legumineuses (legumes), Olivier (olive), Palmier (palm).
+
+    QUERY STRATEGY: If unsure about exact column names or values, call with no SQL first to preview
+    the schema and sample data, then construct your filtered query using the exact values returned.
+
     When analyzing a specific governorate, ensure consistency across dimensions. If you retrieve cereal production data for Bizerte, also retrieve rainfall or climate data for Bizerte — not a different governorate. Cross-dimensional analysis should be geographically aligned.
     """
     identifier = resource_id or dataset_id
