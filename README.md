@@ -108,8 +108,8 @@ For developers who want to run their own instance or contribute.
 ### Install and run
 
 ```bash
-git clone https://github.com/tarekddoit/tanitdata.git
-cd tanitdata
+git clone https://github.com/tanitdata/agridata-mcp.git
+cd agridata-mcp
 uv sync
 uv run tanitdata          # starts stdio server
 ```
