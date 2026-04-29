@@ -8,6 +8,15 @@ See RESEARCH.md for academic research context and evaluation methodology.
 
 ## Architecture
 
+v3.0.0 introduces a snapshot-backed data layer. The server now has two
+interchangeable data sources, selected by the `DATA_SOURCE` env var:
+
+- **snapshot** (default, offline) — all tool queries resolve against
+  local Parquet/JSON artifacts under `snapshot/` and `audit_full.json`.
+  Zero network dependency on `catalog.agridata.tn`.
+- **live** (original, online) — the v2.x httpx-based CKAN client,
+  unchanged. Used when the portal is reachable.
+
 ```
 ┌─────────────────────────────────────────────┐
 │              MCP Client                      │
@@ -15,11 +24,10 @@ See RESEARCH.md for academic research context and evaluation methodology.
 └──────────────┬──────────────────────────────┘
                │ MCP Protocol (stdio local / streamable-http remote)
 ┌──────────────▼──────────────────────────────┐
-│           tanitdata MCP Server               │
+│           tanitdata MCP Server v3.0          │
 │                                              │
 │  ┌─────────────┐  ┌──────────────────────┐  │
 │  │ Data Tools   │  │ Knowledge Tools      │  │
-│  │              │  │                      │  │
 │  │ climate  ✅  │  │ bibliography ✅      │  │
 │  │ generic_sql✅│  │                      │  │
 │  │ read_file ✅ │  │                      │  │
@@ -27,31 +35,47 @@ See RESEARCH.md for academic research context and evaluation methodology.
 │  └──────┬──────┘  └──────────┬───────────┘  │
 │         │                    │               │
 │  ┌──────▼────────────────────▼───────────┐  │
-│  │ CKAN Client + Schema Registry         │  │
-│  └──────┬────────────────────────────────┘  │
-└─────────┼───────────────────────────────────┘
-          │ HTTPS
-┌─────────▼───────────────────────────────────┐
-│  catalog.agridata.tn (CKAN 2.9+)            │
-│  1,248 DataStore resources · 1,108 datasets   │
-└─────────────────────────────────────────────┘
+│  │ BaseClient (interface)                 │  │
+│  │ + SchemaRegistry                       │  │
+│  └─┬─────────────────────────────────┬──┘  │
+│    │                                 │      │
+│  ┌─▼──────────────┐         ┌────────▼───┐ │
+│  │ SnapshotClient │         │ LiveClient │ │
+│  │ (offline)      │         │ (online)   │ │
+│  └─┬──────────────┘         └──────┬─────┘ │
+└────┼────────────────────────────────┼──────┘
+     │ local I/O                      │ HTTPS
+┌────▼─────────────────┐  ┌───────────▼──────┐
+│ snapshot/parquet/    │  │ catalog.agridata │
+│ audit_full.json      │  │ .tn (CKAN 2.9+)  │
+│ scrape_index.json    │  │                  │
+│ schemas.json         │  └──────────────────┘
+│ value_hints.json     │
+└──────────────────────┘
 ```
 
 ## Tech Stack
 
 - **Language:** Python 3.11+
 - **MCP SDK:** `mcp[cli]` (official Anthropic Python SDK)
-- **HTTP client:** `httpx` (async, lazy-initialized, rate-limited)
-- **XLSX parser:** `openpyxl` (read-only mode for non-DataStore files)
+- **HTTP client:** `httpx` (async, lazy-initialized, rate-limited) — live mode
+- **Embedded SQL engine:** `duckdb` (≥1.0) — snapshot mode
+- **XLSX/XLS parser:** `openpyxl`, `xlrd` — `xlrd` handles legacy OLE2 binary XLS
 - **Data validation:** `pydantic` (installed, not yet heavily used)
-- **Env config:** `python-dotenv` (supports `CKAN_BASE_URL` override)
+- **Env config:** `python-dotenv` (supports `CKAN_BASE_URL`, `DATA_SOURCE`,
+  `SNAPSHOT_PARQUET_DIR`, `SNAPSHOT_AUDIT_PATH`, `SNAPSHOT_SCRAPE_INDEX`,
+  `SNAPSHOT_SCRAPE_ROOT`)
 - **Transport:** stdio (local dev), streamable-http (remote deployment)
 - **Test framework:** `pytest` + `pytest-asyncio` (asyncio_mode = "strict")
 
 ## Dependencies (actual — from pyproject.toml)
 
 ```toml
-dependencies = ["mcp[cli]", "httpx", "pydantic", "python-dotenv", "openpyxl", "boto3"]
+dependencies = [
+    "mcp[cli]", "httpx", "pydantic", "python-dotenv",
+    "openpyxl", "boto3",
+    "duckdb>=1.0", "xlrd>=2.0",
+]
 
 [dependency-groups]
 dev = ["pytest", "pytest-asyncio"]
@@ -568,11 +592,14 @@ with no categorical columns or with only single-value columns.
 
 ### Benchmarking (Complete — 2026-04-14)
 
-10-query A/B benchmark run by research collaborator using Claude Sonnet 4.6.
-L2 (baseline `87fd3a4`): 4/10 COMPLETE. L3 (semantic layer): 6/10 COMPLETE.
+10-query bundled-ablation benchmark run by research collaborator using Claude Sonnet 4.6.
+Base tanitdata (pre-semantic-layer, commit `87fd3a4`): 4/10 COMPLETE.
+Enriched tanitdata (semantic-layer bundle): 6/10 COMPLETE.
 Significant improvement on 2/10 (dataset discovery), marginal efficiency on 3/10,
-no difference on 5/10. Total tool calls: L2 104, L3 98.
-See RESEARCH.md Section 4 for full statistics and per-query analysis.
+no difference on 5/10. Total tool calls: base 104, enriched 98.
+This is a within-codebase ablation that isolates the semantic-layer bundle from
+tanitdata's pre-existing domain tooling. It is NOT the paper's Level 1 vs Level 2 vs
+Level 3 comparison — see RESEARCH.md Sections 1 and 4 for the distinction.
 
 ### Constraints
 
@@ -582,23 +609,154 @@ See RESEARCH.md Section 4 for full statistics and per-query analysis.
 - Existing 12 domain structure stays. Concepts are an additional layer on top, not a replacement
 - All existing registry methods (get_domain_resources, get_coverage_summary, get_data_availability) must continue to work unchanged
 
+## Snapshot Architecture (v3.0.0)
+
+### Overview
+
+The server was originally a CKAN API proxy. In v3.0.0 it became snapshot-first,
+with the live CKAN path retained as a `DATA_SOURCE=live` toggle. The snapshot
+architecture solves two problems at once: **outage resilience** (the portal has
+been down; the server stays functional) and **reproducibility** (evaluation
+runs now operate on a fixed, versioned data vintage rather than a moving target).
+
+### The DATA_SOURCE toggle
+
+`src/tanitdata/ckan_client.py` defines `BaseClient`, the async interface every
+tool depends on. Two concrete variants implement it:
+
+- `LiveClient` — the v2.x httpx-based CKAN client, byte-identical to before.
+- `SnapshotClient` — offline DuckDB-over-Parquet + audit-JSON lookups.
+
+`make_client()` reads the `DATA_SOURCE` env var (default `snapshot`; accepts
+`live`) and returns the appropriate client. `CKANClient = LiveClient` remains
+exported for back-compat so existing imports don't break.
+
+### Data artifacts
+
+| File | Size | Origin | Role |
+|------|------|--------|------|
+| `snapshot/parquet/<rid>.parquet` | 7.8 MB (727 files) | Built by `scripts/build_snapshot.py` from the scrape | One Parquet per DataStore-active resource; columns all VARCHAR to match CKAN's "all fields are text" invariant |
+| `audit_full.json` | 5.5 MB | One-time dump from CKAN (datasets + resources + orgs + groups + datastore_schemas) | Fills every metadata role — `package_search`, `package_show`, `_table_metadata`, dataset→org mapping |
+| `snapshot/scrape_index.json` | 117 KB | Sidecar from `build_snapshot.py` | Maps every resource UUID to a relative path in the original scrape folder; carries `meta.snapshot_date` |
+| `schemas.json` | 641 KB | Pre-existing (curated domain registry) | Unchanged |
+| `value_hints.json` | 233 KB | Pre-existing (Phase 3 semantic layer) | Unchanged |
+
+### DuckDB layer
+
+At startup `SnapshotClient._build_connection()` opens an in-memory DuckDB
+connection and registers one view per Parquet file:
+`CREATE OR REPLACE VIEW "<uuid>" AS SELECT * FROM read_parquet('<path>')`.
+Typical registration takes ~100 ms for 727 views — views are metadata-only, so
+actual data is read lazily on query. Resources with no parquet (50 of 789 DS-active
+resources not in the scrape) are simply not registered; queries against them
+return `None`, matching live CKAN's behaviour on unknown resources.
+
+Peak process RSS observed on a cold query: 164 MB (see inventory
+benchmark). Comfortably within the 512 MB Fargate task size.
+
+### Postgres → DuckDB SQL translator
+
+CKAN's DataStore runs Postgres; `tanitdata` tool code and LLM-authored SQL use
+Postgres idioms. DuckDB accepts almost all of them verbatim — `::numeric` and
+`::timestamp` casts, `DATE_TRUNC`, `ILIKE`, `DISTINCT ON`, `information_schema`
+all work unchanged. The sole exception is the `~` POSIX-regex operator.
+
+`translate_postgres_tilde(sql)` in `ckan_client.py` rewrites
+`<ident> ~ '<pattern>'` → `regexp_matches(<ident>, '<pattern>')` at the
+executor boundary. It runs over a pre-scan that stashes string literals as
+placeholders so `~` inside `'literal text'` is preserved. Identifiers can be
+bare, double-quoted, or qualified (`alias."col"`). Every `datastore_sql` call
+goes through this translator.
+
+### Audit-backed SchemaRegistry refresh
+
+Live mode: the registry runs a 6-hour background refresh that calls
+`client.datastore_search("_table_metadata")` and paginated `package_search` to
+populate the live layer.
+
+Snapshot mode: the registry calls `load_snapshot()` once at startup from the
+server lifespan. It reads `audit_full.json` — `datastore_schemas` for
+field lists/record counts, `datasets` for dataset→org mapping, `organizations`
+for display titles — and populates the live layer synchronously. No background
+task, no periodic timer. `maybe_refresh()` is a permanent no-op when the
+client is a `SnapshotClient`.
+
+### Snapshot date attribution
+
+`SchemaRegistry.load_snapshot()` also reads `snapshot/scrape_index.json`'s
+`meta.snapshot_date`, exposes it via the `snapshot_date` property, and
+propagates it through `get_source_attribution()`. `format_source_footer()`
+surfaces one italic line per unique snapshot:
+
+```
+- *Data from snapshot dated 2025-11-26.*
+```
+
+Live mode responses don't carry this marker — they implicitly reflect the
+portal's current state.
+
+### Snapshot build process
+
+```bash
+python scripts/build_snapshot.py --snapshot-date 2025-11-26
+```
+
+The builder:
+1. Indexes every scrape file by its 8-hex UUID prefix.
+2. For each of the 789 DataStore-active resources listed in `audit_full.json`,
+   reads the source file (magic-byte dispatch: XLSX → `openpyxl`, XLS-OLE2 →
+   `xlrd`, else CSV via DuckDB's `read_csv_auto`).
+3. Writes `snapshot/parquet/<uuid>.parquet` with `COMPRESSION ZSTD` and all
+   columns as VARCHAR.
+4. Excludes Excel-overflow artifacts (rows ≥ 1 M — two known corrupted files).
+5. Writes `snapshot/scrape_index.json` with full UUID → scrape-relative path
+   mapping (including non-DataStore files) and `meta.snapshot_date`.
+
+Expected output: 727 converted, 50 skipped (no file in scrape), 2 overflow
+skipped, 9 unrecoverable failures, 3 empty workbooks.
+
+### read_resource offline path
+
+`SnapshotClient.download_file(url, max_bytes, resource_id=None)`:
+
+1. Uses `resource_id` when supplied; otherwise extracts the UUID from the
+   portal-style URL pattern `/resource/<uuid>/download/...`.
+2. Looks up the UUID in `scrape_index.json` → local path.
+3. Returns `None` on unknown UUID, missing file, or size > `max_bytes`.
+
+`tools/resource_reader.py` now dispatches parsers by sniffed magic bytes rather
+than declared format, handling the ~150 mislabeled CSV/XLS files (the scrape
+has 10 `.csv` files that are XLSX + 143 `.xls` files that are XLSX).
+
+PDFs and other non-tabular formats return the existing "download manually"
+message including the portal URL — the scrape has the PDF bytes on disk but
+PDF extraction is out of scope for v3.0.
+
 ## Deployment (AWS)
 
 ### Transport
 - `MCP_TRANSPORT=stdio` (default, local) or `MCP_TRANSPORT=streamable-http` (remote)
 - Remote mode: FastMCP spins up Uvicorn/Starlette on `FASTMCP_HOST:FASTMCP_PORT` (default `127.0.0.1:8000`; container overrides to `0.0.0.0`)
 - `FASTMCP_STATELESS_HTTP=true` — each POST to `/mcp` is independent (no session state in transport layer)
-- `/health` endpoint returns `{"status": "ok", "version": "2.1.0"}` for ALB and Docker health checks
+- `/health` endpoint returns `{"status": "ok", "version": "3.0.0"}` for ALB and Docker health checks
 
 ### Static data in containers
-- `SchemaRegistry(schemas_path=...)` accepts `SCHEMAS_PATH` env var (default: relative to source tree)
-- Container sets `SCHEMAS_PATH=/app/schemas.json` — baked into the Docker image
-- `value_hints.json` is copied alongside schemas.json (same directory); loaded automatically by the registry
-- The 6-hour live refresh updates the live layer from the CKAN portal; the static layer from schemas.json never mutates at runtime
+- `DATA_SOURCE=snapshot` is the Dockerfile default — the image ships
+  self-contained with no network dependency on the portal.
+- `SCHEMAS_PATH=/app/schemas.json` (unchanged from v2).
+- `SNAPSHOT_PARQUET_DIR=/app/snapshot/parquet`,
+  `SNAPSHOT_AUDIT_PATH=/app/audit_full.json`,
+  `SNAPSHOT_SCRAPE_INDEX=/app/snapshot/scrape_index.json` — all have sensible
+  defaults in code; Dockerfile sets them explicitly for clarity.
+- Raw scrape files (PDFs, non-DS XLSX, etc.) are NOT baked into the image.
+  `read_resource` on a non-DataStore resource returns the "download manually"
+  message with the portal URL.
 
 ### AWS architecture
 - Hosted at `https://mcp.tanitdata.org/mcp` — unauthenticated public access
-- ECS Fargate (ARM64), ALB with ACM TLS, CloudWatch structured logging
+- ECS Fargate (ARM64), 0.25 vCPU / 512 MB (sufficient per Phase 1 memory
+  benchmark; scale up only if monitoring shows sustained pressure).
+- ALB with ACM TLS, CloudWatch structured logging
 - CI/CD: GitHub Actions → ECR → ECS rolling deployment (triggered by `v*` tags)
 
 ### Client configuration (remote)

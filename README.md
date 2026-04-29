@@ -14,6 +14,8 @@ The portal covers climate, crops, fisheries, water resources, livestock, prices,
 
 Built for researchers, data scientists, agricultural policy analysts, and journalists covering food security in Tunisia and North Africa.
 
+> **Note:** The server currently operates on a snapshot of catalog.agridata.tn dated November 2025. All responses include the snapshot date in source attribution.
+
 ---
 
 ## Quick Start — Hosted Instance
