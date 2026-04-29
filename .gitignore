@@ -53,6 +53,9 @@ _phase*
 RESEARCH.md
 research/
 
+# Claude Code development context (local only, not for public repo)
+CLAUDE.md
+
 # Ad-hoc scripts (local only)
 list_stations.py
 test_domain.py

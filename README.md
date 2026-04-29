@@ -229,7 +229,22 @@ Contributions are welcome.
 - Use conventional commit messages (`feat:`, `fix:`, `docs:`)
 - All submissions are reviewed before merging
 
-See [CLAUDE.md](CLAUDE.md) for detailed architecture documentation, API patterns, and data quality notes.
+---
+
+## Citation
+
+If you use tanitdata in your research, please cite:
+
+```bibtex
+@software{tanitdata2026,
+  title     = {tanitdata: Domain-Adapted MCP Server for Tunisia's Agricultural Open Data},
+  author    = {Gasmi, Tarek},
+  year      = {2026},
+  url       = {https://github.com/tanitdata/agridata-mcp},
+  note      = {MCP server providing AI-mediated access to catalog.agridata.tn
+               with semantic layer for vocabulary bridging}
+}
+```
 
 ---
 
