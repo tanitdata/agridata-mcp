@@ -14,9 +14,41 @@ ROOT = Path(__file__).resolve().parent.parent
 AUDIT_PATH = ROOT / "audit_full.json"
 SCRAPE_INDEX = ROOT / "snapshot" / "scrape_index.json"
 
+
+def _scrape_available() -> bool:
+    """True when the raw scrape folder is actually on disk.
+
+    The scrape_index.json sidecar is committed (tiny, deterministic) but
+    the 268 MB raw scrape folder is not. In CI only the index is present,
+    so tests that read the underlying XLS/XLSX bytes must be skipped.
+    We detect by looking up a known file from the index and checking for
+    its existence relative to the scrape_root recorded in the sidecar.
+    """
+    if not AUDIT_PATH.exists() or not SCRAPE_INDEX.exists():
+        return False
+    try:
+        import json
+
+        with open(SCRAPE_INDEX, encoding="utf-8") as f:
+            idx = json.load(f)
+        scrape_root = Path(idx.get("meta", {}).get("scrape_root", ""))
+        # Probe the first indexed file
+        resources = idx.get("resources", {})
+        if not resources:
+            return False
+        first_rel = next(iter(resources.values()))
+        return (scrape_root / first_rel).exists()
+    except Exception:
+        return False
+
+
 _snapshot_available = pytest.mark.skipif(
-    not AUDIT_PATH.exists() or not SCRAPE_INDEX.exists(),
-    reason="audit_full.json or snapshot/scrape_index.json missing",
+    not _scrape_available(),
+    reason=(
+        "raw scrape folder not on disk (CI / fresh clone). "
+        "These tests read bytes from files that the gitignored scrape "
+        "folder owns; they run locally when the scrape is available."
+    ),
 )
 
 

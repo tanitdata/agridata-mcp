@@ -114,6 +114,42 @@ _snapshot_available = pytest.mark.skipif(
 )
 
 
+def _raw_scrape_present() -> bool:
+    """True when the raw scrape folder (gitignored, 268 MB) is on disk.
+
+    The Parquet snapshot and scrape_index sidecar are committed; the raw
+    source files (XLSX/CSV/PDF) under agridata_TN_Scraped_*/ are not.
+    `download_file` reads from those raw files, so its tests can only
+    run where the scrape folder is actually available (developer
+    machines, not CI).
+    """
+    idx_path = ROOT / "snapshot" / "scrape_index.json"
+    if not idx_path.exists():
+        return False
+    try:
+        import json
+
+        with open(idx_path, encoding="utf-8") as f:
+            idx = json.load(f)
+        scrape_root = Path(idx.get("meta", {}).get("scrape_root", ""))
+        resources = idx.get("resources", {})
+        if not resources:
+            return False
+        first_rel = next(iter(resources.values()))
+        return (scrape_root / first_rel).exists()
+    except Exception:
+        return False
+
+
+_scrape_available = pytest.mark.skipif(
+    not _raw_scrape_present(),
+    reason=(
+        "raw scrape folder not on disk (CI / fresh clone). "
+        "download_file tests read bytes from the gitignored scrape."
+    ),
+)
+
+
 @_snapshot_available
 def test_snapshot_datastore_search_returns_benchmark_rows():
     client = SnapshotClient()
@@ -198,7 +234,7 @@ def test_snapshot_table_metadata_enumerates_resources():
         assert rec["alias_of"] is None
 
 
-@_snapshot_available
+@_scrape_available
 def test_download_file_by_resource_id_returns_bytes():
     client = SnapshotClient()
     # An XLSX non-DataStore resource known to be in the scrape
@@ -210,7 +246,7 @@ def test_download_file_by_resource_id_returns_bytes():
     assert data[:4] == b"PK\x03\x04"
 
 
-@_snapshot_available
+@_scrape_available
 def test_download_file_parses_resource_id_from_url():
     client = SnapshotClient()
     # Construct a portal-style URL for a resource we know is cached
@@ -235,7 +271,7 @@ def test_download_file_returns_none_for_unknown_resource():
     assert result is None
 
 
-@_snapshot_available
+@_scrape_available
 def test_download_file_respects_size_cap(tmp_path, monkeypatch):
     client = SnapshotClient()
     # Pick a resource known to be in the scrape, then set max_bytes below

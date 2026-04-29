@@ -1,6 +1,6 @@
 [project]
 name = "tanitdata"
-version = "3.0.0"
+version = "3.0.1"
 description = "MCP server for Tunisia's agricultural open data portal (agridata.tn)"
 readme = "README.md"
 requires-python = ">=3.11"
