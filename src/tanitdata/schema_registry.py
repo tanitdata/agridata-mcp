@@ -5,10 +5,13 @@ Static layer  (loaded once from schemas.json, never changes at runtime):
   - clusters               — shared schema annotations
   - arabic_field_decoding  — mojibake table
 
-Live layer (seeded from static at startup, refreshed every 6 hours from the portal):
+Live layer (seeded from static at startup, then populated by one of two refresh paths):
+  - live mode    — background refresh every 6 hours via CKAN API calls
+  - snapshot mode — single synchronous pass at startup from audit_full.json,
+                    no background task, no network calls
   - actual DataStore-active resource inventory
   - field names and record counts per resource
-  - dataset → organization mapping (fetched from portal)
+  - dataset → organization mapping
   - coverage_by_gouvernorat per domain
 """
 
@@ -17,15 +20,27 @@ from __future__ import annotations
 import asyncio
 import json
 import logging
+import os
 import re
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
 
 if TYPE_CHECKING:
-    from tanitdata.ckan_client import CKANClient
+    from tanitdata.ckan_client import BaseClient
 
 logger = logging.getLogger(__name__)
+
+
+def _fold(s: str) -> str:
+    """Case-insensitive ASCII fold used for tolerant column-name matching.
+
+    `Délégation` → `delegation`, `BLÉ DUR` → `ble dur`. Whitespace is
+    preserved so multi-word column names still collide on the same key.
+    """
+    nfkd = unicodedata.normalize("NFKD", s).lower()
+    return "".join(c for c in nfkd if not unicodedata.combining(c))
 
 # ---------------------------------------------------------------------------
 # Governorate normalisation tables
@@ -370,6 +385,7 @@ class SchemaRegistry:
         self,
         schemas_path: str | Path | None = None,
         refresh_interval_hours: float = 6.0,
+        audit_path: str | Path | None = None,
     ) -> None:
         if schemas_path is None:
             schemas_path = (
@@ -377,6 +393,18 @@ class SchemaRegistry:
             )
         self._path = Path(schemas_path)
         self._refresh_interval = timedelta(hours=refresh_interval_hours)
+
+        # Offline mode uses audit_full.json as a single source of truth.
+        # Path defaults to `<project_root>/audit_full.json` and is also
+        # overridable via the SNAPSHOT_AUDIT_PATH env var (matching the
+        # SnapshotClient). Only used when the registry is refreshed via
+        # a SnapshotClient.
+        if audit_path is None:
+            audit_path = (
+                os.environ.get("SNAPSHOT_AUDIT_PATH")
+                or Path(__file__).resolve().parent.parent.parent / "audit_full.json"
+            )
+        self._audit_path = Path(audit_path)
 
         # Static layer
         self._meta: dict[str, Any] = {}
@@ -402,6 +430,10 @@ class SchemaRegistry:
         self._resource_to_dataset: dict[str, tuple[str, str]] = {}
         self._last_refreshed: datetime | None = None
         self._refresh_lock = asyncio.Lock()
+
+        # Snapshot metadata — populated if the registry is ever refreshed
+        # from audit_full.json. `None` means live mode (no snapshot date).
+        self._snapshot_date: str | None = None
 
     # ------------------------------------------------------------------
     # Static layer
@@ -487,12 +519,30 @@ class SchemaRegistry:
     # Live layer
     # ------------------------------------------------------------------
 
-    async def maybe_refresh(self, client: "CKANClient") -> None:
+    @staticmethod
+    def _is_snapshot_client(client: "BaseClient") -> bool:
+        """Return True if `client` is a SnapshotClient (offline mode).
+
+        Uses a late import to avoid a circular dependency between ckan_client
+        and schema_registry.
+        """
+        from tanitdata.ckan_client import SnapshotClient  # late import
+
+        return isinstance(client, SnapshotClient)
+
+    async def maybe_refresh(self, client: "BaseClient") -> None:
         """Refresh the live inventory if the refresh interval has elapsed.
 
         Designed to be called at the start of every tool invocation.
         Most calls just check a timestamp and return instantly (~0 µs).
+
+        In snapshot mode this is a permanent no-op: the audit JSON is read
+        once at startup (via `load_snapshot`) and never refreshed again.
         """
+        # Snapshot mode: audit JSON is static; refresh was done at startup.
+        if self._is_snapshot_client(client):
+            return
+
         now = datetime.now(tz=timezone.utc)
         if (
             self._last_refreshed is not None
@@ -510,7 +560,7 @@ class SchemaRegistry:
                 return
             await self._refresh(client)
 
-    async def _refresh(self, client: "CKANClient") -> None:
+    async def _refresh(self, client: "BaseClient") -> None:
         """Fetch the live DataStore inventory and dataset→org mapping."""
         logger.info("Schema registry: starting live refresh…")
         try:
@@ -583,7 +633,129 @@ class SchemaRegistry:
             logger.error("Schema registry: live refresh failed: %s", exc)
             self._last_refreshed = datetime.now(tz=timezone.utc)
 
-    async def _fetch_dataset_orgs(self, client: "CKANClient") -> None:
+    # ------------------------------------------------------------------
+    # Offline refresh (snapshot mode)
+    # ------------------------------------------------------------------
+
+    def load_snapshot(
+        self,
+        audit_path: str | Path | None = None,
+        scrape_index_path: str | Path | None = None,
+    ) -> None:
+        """Populate the live layer from audit_full.json + scrape_index.json.
+
+        Used in snapshot mode in place of the live CKAN refresh. One
+        synchronous pass at startup — no network calls, no background task,
+        no periodic timer. The static layer (schemas.json) must already be
+        loaded (`load()` called first) before this method runs.
+
+        The `scrape_index_path` sidecar, when present, provides the
+        authoritative `snapshot_date` used in source attribution footers.
+        """
+        if not self._static_loaded:
+            self.load()
+
+        path = Path(audit_path) if audit_path else self._audit_path
+        if not path.exists():
+            logger.warning(
+                "Schema registry: audit file not found at %s — "
+                "snapshot refresh skipped, using static layer only",
+                path,
+            )
+            return
+
+        with open(path, encoding="utf-8") as f:
+            audit = json.load(f)
+
+        # --- Populate _live from audit_full.json.datastore_schemas ---
+        # Each entry carries: resource_id, dataset_name, resource_name,
+        # format, total_records, fields: [{name, type, info}].
+        ds_schemas = audit.get("datastore_schemas", {})
+        for rid, schema in ds_schemas.items():
+            fields = [
+                f.get("name", "")
+                for f in schema.get("fields", [])
+                if f.get("name") and f.get("name") not in ("_id", "_full_text")
+            ]
+            dataset_slug = schema.get("dataset_name", "")
+            resource_name = schema.get("resource_name", "")
+            total = int(schema.get("total_records") or 0)
+
+            if rid in self._live:
+                # Only overwrite fields/records if audit has newer info.
+                if fields:
+                    self._live[rid].fields = fields
+                if total:
+                    self._live[rid].records = total
+                if resource_name and not self._live[rid].name:
+                    self._live[rid].name = resource_name
+                if dataset_slug and not self._live[rid].dataset:
+                    self._live[rid].dataset = dataset_slug
+            else:
+                self._live[rid] = LiveResource(
+                    id=rid,
+                    name=resource_name,
+                    dataset=dataset_slug,
+                    fields=fields,
+                    records=total,
+                )
+
+            if dataset_slug and rid not in self._resource_to_dataset:
+                self._resource_to_dataset[rid] = (dataset_slug, resource_name)
+
+        # --- Populate dataset → org mapping from audit_full.json.datasets ---
+        # Organisation metadata lives in audit_full.json.organizations —
+        # attach display titles by joining on slug.
+        org_title_by_slug = {
+            o.get("name", ""): o.get("title", "")
+            for o in audit.get("organizations", [])
+        }
+        for ds in audit.get("datasets", []):
+            slug = ds.get("name", "")
+            org_slug = ds.get("organization") or ""
+            if slug and org_slug:
+                self._dataset_orgs[slug] = org_slug
+                self._dataset_meta[slug] = {
+                    "title": ds.get("title", ""),
+                    "org_slug": org_slug,
+                    "org_title": (
+                        ds.get("organization_title")
+                        or org_title_by_slug.get(org_slug, "")
+                    ),
+                }
+
+        # --- Recompute coverage now that org data is present ---
+        self._compute_coverage()
+        self._last_refreshed = datetime.now(tz=timezone.utc)
+
+        # --- Load scrape index sidecar for snapshot_date metadata ---
+        if scrape_index_path is None:
+            scrape_index_path = self._audit_path.parent / "snapshot" / "scrape_index.json"
+        scrape_index_path = Path(scrape_index_path)
+        if scrape_index_path.exists():
+            try:
+                with open(scrape_index_path, encoding="utf-8") as f:
+                    sidecar = json.load(f)
+                self._snapshot_date = sidecar.get("meta", {}).get("snapshot_date")
+            except Exception as exc:  # pragma: no cover - sidecar is optional
+                logger.warning(
+                    "Schema registry: failed to read %s: %s", scrape_index_path, exc
+                )
+
+        logger.info(
+            "Schema registry: snapshot refresh complete "
+            "(%d resources, %d dataset→org mappings, snapshot_date=%s)",
+            len(self._live),
+            len(self._dataset_orgs),
+            self._snapshot_date or "unknown",
+        )
+
+    @property
+    def snapshot_date(self) -> str | None:
+        """ISO `YYYY-MM-DD` date of the snapshot, or None in live mode."""
+        return self._snapshot_date
+
+    async def _fetch_dataset_orgs(self, client: "BaseClient") -> None:
         """Fetch all datasets from the portal to build dataset_slug → org_slug mapping.
 
         Uses paginated package_search (100 per page, ~12 calls for 1102 datasets).
@@ -794,6 +966,9 @@ class SchemaRegistry:
 
         Returns a dict with keys: resource_id, resource_name, dataset_name,
         dataset_title, organization, organization_title, portal_url.
+        When the registry was populated from a snapshot, also includes a
+        `snapshot_date` key (ISO `YYYY-MM-DD`) so response footers can
+        make clear which vintage of the data is being served.
         Returns None if the resource is completely unknown.
         """
         live = self._live.get(resource_id)
@@ -812,7 +987,7 @@ class SchemaRegistry:
 
         meta = self._dataset_meta.get(dataset_slug, {})
 
-        return {
+        result: dict[str, str] = {
             "resource_id": resource_id,
             "resource_name": resource_name,
             "dataset_name": dataset_slug,
@@ -825,6 +1000,9 @@ class SchemaRegistry:
                 else ""
             ),
         }
+        if self._snapshot_date:
+            result["snapshot_date"] = self._snapshot_date
+        return result
 
     # ------------------------------------------------------------------
     # Backwards-compatible interface (used by existing tools)
@@ -887,15 +1065,35 @@ class SchemaRegistry:
 
         Returns: {column_name: [value1, value2, ...]} for columns with
         known categorical values.  Omits columns with no hints.
+
+        Matching is accent- and case-insensitive so hints populated from
+        the live CKAN inventory (where `Délégation` is stored as
+        `Delegation`) still surface when querying the offline Parquet
+        snapshot (which preserves the original XLS column name with
+        diacritics). The hint dict is returned keyed by the *requested*
+        column name so tool output stays aligned with the actual column
+        headers shown to the LLM.
         """
         resource_hints = self._value_hints.get(resource_id, {})
         if not resource_hints:
             return {}
-        return {
+
+        # Fast path: exact match
+        exact = {
             col: resource_hints[col]
             for col in column_names
             if col in resource_hints
         }
+        # Slow path: fold to an ASCII/case-insensitive key and retry any
+        # columns that didn't exact-match.
+        missing = [c for c in column_names if c not in exact]
+        if missing:
+            folded_map = {_fold(k): v for k, v in resource_hints.items()}
+            for col in missing:
+                folded = _fold(col)
+                if folded in folded_map:
+                    exact[col] = folded_map[folded]
+        return exact
 
     def get_arabic_field_mapping(self) -> dict[str, Any]:
         self._ensure_loaded()

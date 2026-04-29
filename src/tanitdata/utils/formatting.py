@@ -100,7 +100,10 @@ def format_source_footer(sources: list[dict[str, str]]) -> str:
     """Format a Sources section from source attribution dicts.
 
     Each source dict should have: resource_id, resource_name, dataset_name,
-    dataset_title, organization_title, portal_url.
+    dataset_title, organization_title, portal_url. When the server is
+    running in snapshot mode, sources also carry `snapshot_date`
+    (ISO `YYYY-MM-DD`), which is surfaced as a single trailing line so the
+    reader knows which vintage of the data is being reported.
     """
     if not sources:
         return ""
@@ -129,5 +132,16 @@ def format_source_footer(sources: list[dict[str, str]]) -> str:
             if url:
                 parts.append(url)
             lines.append(f"  {' — '.join(parts)}")
+
+    # Deduplicate snapshot_date across multiple sources — they all share the
+    # same snapshot. Append as a single trailing line.
+    snapshot_dates = {s.get("snapshot_date") for s in sources if s.get("snapshot_date")}
+    if snapshot_dates:
+        # If somehow sources come from different snapshots, list them all.
+        sd = sorted(d for d in snapshot_dates if d)
+        if len(sd) == 1:
+            lines.append(f"- *Data from snapshot dated {sd[0]}.*")
+        else:
+            lines.append(f"- *Data from snapshots dated {', '.join(sd)}.*")
 
     return "\n".join(lines)

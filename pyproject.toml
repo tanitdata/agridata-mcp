@@ -1,6 +1,6 @@
 [project]
 name = "tanitdata"
-version = "2.1.1"
+version = "3.0.0"
 description = "MCP server for Tunisia's agricultural open data portal (agridata.tn)"
 readme = "README.md"
 requires-python = ">=3.11"
@@ -12,6 +12,8 @@ dependencies = [
     "python-dotenv",
     "openpyxl",
     "boto3",
+    "duckdb>=1.0",
+    "xlrd>=2.0",
 ]
 
 [project.scripts]
