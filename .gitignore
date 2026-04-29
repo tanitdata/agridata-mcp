@@ -28,7 +28,22 @@ value_catalog.json
 # Raw scrape (268 MB source of truth for the snapshot). The derived
 # artifacts (snapshot/parquet/, snapshot/scrape_index.json, audit_full.json)
 # ARE committed so the repo is self-contained and reproducible.
-agridata_TN_Scraped_*/
+#
+# v3.1.0 also commits the tabular source folders (~94 MB) so read_resource
+# works fully offline on non-DataStore XLSX/XLS/CSV files. The non-tabular
+# scrape folders (PDFs, images, DOCX, GeoJSON, ODS, XML, WORD) remain
+# ignored — they're ~174 MB and not queryable anyway.
+agridata_TN_Scraped_*/format_pdf/
+agridata_TN_Scraped_*/format_jpeg/
+agridata_TN_Scraped_*/format_png/
+agridata_TN_Scraped_*/format_docx/
+agridata_TN_Scraped_*/format_word/
+agridata_TN_Scraped_*/format_geojson/
+agridata_TN_Scraped_*/format_ods/
+agridata_TN_Scraped_*/format_xml/
+agridata_TN_Scraped_*/Master_Climate_Data_Stitched.csv
+agridata_TN_Scraped_*/TanitData_Solar_Map_*.html
+agridata_TN_Scraped_*/TanitData_Stitching_Map.csv
 
 # Local memory / scratch
 memory/

@@ -637,6 +637,7 @@ exported for back-compat so existing imports don't break.
 |------|------|--------|------|
 | `snapshot/parquet/<rid>.parquet` | 7.8 MB (727 files) | Built by `scripts/build_snapshot.py` from the scrape | One Parquet per DataStore-active resource; columns all VARCHAR to match CKAN's "all fields are text" invariant |
 | `audit_full.json` | 5.5 MB | One-time dump from CKAN (datasets + resources + orgs + groups + datastore_schemas) | Fills every metadata role — `package_search`, `package_show`, `_table_metadata`, dataset→org mapping |
+| `agridata_TN_Scraped_*/format_{xlsx,xls,csv,api}/` | ~94 MB, 1,436 files | Raw tabular scrape files (v3.1.0+) | Source for `read_resource` on non-DataStore resources; path resolved via `SNAPSHOT_SCRAPE_ROOT` |
 | `snapshot/scrape_index.json` | 117 KB | Sidecar from `build_snapshot.py` | Maps every resource UUID to a relative path in the original scrape folder; carries `meta.snapshot_date` |
 | `schemas.json` | 641 KB | Pre-existing (curated domain registry) | Unchanged |
 | `value_hints.json` | 233 KB | Pre-existing (Phase 3 semantic layer) | Unchanged |
@@ -738,7 +739,7 @@ PDF extraction is out of scope for v3.0.
 - `MCP_TRANSPORT=stdio` (default, local) or `MCP_TRANSPORT=streamable-http` (remote)
 - Remote mode: FastMCP spins up Uvicorn/Starlette on `FASTMCP_HOST:FASTMCP_PORT` (default `127.0.0.1:8000`; container overrides to `0.0.0.0`)
 - `FASTMCP_STATELESS_HTTP=true` — each POST to `/mcp` is independent (no session state in transport layer)
-- `/health` endpoint returns `{"status": "ok", "version": "3.0.0"}` for ALB and Docker health checks
+- `/health` endpoint returns `{"status": "ok", "version": "3.1.0"}` for ALB and Docker health checks
 
 ### Static data in containers
 - `DATA_SOURCE=snapshot` is the Dockerfile default — the image ships
@@ -748,9 +749,13 @@ PDF extraction is out of scope for v3.0.
   `SNAPSHOT_AUDIT_PATH=/app/audit_full.json`,
   `SNAPSHOT_SCRAPE_INDEX=/app/snapshot/scrape_index.json` — all have sensible
   defaults in code; Dockerfile sets them explicitly for clarity.
-- Raw scrape files (PDFs, non-DS XLSX, etc.) are NOT baked into the image.
-  `read_resource` on a non-DataStore resource returns the "download manually"
-  message with the portal URL.
+- **v3.1.0**: tabular scrape folders (`format_xlsx/`, `format_xls/`,
+  `format_csv/`, `format_api/`) are also baked into the image under
+  `/app/scrape/` and surfaced via `SNAPSHOT_SCRAPE_ROOT=/app/scrape`.
+  `read_resource` now works fully offline on every non-DataStore
+  XLSX/XLS/CSV resource (~94 MB added, 1,436 files). Non-tabular
+  formats (PDFs, images, DOCX, GeoJSON) are NOT shipped — `read_resource`
+  still returns "download manually" for those.
 
 ### AWS architecture
 - Hosted at `https://mcp.tanitdata.org/mcp` — unauthenticated public access
