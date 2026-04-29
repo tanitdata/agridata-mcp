@@ -20,14 +20,32 @@ venv/
 .vscode/
 .idea/
 
-# Regeneratable data (run scripts/ to rebuild)
-audit_full.json
+# Offline-analysis artifacts (regeneratable by scripts/; too large + not
+# needed at runtime). These were gitignored pre-v3 and stay gitignored.
 vocabulary_raw.json
 value_catalog.json
 
+# Raw scrape (268 MB source of truth for the snapshot). The derived
+# artifacts (snapshot/parquet/, snapshot/scrape_index.json, audit_full.json)
+# ARE committed so the repo is self-contained and reproducible.
+agridata_TN_Scraped_*/
+
+# Local memory / scratch
+memory/
+_phase*
+
 # Research (local only, not for public repo)
 RESEARCH.md
+research/
 
-# Ad-hoc scripts
+# Ad-hoc scripts (local only)
 list_stations.py
 test_domain.py
+trust-policy-final.json
+tanitdata_logo_v2.png
+
+# NOTE v3.0.0: audit_full.json and snapshot/ are now intentionally TRACKED.
+# audit_full.json cannot be regenerated while the portal is down and is
+# the single source of truth for catalog metadata in snapshot mode.
+# snapshot/parquet/ is deterministic given the scrape + audit; we commit
+# it so clones are self-contained without needing the 268 MB scrape.

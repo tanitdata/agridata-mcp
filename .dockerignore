@@ -10,7 +10,17 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
-audit_full.json
 test_*.py
 CLAUDE.md
+RESEARCH.md
+research/
 claude_desktop_config.json
+
+# Raw scrape (268 MB) — NOT needed in the image. The snapshot/parquet/
+# files built from it are the actual data shipped.
+agridata_TN_Scraped_*/
+
+# Development / offline-analysis artifacts (regeneratable, not needed at runtime)
+vocabulary_raw.json
+value_catalog.json
+memory/
