@@ -1,0 +1,697 @@
+date,parameter,value,unite
+2025-05-16 01:00:00,Humidité relative,86.7,%
+2025-05-16 02:00:00,Humidité relative,83.2,%
+2025-05-16 03:00:00,Humidité relative,83.5,%
+2025-05-16 04:00:00,Humidité relative,83.0,%
+2025-05-16 05:00:00,Humidité relative,75.9,%
+2025-05-16 06:00:00,Humidité relative,74.2,%
+2025-05-16 07:00:00,Humidité relative,70.5,%
+2025-05-16 08:00:00,Humidité relative,70.3,%
+2025-05-16 09:00:00,Humidité relative,64.5,%
+2025-05-16 10:00:00,Humidité relative,61.1,%
+2025-05-16 11:00:00,Humidité relative,62.6,%
+2025-05-16 12:00:00,Humidité relative,65.6,%
+2025-05-16 13:00:00,Humidité relative,64.9,%
+2025-05-16 14:00:00,Humidité relative,71.5,%
+2025-05-16 15:00:00,Humidité relative,60.2,%
+2025-05-16 16:00:00,Humidité relative,60.0,%
+2025-05-16 17:00:00,Humidité relative,65.0,%
+2025-05-16 18:00:00,Humidité relative,60.8,%
+2025-05-16 19:00:00,Humidité relative,71.2,%
+2025-05-16 20:00:00,Humidité relative,73.0,%
+2025-05-16 21:00:00,Humidité relative,78.8,%
+2025-05-16 22:00:00,Humidité relative,83.9,%
+2025-05-16 23:00:00,Humidité relative,87.4,%
+2025-05-17 00:00:00,Humidité relative,87.2,%
+2025-05-17 01:00:00,Humidité relative,90.0,%
+2025-05-17 02:00:00,Humidité relative,91.9,%
+2025-05-17 03:00:00,Humidité relative,91.7,%
+2025-05-17 04:00:00,Humidité relative,89.6,%
+2025-05-17 05:00:00,Humidité relative,87.2,%
+2025-05-17 06:00:00,Humidité relative,86.5,%
+2025-05-17 07:00:00,Humidité relative,73.0,%
+2025-05-17 08:00:00,Humidité relative,63.9,%
+2025-05-17 09:00:00,Humidité relative,54.6,%
+2025-05-17 10:00:00,Humidité relative,48.4,%
+2025-05-17 11:00:00,Humidité relative,34.2,%
+2025-05-17 12:00:00,Humidité relative,32.8,%
+2025-05-17 13:00:00,Humidité relative,33.9,%
+2025-05-17 14:00:00,Humidité relative,29.8,%
+2025-05-17 15:00:00,Humidité relative,31.5,%
+2025-05-16 21:00:00,L'humidité du sol,434.1,mV
+2025-05-16 22:00:00,L'humidité du sol,429.5,mV
+2025-05-16 23:00:00,L'humidité du sol,429.7,mV
+2025-05-17 03:00:00,L'humidité du sol,427.0,mV
+2025-05-17 04:00:00,L'humidité du sol,427.2,mV
+2025-05-17 05:00:00,L'humidité du sol,427.2,mV
+2025-05-17 06:00:00,L'humidité du sol,430.3,mV
+2025-05-17 07:00:00,L'humidité du sol,438.1,mV
+2025-05-17 08:00:00,L'humidité du sol,442.6,mV
+2025-05-17 09:00:00,L'humidité du sol,446.8,mV
+2025-05-17 10:00:00,L'humidité du sol,449.1,mV
+2025-05-17 11:00:00,L'humidité du sol,452.6,mV
+2025-05-17 12:00:00,L'humidité du sol,457.7,mV
+2025-05-17 13:00:00,L'humidité du sol,459.8,mV
+2025-05-17 14:00:00,L'humidité du sol,463.4,mV
+2025-05-17 15:00:00,L'humidité du sol,463.4,mV
+2025-05-16 01:00:00,Point de Rosée,10.3,°C
+2025-05-16 02:00:00,Point de Rosée,9.6,°C
+2025-05-16 03:00:00,Point de Rosée,9.5,°C
+2025-05-16 04:00:00,Point de Rosée,9.0,°C
+2025-05-16 05:00:00,Point de Rosée,7.7,°C
+2025-05-16 06:00:00,Point de Rosée,7.4,°C
+2025-05-16 07:00:00,Point de Rosée,7.2,°C
+2025-05-16 08:00:00,Point de Rosée,7.9,°C
+2025-05-16 09:00:00,Point de Rosée,8.0,°C
+2025-05-16 10:00:00,Point de Rosée,8.5,°C
+2025-05-16 11:00:00,Point de Rosée,9.1,°C
+2025-05-16 12:00:00,Point de Rosée,9.2,°C
+2025-05-16 13:00:00,Point de Rosée,9.0,°C
+2025-05-16 14:00:00,Point de Rosée,9.9,°C
+2025-05-16 15:00:00,Point de Rosée,9.9,°C
+2025-05-16 16:00:00,Point de Rosée,8.4,°C
+2025-05-16 17:00:00,Point de Rosée,9.7,°C
+2025-05-16 18:00:00,Point de Rosée,9.5,°C
+2025-05-16 19:00:00,Point de Rosée,10.5,°C
+2025-05-16 20:00:00,Point de Rosée,10.1,°C
+2025-05-16 21:00:00,Point de Rosée,10.6,°C
+2025-05-16 22:00:00,Point de Rosée,10.0,°C
+2025-05-16 23:00:00,Point de Rosée,10.3,°C
+2025-05-17 00:00:00,Point de Rosée,9.5,°C
+2025-05-17 01:00:00,Point de Rosée,9.6,°C
+2025-05-17 02:00:00,Point de Rosée,9.1,°C
+2025-05-17 03:00:00,Point de Rosée,8.2,°C
+2025-05-17 04:00:00,Point de Rosée,8.9,°C
+2025-05-17 05:00:00,Point de Rosée,8.5,°C
+2025-05-17 06:00:00,Point de Rosée,8.5,°C
+2025-05-17 07:00:00,Point de Rosée,8.9,°C
+2025-05-17 08:00:00,Point de Rosée,8.8,°C
+2025-05-17 09:00:00,Point de Rosée,8.1,°C
+2025-05-17 10:00:00,Point de Rosée,7.4,°C
+2025-05-17 11:00:00,Point de Rosée,3.6,°C
+2025-05-17 12:00:00,Point de Rosée,4.0,°C
+2025-05-17 13:00:00,Point de Rosée,5.0,°C
+2025-05-17 14:00:00,Point de Rosée,4.0,°C
+2025-05-17 15:00:00,Point de Rosée,5.0,°C
+2025-05-16 01:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 02:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 03:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 04:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 05:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 06:00:00,Rayonnement solaire,34.0,W/m²
+2025-05-16 07:00:00,Rayonnement solaire,119.0,W/m²
+2025-05-16 08:00:00,Rayonnement solaire,333.0,W/m²
+2025-05-16 09:00:00,Rayonnement solaire,244.0,W/m²
+2025-05-16 10:00:00,Rayonnement solaire,954.0,W/m²
+2025-05-16 11:00:00,Rayonnement solaire,210.0,W/m²
+2025-05-16 12:00:00,Rayonnement solaire,113.0,W/m²
+2025-05-16 13:00:00,Rayonnement solaire,292.0,W/m²
+2025-05-16 14:00:00,Rayonnement solaire,489.0,W/m²
+2025-05-16 15:00:00,Rayonnement solaire,176.0,W/m²
+2025-05-16 16:00:00,Rayonnement solaire,131.0,W/m²
+2025-05-16 17:00:00,Rayonnement solaire,203.0,W/m²
+2025-05-16 18:00:00,Rayonnement solaire,83.0,W/m²
+2025-05-16 19:00:00,Rayonnement solaire,21.0,W/m²
+2025-05-16 20:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 21:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 22:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-16 23:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 00:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 01:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 02:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 03:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 04:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 05:00:00,Rayonnement solaire,0.0,W/m²
+2025-05-17 06:00:00,Rayonnement solaire,42.0,W/m²
+2025-05-17 07:00:00,Rayonnement solaire,199.0,W/m²
+2025-05-17 08:00:00,Rayonnement solaire,409.0,W/m²
+2025-05-17 09:00:00,Rayonnement solaire,618.0,W/m²
+2025-05-17 10:00:00,Rayonnement solaire,790.0,W/m²
+2025-05-17 11:00:00,Rayonnement solaire,931.0,W/m²
+2025-05-17 12:00:00,Rayonnement solaire,1013.0,W/m²
+2025-05-17 13:00:00,Rayonnement solaire,1028.0,W/m²
+2025-05-17 14:00:00,Rayonnement solaire,1000.0,W/m²
+2025-05-17 15:00:00,Rayonnement solaire,915.0,W/m²
+2025-05-16 01:00:00,Vitesse du vent,4.08,m/s
+2025-05-16 02:00:00,Vitesse du vent,2.69,m/s
+2025-05-16 03:00:00,Vitesse du vent,2.82,m/s
+2025-05-16 04:00:00,Vitesse du vent,1.96,m/s
+2025-05-16 05:00:00,Vitesse du vent,3.65,m/s
+2025-05-16 06:00:00,Vitesse du vent,2.8,m/s
+2025-05-16 07:00:00,Vitesse du vent,3.15,m/s
+2025-05-16 08:00:00,Vitesse du vent,5.59,m/s
+2025-05-16 09:00:00,Vitesse du vent,3.75,m/s
+2025-05-16 10:00:00,Vitesse du vent,5.54,m/s
+2025-05-16 11:00:00,Vitesse du vent,5.06,m/s
+2025-05-16 12:00:00,Vitesse du vent,3.92,m/s
+2025-05-16 13:00:00,Vitesse du vent,3.61,m/s
+2025-05-16 14:00:00,Vitesse du vent,3.73,m/s
+2025-05-16 15:00:00,Vitesse du vent,4.97,m/s
+2025-05-16 16:00:00,Vitesse du vent,4.14,m/s
+2025-05-16 17:00:00,Vitesse du vent,4.87,m/s
+2025-05-16 18:00:00,Vitesse du vent,3.99,m/s
+2025-05-16 19:00:00,Vitesse du vent,1.39,m/s
+2025-05-16 20:00:00,Vitesse du vent,2.99,m/s
+2025-05-16 21:00:00,Vitesse du vent,1.08,m/s
+2025-05-16 22:00:00,Vitesse du vent,1.23,m/s
+2025-05-16 23:00:00,Vitesse du vent,1.03,m/s
+2025-05-17 00:00:00,Vitesse du vent,2.23,m/s
+2025-05-17 01:00:00,Vitesse du vent,1.66,m/s
+2025-05-17 02:00:00,Vitesse du vent,1.28,m/s
+2025-05-17 03:00:00,Vitesse du vent,2.38,m/s
+2025-05-17 04:00:00,Vitesse du vent,2.49,m/s
+2025-05-17 05:00:00,Vitesse du vent,0.81,m/s
+2025-05-17 06:00:00,Vitesse du vent,2.21,m/s
+2025-05-17 07:00:00,Vitesse du vent,1.16,m/s
+2025-05-17 08:00:00,Vitesse du vent,2.09,m/s
+2025-05-17 09:00:00,Vitesse du vent,2.91,m/s
+2025-05-17 10:00:00,Vitesse du vent,1.18,m/s
+2025-05-17 11:00:00,Vitesse du vent,2.96,m/s
+2025-05-17 12:00:00,Vitesse du vent,3.61,m/s
+2025-05-17 13:00:00,Vitesse du vent,3.68,m/s
+2025-05-17 14:00:00,Vitesse du vent,4.91,m/s
+2025-05-17 15:00:00,Vitesse du vent,4.38,m/s
+2025-05-16 01:00:00,Température,16.6,°C
+2025-05-16 02:00:00,Température,16.3,°C
+2025-05-16 03:00:00,Température,16.1,°C
+2025-05-16 04:00:00,Température,15.8,°C
+2025-05-16 05:00:00,Température,15.6,°C
+2025-05-16 06:00:00,Température,15.3,°C
+2025-05-16 07:00:00,Température,15.1,°C
+2025-05-16 08:00:00,Température,14.9,°C
+2025-05-16 11:00:00,Température,15.4,°C
+2025-05-16 13:00:00,Température,15.9,°C
+2025-05-16 15:00:00,Température,16.5,°C
+2025-05-16 17:00:00,Température,17.3,°C
+2025-05-16 19:00:00,Température,17.4,°C
+2025-05-16 21:00:00,Température,17.1,°C
+2025-05-16 22:00:00,Température,16.6,°C
+2025-05-16 23:00:00,Température,16.3,°C
+2025-05-17 03:00:00,Température,15.5,°C
+2025-05-17 04:00:00,Température,14.7,°C
+2025-05-17 05:00:00,Température,14.4,°C
+2025-05-17 06:00:00,Température,14.2,°C
+2025-05-17 07:00:00,Température,14.0,°C
+2025-05-17 08:00:00,Température,14.0,°C
+2025-05-17 09:00:00,Température,14.3,°C
+2025-05-17 10:00:00,Température,14.7,°C
+2025-05-17 11:00:00,Température,15.2,°C
+2025-05-17 12:00:00,Température,15.6,°C
+2025-05-17 13:00:00,Température,16.3,°C
+2025-05-17 14:00:00,Température,17.0,°C
+2025-05-17 15:00:00,Température,18.0,°C
+2025-05-16 01:00:00,Pression atmosphérique,918.0,mm/j
+2025-05-16 02:00:00,Pression atmosphérique,917.9,mm/j
+2025-05-16 03:00:00,Pression atmosphérique,918.0,mm/j
+2025-05-16 04:00:00,Pression atmosphérique,918.1,mm/j
+2025-05-16 05:00:00,Pression atmosphérique,918.4,mm/j
+2025-05-16 06:00:00,Pression atmosphérique,919.0,mm/j
+2025-05-16 07:00:00,Pression atmosphérique,919.5,mm/j
+2025-05-16 08:00:00,Pression atmosphérique,919.7,mm/j
+2025-05-16 09:00:00,Pression atmosphérique,920.1,mm/j
+2025-05-16 10:00:00,Pression atmosphérique,920.4,mm/j
+2025-05-16 11:00:00,Pression atmosphérique,920.8,mm/j
+2025-05-16 12:00:00,Pression atmosphérique,921.2,mm/j
+2025-05-16 13:00:00,Pression atmosphérique,921.5,mm/j
+2025-05-16 14:00:00,Pression atmosphérique,921.6,mm/j
+2025-05-16 15:00:00,Pression atmosphérique,920.9,mm/j
+2025-05-16 16:00:00,Pression atmosphérique,921.4,mm/j
+2025-05-16 17:00:00,Pression atmosphérique,921.7,mm/j
+2025-05-16 18:00:00,Pression atmosphérique,921.8,mm/j
+2025-05-16 19:00:00,Pression atmosphérique,922.6,mm/j
+2025-05-16 20:00:00,Pression atmosphérique,923.2,mm/j
+2025-05-16 21:00:00,Pression atmosphérique,923.5,mm/j
+2025-05-16 22:00:00,Pression atmosphérique,924.4,mm/j
+2025-05-16 23:00:00,Pression atmosphérique,924.5,mm/j
+2025-05-17 00:00:00,Pression atmosphérique,924.7,mm/j
+2025-05-17 01:00:00,Pression atmosphérique,924.7,mm/j
+2025-05-17 02:00:00,Pression atmosphérique,924.1,mm/j
+2025-05-17 03:00:00,Pression atmosphérique,923.9,mm/j
+2025-05-17 04:00:00,Pression atmosphérique,923.9,mm/j
+2025-05-17 05:00:00,Pression atmosphérique,924.0,mm/j
+2025-05-17 06:00:00,Pression atmosphérique,924.5,mm/j
+2025-05-17 07:00:00,Pression atmosphérique,924.9,mm/j
+2025-05-17 08:00:00,Pression atmosphérique,925.0,mm/j
+2025-05-17 09:00:00,Pression atmosphérique,925.4,mm/j
+2025-05-17 10:00:00,Pression atmosphérique,925.4,mm/j
+2025-05-17 11:00:00,Pression atmosphérique,925.5,mm/j
+2025-05-17 12:00:00,Pression atmosphérique,925.4,mm/j
+2025-05-17 13:00:00,Pression atmosphérique,925.2,mm/j
+2025-05-17 14:00:00,Pression atmosphérique,924.9,mm/j
+2025-05-17 15:00:00,Pression atmosphérique,924.5,mm/j
+2025-05-16 01:00:00,Direction du vent,327.9,Deg
+2025-05-16 02:00:00,Direction du vent,311.9,Deg
+2025-05-16 03:00:00,Direction du vent,314.4,Deg
+2025-05-16 04:00:00,Direction du vent,319.4,Deg
+2025-05-16 05:00:00,Direction du vent,302.2,Deg
+2025-05-16 06:00:00,Direction du vent,341.3,Deg
+2025-05-16 07:00:00,Direction du vent,304.2,Deg
+2025-05-16 08:00:00,Direction du vent,9.3,Deg
+2025-05-16 09:00:00,Direction du vent,294.8,Deg
+2025-05-16 10:00:00,Direction du vent,346.9,Deg
+2025-05-16 11:00:00,Direction du vent,2.5,Deg
+2025-05-16 12:00:00,Direction du vent,320.0,Deg
+2025-05-16 13:00:00,Direction du vent,323.8,Deg
+2025-05-16 14:00:00,Direction du vent,284.3,Deg
+2025-05-16 15:00:00,Direction du vent,273.7,Deg
+2025-05-16 16:00:00,Direction du vent,318.8,Deg
+2025-05-16 17:00:00,Direction du vent,329.1,Deg
+2025-05-16 18:00:00,Direction du vent,334.8,Deg
+2025-05-16 19:00:00,Direction du vent,356.7,Deg
+2025-05-16 20:00:00,Direction du vent,321.8,Deg
+2025-05-16 21:00:00,Direction du vent,296.2,Deg
+2025-05-16 22:00:00,Direction du vent,53.7,Deg
+2025-05-16 23:00:00,Direction du vent,346.4,Deg
+2025-05-17 00:00:00,Direction du vent,18.5,Deg
+2025-05-17 01:00:00,Direction du vent,1.4,Deg
+2025-05-17 02:00:00,Direction du vent,0.7,Deg
+2025-05-17 03:00:00,Direction du vent,35.5,Deg
+2025-05-17 04:00:00,Direction du vent,23.3,Deg
+2025-05-17 05:00:00,Direction du vent,316.6,Deg
+2025-05-17 06:00:00,Direction du vent,49.7,Deg
+2025-05-17 07:00:00,Direction du vent,138.8,Deg
+2025-05-17 08:00:00,Direction du vent,218.1,Deg
+2025-05-17 09:00:00,Direction du vent,321.7,Deg
+2025-05-17 10:00:00,Direction du vent,270.2,Deg
+2025-05-17 11:00:00,Direction du vent,287.1,Deg
+2025-05-17 12:00:00,Direction du vent,312.1,Deg
+2025-05-17 13:00:00,Direction du vent,323.7,Deg
+2025-05-17 14:00:00,Direction du vent,352.4,Deg
+2025-05-17 15:00:00,Direction du vent,318.2,Deg
+2025-05-16 01:00:00,Température,12.5,°C
+2025-05-16 02:00:00,Température,12.4,°C
+2025-05-16 03:00:00,Température,12.2,°C
+2025-05-16 04:00:00,Température,11.8,°C
+2025-05-16 05:00:00,Température,11.8,°C
+2025-05-16 06:00:00,Température,11.9,°C
+2025-05-16 07:00:00,Température,12.4,°C
+2025-05-16 08:00:00,Température,13.2,°C
+2025-05-16 09:00:00,Température,14.6,°C
+2025-05-16 10:00:00,Température,16.0,°C
+2025-05-16 11:00:00,Température,16.3,°C
+2025-05-16 12:00:00,Température,15.6,°C
+2025-05-16 13:00:00,Température,15.6,°C
+2025-05-16 14:00:00,Température,15.0,°C
+2025-05-16 15:00:00,Température,17.7,°C
+2025-05-16 16:00:00,Température,16.2,°C
+2025-05-16 17:00:00,Température,16.3,°C
+2025-05-16 18:00:00,Température,17.1,°C
+2025-05-16 19:00:00,Température,15.7,°C
+2025-05-16 20:00:00,Température,14.9,°C
+2025-05-16 21:00:00,Température,14.2,°C
+2025-05-16 22:00:00,Température,12.6,°C
+2025-05-16 23:00:00,Température,12.4,°C
+2025-05-17 00:00:00,Température,11.6,°C
+2025-05-17 01:00:00,Température,11.2,°C
+2025-05-17 02:00:00,Température,10.4,°C
+2025-05-17 03:00:00,Température,9.5,°C
+2025-05-17 04:00:00,Température,10.5,°C
+2025-05-17 05:00:00,Température,10.6,°C
+2025-05-17 06:00:00,Température,10.7,°C
+2025-05-17 07:00:00,Température,13.6,°C
+2025-05-17 08:00:00,Température,15.6,°C
+2025-05-17 09:00:00,Température,17.4,°C
+2025-05-17 10:00:00,Température,18.5,°C
+2025-05-17 11:00:00,Température,19.8,°C
+2025-05-17 12:00:00,Température,20.9,°C
+2025-05-17 13:00:00,Température,21.5,°C
+2025-05-17 14:00:00,Température,22.5,°C
+2025-05-17 15:00:00,Température,22.7,°C
+2025-05-16 01:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 02:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 03:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 04:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 05:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 06:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 07:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 08:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 09:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 10:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 11:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 12:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 13:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 14:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 15:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 16:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 17:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 18:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 19:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 20:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 21:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 22:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 23:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 00:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 01:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 02:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 03:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 04:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 05:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 06:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 07:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 08:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 09:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 10:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 11:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 12:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 13:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 14:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-17 15:00:00,Évapotranspiration Horaire,0.0,mm/h
+2025-05-16 01:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 02:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 03:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 04:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 05:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 06:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 07:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 08:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 09:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 10:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 11:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 12:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 13:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 14:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 15:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 16:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 17:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 18:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 19:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 20:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 21:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 22:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-16 23:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-17 00:00:00,Évapotranspiration journalière,2.97,mm/j
+2025-05-17 01:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 02:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 03:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 04:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 05:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 06:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 07:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 08:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 09:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 10:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 11:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 12:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 13:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 14:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-17 15:00:00,Évapotranspiration journalière,2.81,mm/j
+2025-05-16 01:00:00,Intensité de Pluie,0.0,mm/h
+2025-05-17 00:00:00,Intensité de Pluie,0.0,mm/h
+2025-05-16 01:00:00,Pluie quotidienne,0.0,mm
+2025-05-17 00:00:00,Pluie quotidienne,0.0,mm
+2025-05-16 01:00:00,Pluie Totale,811.6,mm
+2025-05-17 00:00:00,Pluie Totale,811.6,mm
+2025-05-16 01:00:00,Contenu volumétrique d'eau,295.0,%
+2025-05-16 02:00:00,Contenu volumétrique d'eau,258.3,%
+2025-05-16 03:00:00,Contenu volumétrique d'eau,327.9,%
+2025-05-16 04:00:00,Contenu volumétrique d'eau,48.0,%
+2025-05-16 05:00:00,Contenu volumétrique d'eau,287.6,%
+2025-05-16 06:00:00,Contenu volumétrique d'eau,290.8,%
+2025-05-16 07:00:00,Contenu volumétrique d'eau,312.4,%
+2025-05-16 08:00:00,Contenu volumétrique d'eau,308.8,%
+2025-05-16 11:00:00,Contenu volumétrique d'eau,297.1,%
+2025-05-16 13:00:00,Contenu volumétrique d'eau,299.4,%
+2025-05-16 15:00:00,Contenu volumétrique d'eau,326.9,%
+2025-05-16 17:00:00,Contenu volumétrique d'eau,321.2,%
+2025-05-16 19:00:00,Contenu volumétrique d'eau,293.0,%
+2025-05-16 21:00:00,Contenu volumétrique d'eau,264.5,%
+2025-05-16 22:00:00,Contenu volumétrique d'eau,278.9,%
+2025-05-16 23:00:00,Contenu volumétrique d'eau,292.9,%
+2025-05-17 03:00:00,Contenu volumétrique d'eau,356.5,%
+2025-05-17 04:00:00,Contenu volumétrique d'eau,251.3,%
+2025-05-17 05:00:00,Contenu volumétrique d'eau,200.2,%
+2025-05-17 06:00:00,Contenu volumétrique d'eau,272.0,%
+2025-05-17 07:00:00,Contenu volumétrique d'eau,279.9,%
+2025-05-17 08:00:00,Contenu volumétrique d'eau,287.9,%
+2025-05-17 09:00:00,Contenu volumétrique d'eau,316.5,%
+2025-05-17 10:00:00,Contenu volumétrique d'eau,287.8,%
+2025-05-17 11:00:00,Contenu volumétrique d'eau,206.1,%
+2025-05-17 12:00:00,Contenu volumétrique d'eau,319.2,%
+2025-05-17 13:00:00,Contenu volumétrique d'eau,287.6,%
+2025-05-17 14:00:00,Contenu volumétrique d'eau,188.3,%
+2025-05-17 15:00:00,Contenu volumétrique d'eau,303.6,%
+2025-05-16 01:00:00,L'humidité du sol,84.3,mV
+2025-05-16 02:00:00,L'humidité du sol,100.7,mV
+2025-05-16 03:00:00,L'humidité du sol,85.1,mV
+2025-05-16 04:00:00,L'humidité du sol,89.1,mV
+2025-05-16 05:00:00,L'humidité du sol,86.1,mV
+2025-05-16 06:00:00,L'humidité du sol,86.1,mV
+2025-05-16 07:00:00,L'humidité du sol,87.1,mV
+2025-05-16 08:00:00,L'humidité du sol,92.1,mV
+2025-05-16 11:00:00,L'humidité du sol,94.9,mV
+2025-05-16 13:00:00,L'humidité du sol,94.4,mV
+2025-05-16 15:00:00,L'humidité du sol,85.8,mV
+2025-05-16 17:00:00,L'humidité du sol,97.2,mV
+2025-05-16 19:00:00,L'humidité du sol,97.1,mV
+2025-05-16 21:00:00,L'humidité du sol,96.4,mV
+2025-05-16 22:00:00,L'humidité du sol,97.8,mV
+2025-05-16 23:00:00,L'humidité du sol,97.0,mV
+2025-05-17 03:00:00,L'humidité du sol,91.8,mV
+2025-05-17 04:00:00,L'humidité du sol,90.4,mV
+2025-05-17 05:00:00,L'humidité du sol,90.7,mV
+2025-05-17 06:00:00,L'humidité du sol,89.6,mV
+2025-05-17 07:00:00,L'humidité du sol,93.9,mV
+2025-05-17 08:00:00,L'humidité du sol,96.3,mV
+2025-05-17 09:00:00,L'humidité du sol,96.0,mV
+2025-05-17 10:00:00,L'humidité du sol,96.5,mV
+2025-05-17 11:00:00,L'humidité du sol,95.4,mV
+2025-05-17 12:00:00,L'humidité du sol,95.8,mV
+2025-05-17 13:00:00,L'humidité du sol,96.1,mV
+2025-05-17 14:00:00,L'humidité du sol,96.0,mV
+2025-05-17 15:00:00,L'humidité du sol,98.0,mV
+2025-05-16 01:00:00,Température,18.2,°C
+2025-05-16 02:00:00,Température,18.0,°C
+2025-05-16 03:00:00,Température,17.9,°C
+2025-05-16 04:00:00,Température,17.7,°C
+2025-05-16 05:00:00,Température,17.6,°C
+2025-05-16 06:00:00,Température,17.4,°C
+2025-05-16 07:00:00,Température,17.2,°C
+2025-05-16 08:00:00,Température,17.0,°C
+2025-05-16 11:00:00,Température,16.8,°C
+2025-05-16 13:00:00,Température,16.8,°C
+2025-05-16 15:00:00,Température,17.0,°C
+2025-05-16 17:00:00,Température,17.2,°C
+2025-05-16 19:00:00,Température,17.5,°C
+2025-05-16 21:00:00,Température,17.6,°C
+2025-05-16 22:00:00,Température,17.5,°C
+2025-05-16 23:00:00,Température,17.5,°C
+2025-05-17 03:00:00,Température,17.2,°C
+2025-05-17 04:00:00,Température,16.8,°C
+2025-05-17 05:00:00,Température,16.6,°C
+2025-05-17 06:00:00,Température,16.4,°C
+2025-05-17 07:00:00,Température,16.2,°C
+2025-05-17 08:00:00,Température,16.1,°C
+2025-05-17 09:00:00,Température,16.0,°C
+2025-05-17 10:00:00,Température,16.0,°C
+2025-05-17 11:00:00,Température,16.0,°C
+2025-05-17 12:00:00,Température,16.1,°C
+2025-05-17 13:00:00,Température,16.3,°C
+2025-05-17 14:00:00,Température,16.5,°C
+2025-05-17 15:00:00,Température,16.8,°C
+2025-05-16 01:00:00,Contenu volumétrique d'eau,10.9,%
+2025-05-16 02:00:00,Contenu volumétrique d'eau,11.0,%
+2025-05-16 03:00:00,Contenu volumétrique d'eau,10.3,%
+2025-05-16 04:00:00,Contenu volumétrique d'eau,10.3,%
+2025-05-16 05:00:00,Contenu volumétrique d'eau,10.8,%
+2025-05-16 06:00:00,Contenu volumétrique d'eau,10.4,%
+2025-05-16 07:00:00,Contenu volumétrique d'eau,11.0,%
+2025-05-16 08:00:00,Contenu volumétrique d'eau,10.4,%
+2025-05-16 11:00:00,Contenu volumétrique d'eau,10.9,%
+2025-05-16 13:00:00,Contenu volumétrique d'eau,12.1,%
+2025-05-16 15:00:00,Contenu volumétrique d'eau,9.3,%
+2025-05-16 17:00:00,Contenu volumétrique d'eau,9.1,%
+2025-05-16 19:00:00,Contenu volumétrique d'eau,12.4,%
+2025-05-16 21:00:00,Contenu volumétrique d'eau,11.4,%
+2025-05-16 22:00:00,Contenu volumétrique d'eau,11.3,%
+2025-05-16 23:00:00,Contenu volumétrique d'eau,9.2,%
+2025-05-17 03:00:00,Contenu volumétrique d'eau,8.8,%
+2025-05-17 04:00:00,Contenu volumétrique d'eau,9.6,%
+2025-05-17 05:00:00,Contenu volumétrique d'eau,8.7,%
+2025-05-17 06:00:00,Contenu volumétrique d'eau,9.6,%
+2025-05-17 07:00:00,Contenu volumétrique d'eau,9.8,%
+2025-05-17 08:00:00,Contenu volumétrique d'eau,9.2,%
+2025-05-17 09:00:00,Contenu volumétrique d'eau,9.5,%
+2025-05-17 10:00:00,Contenu volumétrique d'eau,8.9,%
+2025-05-17 11:00:00,Contenu volumétrique d'eau,8.0,%
+2025-05-17 12:00:00,Contenu volumétrique d'eau,7.6,%
+2025-05-17 13:00:00,Contenu volumétrique d'eau,8.8,%
+2025-05-17 14:00:00,Contenu volumétrique d'eau,8.1,%
+2025-05-17 15:00:00,Contenu volumétrique d'eau,6.7,%
+2025-05-16 01:00:00,L'humidité du sol,29.8,mV
+2025-05-16 02:00:00,L'humidité du sol,37.6,mV
+2025-05-16 03:00:00,L'humidité du sol,30.9,mV
+2025-05-16 04:00:00,L'humidité du sol,33.1,mV
+2025-05-16 05:00:00,L'humidité du sol,32.2,mV
+2025-05-16 06:00:00,L'humidité du sol,32.4,mV
+2025-05-16 07:00:00,L'humidité du sol,33.2,mV
+2025-05-16 08:00:00,L'humidité du sol,37.0,mV
+2025-05-16 11:00:00,L'humidité du sol,39.4,mV
+2025-05-16 13:00:00,L'humidité du sol,37.9,mV
+2025-05-16 15:00:00,L'humidité du sol,33.4,mV
+2025-05-16 17:00:00,L'humidité du sol,39.6,mV
+2025-05-16 19:00:00,L'humidité du sol,38.8,mV
+2025-05-16 21:00:00,L'humidité du sol,37.2,mV
+2025-05-16 22:00:00,L'humidité du sol,36.3,mV
+2025-05-16 23:00:00,L'humidité du sol,36.3,mV
+2025-05-17 03:00:00,L'humidité du sol,33.9,mV
+2025-05-17 04:00:00,L'humidité du sol,34.0,mV
+2025-05-17 05:00:00,L'humidité du sol,34.1,mV
+2025-05-17 06:00:00,L'humidité du sol,34.3,mV
+2025-05-17 07:00:00,L'humidité du sol,39.8,mV
+2025-05-17 08:00:00,L'humidité du sol,42.7,mV
+2025-05-17 09:00:00,L'humidité du sol,43.7,mV
+2025-05-17 10:00:00,L'humidité du sol,44.8,mV
+2025-05-17 11:00:00,L'humidité du sol,44.0,mV
+2025-05-17 12:00:00,L'humidité du sol,44.1,mV
+2025-05-17 13:00:00,L'humidité du sol,42.7,mV
+2025-05-17 14:00:00,L'humidité du sol,42.5,mV
+2025-05-17 15:00:00,L'humidité du sol,42.6,mV
+2025-05-16 01:00:00,Température,18.8,°C
+2025-05-16 02:00:00,Température,18.7,°C
+2025-05-16 03:00:00,Température,18.6,°C
+2025-05-16 04:00:00,Température,18.5,°C
+2025-05-16 05:00:00,Température,18.4,°C
+2025-05-16 06:00:00,Température,18.2,°C
+2025-05-16 07:00:00,Température,18.1,°C
+2025-05-16 08:00:00,Température,18.0,°C
+2025-05-16 11:00:00,Température,17.8,°C
+2025-05-16 13:00:00,Température,17.6,°C
+2025-05-16 15:00:00,Température,17.6,°C
+2025-05-16 17:00:00,Température,17.7,°C
+2025-05-16 19:00:00,Température,17.8,°C
+2025-05-16 21:00:00,Température,17.9,°C
+2025-05-16 22:00:00,Température,17.9,°C
+2025-05-16 23:00:00,Température,17.9,°C
+2025-05-17 03:00:00,Température,17.8,°C
+2025-05-17 04:00:00,Température,17.6,°C
+2025-05-17 05:00:00,Température,17.5,°C
+2025-05-17 06:00:00,Température,17.3,°C
+2025-05-17 07:00:00,Température,17.2,°C
+2025-05-17 08:00:00,Température,17.1,°C
+2025-05-17 09:00:00,Température,17.0,°C
+2025-05-17 10:00:00,Température,16.9,°C
+2025-05-17 11:00:00,Température,16.9,°C
+2025-05-17 12:00:00,Température,16.9,°C
+2025-05-17 13:00:00,Température,16.9,°C
+2025-05-17 14:00:00,Température,16.9,°C
+2025-05-17 15:00:00,Température,17.0,°C
+2025-05-16 01:00:00,Contenu volumétrique d'eau,1.1,%
+2025-05-16 02:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-16 03:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-16 04:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-16 05:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-16 06:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-16 07:00:00,Contenu volumétrique d'eau,1.3,%
+2025-05-16 08:00:00,Contenu volumétrique d'eau,1.5,%
+2025-05-16 11:00:00,Contenu volumétrique d'eau,1.8,%
+2025-05-16 13:00:00,Contenu volumétrique d'eau,1.6,%
+2025-05-16 15:00:00,Contenu volumétrique d'eau,1.8,%
+2025-05-16 17:00:00,Contenu volumétrique d'eau,1.7,%
+2025-05-16 19:00:00,Contenu volumétrique d'eau,1.6,%
+2025-05-16 21:00:00,Contenu volumétrique d'eau,1.4,%
+2025-05-16 22:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-16 23:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-17 03:00:00,Contenu volumétrique d'eau,1.1,%
+2025-05-17 04:00:00,Contenu volumétrique d'eau,1.1,%
+2025-05-17 05:00:00,Contenu volumétrique d'eau,1.1,%
+2025-05-17 06:00:00,Contenu volumétrique d'eau,1.2,%
+2025-05-17 07:00:00,Contenu volumétrique d'eau,1.6,%
+2025-05-17 08:00:00,Contenu volumétrique d'eau,1.8,%
+2025-05-17 09:00:00,Contenu volumétrique d'eau,1.9,%
+2025-05-17 10:00:00,Contenu volumétrique d'eau,2.0,%
+2025-05-17 11:00:00,Contenu volumétrique d'eau,2.2,%
+2025-05-17 12:00:00,Contenu volumétrique d'eau,2.4,%
+2025-05-17 13:00:00,Contenu volumétrique d'eau,2.5,%
+2025-05-17 14:00:00,Contenu volumétrique d'eau,2.7,%
+2025-05-17 15:00:00,Contenu volumétrique d'eau,2.7,%
+2025-05-16 01:00:00,L'humidité du sol,428.6,mV
+2025-05-16 02:00:00,L'humidité du sol,430.8,mV
+2025-05-16 03:00:00,L'humidité du sol,429.5,mV
+2025-05-16 04:00:00,L'humidité du sol,429.7,mV
+2025-05-16 05:00:00,L'humidité du sol,430.5,mV
+2025-05-16 06:00:00,L'humidité du sol,431.2,mV
+2025-05-16 07:00:00,L'humidité du sol,432.7,mV
+2025-05-16 08:00:00,L'humidité du sol,437.0,mV
+2025-05-16 11:00:00,L'humidité du sol,442.5,mV
+2025-05-16 13:00:00,L'humidité du sol,439.2,mV
+2025-05-16 15:00:00,L'humidité du sol,441.8,mV
+2025-05-16 17:00:00,L'humidité du sol,440.4,mV
+2025-05-16 19:00:00,L'humidité du sol,438.9,mV
+2025-05-16 01:00:00,Pression relative,339.0,hPa
+2025-05-16 02:00:00,Pression relative,339.0,hPa
+2025-05-16 03:00:00,Pression relative,338.0,hPa
+2025-05-16 04:00:00,Pression relative,338.0,hPa
+2025-05-16 05:00:00,Pression relative,338.0,hPa
+2025-05-16 06:00:00,Pression relative,339.0,hPa
+2025-05-16 07:00:00,Pression relative,339.0,hPa
+2025-05-16 08:00:00,Pression relative,338.0,hPa
+2025-05-16 09:00:00,Pression relative,338.0,hPa
+2025-05-16 10:00:00,Pression relative,339.0,hPa
+2025-05-16 11:00:00,Pression relative,338.0,hPa
+2025-05-16 12:00:00,Pression relative,338.0,hPa
+2025-05-16 13:00:00,Pression relative,338.0,hPa
+2025-05-16 14:00:00,Pression relative,338.0,hPa
+2025-05-16 15:00:00,Pression relative,337.0,hPa
+2025-05-16 16:00:00,Pression relative,337.0,hPa
+2025-05-16 17:00:00,Pression relative,337.0,hPa
+2025-05-16 18:00:00,Pression relative,337.0,hPa
+2025-05-16 19:00:00,Pression relative,337.0,hPa
+2025-05-16 20:00:00,Pression relative,338.0,hPa
+2025-05-16 21:00:00,Pression relative,338.0,hPa
+2025-05-16 22:00:00,Pression relative,338.0,hPa
+2025-05-16 23:00:00,Pression relative,338.0,hPa
+2025-05-17 00:00:00,Pression relative,338.0,hPa
+2025-05-17 01:00:00,Pression relative,337.0,hPa
+2025-05-17 02:00:00,Pression relative,336.0,hPa
+2025-05-17 03:00:00,Pression relative,336.0,hPa
+2025-05-17 04:00:00,Pression relative,336.0,hPa
+2025-05-17 05:00:00,Pression relative,336.0,hPa
+2025-05-17 06:00:00,Pression relative,336.0,hPa
+2025-05-17 07:00:00,Pression relative,336.0,hPa
+2025-05-17 08:00:00,Pression relative,336.0,hPa
+2025-05-17 09:00:00,Pression relative,336.0,hPa
+2025-05-17 10:00:00,Pression relative,335.0,hPa
+2025-05-17 11:00:00,Pression relative,335.0,hPa
+2025-05-17 12:00:00,Pression relative,335.0,hPa
+2025-05-17 13:00:00,Pression relative,335.0,hPa
+2025-05-17 14:00:00,Pression relative,334.0,hPa
+2025-05-17 15:00:00,Pression relative,334.0,hPa
+2025-05-16 01:00:00,Niveau du fluid,3.46,m
+2025-05-16 02:00:00,Niveau du fluid,3.45,m
+2025-05-16 03:00:00,Niveau du fluid,3.45,m
+2025-05-16 04:00:00,Niveau du fluid,3.45,m
+2025-05-16 05:00:00,Niveau du fluid,3.45,m
+2025-05-16 06:00:00,Niveau du fluid,3.45,m
+2025-05-16 07:00:00,Niveau du fluid,3.45,m
+2025-05-16 08:00:00,Niveau du fluid,3.45,m
+2025-05-16 09:00:00,Niveau du fluid,3.45,m
+2025-05-16 10:00:00,Niveau du fluid,3.45,m
+2025-05-16 11:00:00,Niveau du fluid,3.45,m
+2025-05-16 12:00:00,Niveau du fluid,3.45,m
+2025-05-16 13:00:00,Niveau du fluid,3.45,m
+2025-05-16 14:00:00,Niveau du fluid,3.44,m
+2025-05-16 15:00:00,Niveau du fluid,3.43,m
+2025-05-16 16:00:00,Niveau du fluid,3.44,m
+2025-05-16 17:00:00,Niveau du fluid,3.44,m
+2025-05-16 18:00:00,Niveau du fluid,3.43,m
+2025-05-16 19:00:00,Niveau du fluid,3.44,m
+2025-05-16 20:00:00,Niveau du fluid,3.44,m
+2025-05-16 21:00:00,Niveau du fluid,3.44,m
+2025-05-16 22:00:00,Niveau du fluid,3.45,m
+2025-05-16 23:00:00,Niveau du fluid,3.45,m
+2025-05-17 00:00:00,Niveau du fluid,3.44,m
+2025-05-17 01:00:00,Niveau du fluid,3.44,m
+2025-05-17 02:00:00,Niveau du fluid,3.43,m
+2025-05-17 03:00:00,Niveau du fluid,3.43,m
+2025-05-17 04:00:00,Niveau du fluid,3.43,m
+2025-05-17 05:00:00,Niveau du fluid,3.43,m
+2025-05-17 06:00:00,Niveau du fluid,3.43,m
+2025-05-17 07:00:00,Niveau du fluid,3.42,m
+2025-05-17 08:00:00,Niveau du fluid,3.42,m
+2025-05-17 09:00:00,Niveau du fluid,3.43,m
+2025-05-17 10:00:00,Niveau du fluid,3.42,m
+2025-05-17 11:00:00,Niveau du fluid,3.42,m
+2025-05-17 12:00:00,Niveau du fluid,3.41,m
+2025-05-17 13:00:00,Niveau du fluid,3.41,m
+2025-05-17 14:00:00,Niveau du fluid,3.41,m
+2025-05-17 15:00:00,Niveau du fluid,3.4,m

@@ -1,0 +1,121 @@
+mois,station,nombre_jours_pluvieux,precipitations_en_millimetres
+Septembre,Manoubia,3,52
+Septembre,CRDA Bouchoucha,4,63
+Septembre,Tunis Carthage,4,53
+Septembre,Pepiniere Gammarth,3,"62,5"
+Septembre,Belvedere,3,"67,4"
+Septembre,Sidi Hassine,4,"66,5"
+Septembre,SMVDA El Attar,2,49
+Septembre,SMVDA Borj Chakir,5,98
+Septembre,El Hrayria,4,75
+Septembre,Pepiniere El Agba,4,123
+Octobre,Manoubia,5,"103,2"
+Octobre,CRDA Bouchoucha,6,120
+Octobre,Tunis Carthage,5,"140,9"
+Octobre,Pepiniere Gammarth,6,"121,5"
+Octobre,Belvedere,5,"115,8"
+Octobre,Sidi Hassine,4,64
+Octobre,SMVDA El Attar,3,"36,5"
+Octobre,SMVDA Borj Chakir,4,44
+Octobre,El Hrayria,5,"73,5"
+Octobre,Pepiniere El Agba,4,66
+Novembre,Manoubia,9,"35,6"
+Novembre,CRDA Bouchoucha,14,41
+Novembre,Tunis Carthage,11,"34,4"
+Novembre,Pepiniere Gammarth,11,"53,5"
+Novembre,Belvedere,7,"19,7"
+Novembre,Sidi Hassine,12,29
+Novembre,SMVDA El Attar,2,"15,5"
+Novembre,SMVDA Borj Chakir,10,"29,5"
+Novembre,El Hrayria,11,"31,5"
+Novembre,Pepiniere El Agba,11,39
+Decembre,Manoubia,7,"60,3"
+Decembre,CRDA Bouchoucha,7,63
+Decembre,Tunis Carthage,7,"52,8"
+Decembre,Pepiniere Gammarth,7,"70,5"
+Decembre,Belvedere,7,71
+Decembre,Sidi Hassine,7,59
+Decembre,SMVDA El Attar,4,"47,8"
+Decembre,SMVDA Borj Chakir,8,51
+Decembre,El Hrayria,6,"66,6"
+Decembre,Pepiniere El Agba,7,"66,5"
+Janvier,Manoubia,2,"6,5"
+Janvier,CRDA Bouchoucha,2,7
+Janvier,Tunis Carthage,2,"6,4"
+Janvier,Pepiniere Gammarth,1,1
+Janvier,Belvedere,2,"10,3"
+Janvier,Sidi Hassine,2,"8,5"
+Janvier,SMVDA El Attar,1,19
+Janvier,SMVDA Borj Chakir,4,"16,5"
+Janvier,El Hrayria,2,9
+Janvier,Pepiniere El Agba,2,"7,5"
+Fevrier,Manoubia,1,8
+Fevrier,CRDA Bouchoucha,1,4
+Fevrier,Tunis Carthage,1,5
+Fevrier,Pepiniere Gammarth,1,"1,5"
+Fevrier,Belvedere,1,"1,5"
+Fevrier,Sidi Hassine,1,"5,5"
+Fevrier,SMVDA El Attar,1,"0,2"
+Fevrier,SMVDA Borj Chakir,1,5
+Fevrier,El Hrayria,1,6
+Fevrier,Pepiniere El Agba,1,"6,5"
+Mars,Manoubia,9,60
+Mars,CRDA Bouchoucha,9,62
+Mars,Tunis Carthage,7,"56,6"
+Mars,Pepiniere Gammarth,9,69
+Mars,Belvedere,8,"57,5"
+Mars,Sidi Hassine,8,57
+Mars,SMVDA El Attar,7,"74,2"
+Mars,SMVDA Borj Chakir,10,70
+Mars,El Hrayria,8,"73,7"
+Mars,Pepiniere El Agba,8,77
+Avril,Manoubia,8,"80,5"
+Avril,CRDA Bouchoucha,9,"104,5"
+Avril,Tunis Carthage,9,"109,8"
+Avril,Pepiniere Gammarth,7,80
+Avril,Belvedere,8,101
+Avril,Sidi Hassine,8,"107,3"
+Avril,SMVDA El Attar,2,"45,2"
+Avril,SMVDA Borj Chakir,8,99
+Avril,El Hrayria,7,"96,8"
+Avril,Pepiniere El Agba,7,104
+Mai,Manoubia,0,0
+Mai,CRDA Bouchoucha,0,0
+Mai,Tunis Carthage,0,0
+Mai,Pepiniere Gammarth,0,0
+Mai,Belvedere,0,0
+Mai,Sidi Hassine,0,0
+Mai,SMVDA El Attar,0,0
+Mai,SMVDA Borj Chakir,0,0
+Mai,El Hrayria,0,0
+Mai,Pepiniere El Agba,0,0
+Juin,Manoubia,1,"0,7"
+Juin,CRDA Bouchoucha,1,"0,5"
+Juin,Tunis Carthage,1,1
+Juin,Pepiniere Gammarth,1,3
+Juin,Belvedere,1,"1,5"
+Juin,Sidi Hassine,0,0
+Juin,SMVDA El Attar,1,1
+Juin,SMVDA Borj Chakir,0,0
+Juin,El Hrayria,1,2
+Juin,Pepiniere El Agba,0,0
+Juillet,Manoubia,0,0
+Juillet,CRDA Bouchoucha,0,0
+Juillet,Tunis Carthage,0,0
+Juillet,Pepiniere Gammarth,0,0
+Juillet,Belvedere,0,0
+Juillet,Sidi Hassine,0,0
+Juillet,SMVDA El Attar,0,0
+Juillet,SMVDA Borj Chakir,0,0
+Juillet,El Hrayria,0,0
+Juillet,Pepiniere El Agba,0,0
+Aout,Manoubia,0,0
+Aout,CRDA Bouchoucha,0,0
+Aout,Tunis Carthage,0,0
+Aout,Pepiniere Gammarth,0,0
+Aout,Belvedere,0,0
+Aout,Sidi Hassine,0,0
+Aout,SMVDA El Attar,0,0
+Aout,SMVDA Borj Chakir,0,0
+Aout,El Hrayria,0,0
+Aout,Pepiniere El Agba,0,0

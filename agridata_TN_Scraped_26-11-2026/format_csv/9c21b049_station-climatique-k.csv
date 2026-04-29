@@ -1,0 +1,73 @@
+﻿Date,nom_ar,nom_fr,unite,valeur
+2025-10-24 07:00:00,Point de Rosée,Point de Rosée,°c,10.0
+2025-10-24 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,15.0
+2025-10-24 07:00:00,Direction du vent,Direction du vent,Deg,268.4
+2025-10-24 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 07:00:00,Humidité relative,Humidité relative,%,58.9
+2025-10-24 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.8
+2025-10-24 07:00:00,Température,Température,°c,18.2
+2025-10-24 07:00:00,Vitesse du vent,Vitesse du vent,m/s,1.97
+2025-10-24 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 06:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 06:00:00,Point de Rosée,Point de Rosée,°c,10.1
+2025-10-24 06:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 06:00:00,Température,Température,°c,18.0
+2025-10-24 06:00:00,Direction du vent,Direction du vent,Deg,258.0
+2025-10-24 06:00:00,Vitesse du vent,Vitesse du vent,m/s,2.13
+2025-10-24 06:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 06:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.2
+2025-10-24 06:00:00,Humidité relative,Humidité relative,%,60.0
+2025-10-24 05:00:00,Vitesse du vent,Vitesse du vent,m/s,2.27
+2025-10-24 05:00:00,Température,Température,°c,17.5
+2025-10-24 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 05:00:00,Humidité relative,Humidité relative,%,62.1
+2025-10-24 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.2
+2025-10-24 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 05:00:00,Direction du vent,Direction du vent,Deg,261.3
+2025-10-24 05:00:00,Point de Rosée,Point de Rosée,°c,10.1
+2025-10-24 04:00:00,Humidité relative,Humidité relative,%,61.4
+2025-10-24 04:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 04:00:00,Vitesse du vent,Vitesse du vent,m/s,2.6
+2025-10-24 04:00:00,Direction du vent,Direction du vent,Deg,254.1
+2025-10-24 04:00:00,Température,Température,°c,17.6
+2025-10-24 04:00:00,Point de Rosée,Point de Rosée,°c,10.1
+2025-10-24 04:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.0
+2025-10-24 04:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 04:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 03:00:00,Humidité relative,Humidité relative,%,61.5
+2025-10-24 03:00:00,Direction du vent,Direction du vent,Deg,267.0
+2025-10-24 03:00:00,Vitesse du vent,Vitesse du vent,m/s,1.69
+2025-10-24 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 03:00:00,Point de Rosée,Point de Rosée,°c,10.0
+2025-10-24 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.3
+2025-10-24 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 03:00:00,Température,Température,°c,17.5
+2025-10-24 02:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 02:00:00,Humidité relative,Humidité relative,%,59.5
+2025-10-24 02:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 02:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 02:00:00,Vitesse du vent,Vitesse du vent,m/s,1.84
+2025-10-24 02:00:00,Point de Rosée,Point de Rosée,°c,10.5
+2025-10-24 02:00:00,Température,Température,°c,18.5
+2025-10-24 02:00:00,Direction du vent,Direction du vent,Deg,254.4
+2025-10-24 02:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.3
+2025-10-24 01:00:00,Vitesse du vent,Vitesse du vent,m/s,2.01
+2025-10-24 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 01:00:00,Humidité relative,Humidité relative,%,62.8
+2025-10-24 01:00:00,Température,Température,°c,18.1
+2025-10-24 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.4
+2025-10-24 01:00:00,Direction du vent,Direction du vent,Deg,262.7
+2025-10-24 01:00:00,Point de Rosée,Point de Rosée,°c,10.9
+2025-10-24 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 00:00:00,Direction du vent,Direction du vent,Deg,250.2
+2025-10-24 00:00:00,Point de Rosée,Point de Rosée,°c,10.7
+2025-10-24 00:00:00,Température,Température,°c,18.4
+2025-10-24 00:00:00,Pression atmosphérique,Pression atmosphérique,hPa,930.5
+2025-10-24 00:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-24 00:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,0.0
+2025-10-24 00:00:00,Vitesse du vent,Vitesse du vent,m/s,2.59
+2025-10-24 00:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-10-24 00:00:00,Humidité relative,Humidité relative,%,60.9

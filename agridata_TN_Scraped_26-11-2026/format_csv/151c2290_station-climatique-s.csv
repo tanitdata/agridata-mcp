@@ -1,0 +1,1045 @@
+﻿Date,nom_ar,nom_fr,unite,valeur
+2025-11-25 20:00:00,Vitesse du vent,Vitesse du vent,m/s,6.21
+2025-11-25 20:00:00,Direction du vent,Direction du vent,Deg,321.5
+2025-11-25 20:00:00,Température,Température,°c,13.3
+2025-11-25 20:00:00,Humidité relative,Humidité relative,%,66.2
+2025-11-25 20:00:00,Point de Rosée,Point de Rosée,°c,7.1
+2025-11-25 20:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-25 20:00:00,Pression atmosphérique,Pression atmosphérique,hPa,977.6
+2025-11-25 20:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 20:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 18:00:00,Direction du vent,Direction du vent,Deg,340.4
+2025-11-25 18:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 18:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 18:00:00,Pression atmosphérique,Pression atmosphérique,hPa,976.8
+2025-11-25 18:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-25 18:00:00,Point de Rosée,Point de Rosée,°c,7.1
+2025-11-25 18:00:00,Humidité relative,Humidité relative,%,64.6
+2025-11-25 18:00:00,Température,Température,°c,13.7
+2025-11-25 18:00:00,Vitesse du vent,Vitesse du vent,m/s,4.8
+2025-11-25 16:00:00,Direction du vent,Direction du vent,Deg,255.5
+2025-11-25 16:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 16:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 16:00:00,Pression atmosphérique,Pression atmosphérique,hPa,974.1
+2025-11-25 16:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,118.0
+2025-11-25 16:00:00,Point de Rosée,Point de Rosée,°c,2.6
+2025-11-25 16:00:00,Humidité relative,Humidité relative,%,26.6
+2025-11-25 16:00:00,Température,Température,°c,22.8
+2025-11-25 16:00:00,Vitesse du vent,Vitesse du vent,m/s,2.33
+2025-11-25 14:00:00,Direction du vent,Direction du vent,Deg,219.5
+2025-11-25 14:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 14:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 14:00:00,Pression atmosphérique,Pression atmosphérique,hPa,974.3
+2025-11-25 14:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,408.0
+2025-11-25 14:00:00,Point de Rosée,Point de Rosée,°c,2.6
+2025-11-25 14:00:00,Humidité relative,Humidité relative,%,24.6
+2025-11-25 14:00:00,Température,Température,°c,24.1
+2025-11-25 14:00:00,Vitesse du vent,Vitesse du vent,m/s,1.43
+2025-11-25 12:00:00,Vitesse du vent,Vitesse du vent,m/s,5.06
+2025-11-25 12:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 12:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 12:00:00,Pression atmosphérique,Pression atmosphérique,hPa,976.3
+2025-11-25 12:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,489.0
+2025-11-25 12:00:00,Point de Rosée,Point de Rosée,°c,0.0
+2025-11-25 12:00:00,Humidité relative,Humidité relative,%,23.3
+2025-11-25 12:00:00,Température,Température,°c,21.9
+2025-11-25 12:00:00,Direction du vent,Direction du vent,Deg,265.1
+2025-11-25 10:00:00,Vitesse du vent,Vitesse du vent,m/s,1.66
+2025-11-25 10:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 10:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 10:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.0
+2025-11-25 10:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,353.0
+2025-11-25 10:00:00,Point de Rosée,Point de Rosée,°c,-3.0
+2025-11-25 10:00:00,Humidité relative,Humidité relative,%,21.2
+2025-11-25 10:00:00,Température,Température,°c,19.7
+2025-11-25 10:00:00,Direction du vent,Direction du vent,Deg,314.1
+2025-11-25 08:00:00,Direction du vent,Direction du vent,Deg,185.1
+2025-11-25 08:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 08:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 08:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.6
+2025-11-25 08:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,61.0
+2025-11-25 08:00:00,Point de Rosée,Point de Rosée,°c,-2.7
+2025-11-25 08:00:00,Humidité relative,Humidité relative,%,29.5
+2025-11-25 08:00:00,Température,Température,°c,14.9
+2025-11-25 08:00:00,Vitesse du vent,Vitesse du vent,m/s,2.51
+2025-11-25 02:00:00,Vitesse du vent,Vitesse du vent,m/s,1.4
+2025-11-25 02:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.22
+2025-11-25 02:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 02:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.6
+2025-11-25 02:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-25 02:00:00,Point de Rosée,Point de Rosée,°c,-2.7
+2025-11-25 02:00:00,Humidité relative,Humidité relative,%,24.4
+2025-11-25 02:00:00,Température,Température,°c,17.8
+2025-11-25 02:00:00,Direction du vent,Direction du vent,Deg,261.0
+2025-11-25 00:00:00,Vitesse du vent,Vitesse du vent,m/s,1.31
+2025-11-25 00:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-25 00:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-25 00:00:00,Pression atmosphérique,Pression atmosphérique,hPa,981.5
+2025-11-25 00:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-25 00:00:00,Point de Rosée,Point de Rosée,°c,-3.0
+2025-11-25 00:00:00,Humidité relative,Humidité relative,%,30.1
+2025-11-25 00:00:00,Température,Température,°c,14.2
+2025-11-25 00:00:00,Direction du vent,Direction du vent,Deg,143.6
+2025-11-24 22:00:00,Direction du vent,Direction du vent,Deg,245.0
+2025-11-24 22:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 22:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 22:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.0
+2025-11-24 22:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-24 22:00:00,Point de Rosée,Point de Rosée,°c,-2.1
+2025-11-24 22:00:00,Humidité relative,Humidité relative,%,33.7
+2025-11-24 22:00:00,Température,Température,°c,13.5
+2025-11-24 22:00:00,Vitesse du vent,Vitesse du vent,m/s,0.48
+2025-11-24 20:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,1.0
+2025-11-24 20:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 20:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 20:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.1
+2025-11-24 20:00:00,Point de Rosée,Point de Rosée,°c,-1.6
+2025-11-24 20:00:00,Humidité relative,Humidité relative,%,36.3
+2025-11-24 20:00:00,Température,Température,°c,12.9
+2025-11-24 20:00:00,Direction du vent,Direction du vent,Deg,297.6
+2025-11-24 20:00:00,Vitesse du vent,Vitesse du vent,m/s,1.07
+2025-11-24 18:00:00,Vitesse du vent,Vitesse du vent,m/s,0.91
+2025-11-24 18:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 18:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 18:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.0
+2025-11-24 18:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-24 18:00:00,Point de Rosée,Point de Rosée,°c,2.2
+2025-11-24 18:00:00,Humidité relative,Humidité relative,%,49.1
+2025-11-24 18:00:00,Température,Température,°c,12.6
+2025-11-24 18:00:00,Direction du vent,Direction du vent,Deg,283.6
+2025-11-24 16:00:00,Direction du vent,Direction du vent,Deg,175.0
+2025-11-24 16:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 16:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 16:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.2
+2025-11-24 16:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,147.0
+2025-11-24 16:00:00,Point de Rosée,Point de Rosée,°c,-2.8
+2025-11-24 16:00:00,Humidité relative,Humidité relative,%,22.2
+2025-11-24 16:00:00,Température,Température,°c,19.2
+2025-11-24 16:00:00,Vitesse du vent,Vitesse du vent,m/s,0.9
+2025-11-24 14:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,411.0
+2025-11-24 14:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 14:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 14:00:00,Pression atmosphérique,Pression atmosphérique,hPa,983.3
+2025-11-24 14:00:00,Point de Rosée,Point de Rosée,°c,-2.4
+2025-11-24 14:00:00,Humidité relative,Humidité relative,%,23.6
+2025-11-24 14:00:00,Température,Température,°c,18.7
+2025-11-24 14:00:00,Direction du vent,Direction du vent,Deg,147.4
+2025-11-24 14:00:00,Vitesse du vent,Vitesse du vent,m/s,3.38
+2025-11-24 12:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.7
+2025-11-24 12:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,467.0
+2025-11-24 12:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 12:00:00,Point de Rosée,Point de Rosée,°c,-0.2
+2025-11-24 12:00:00,Vitesse du vent,Vitesse du vent,m/s,0.93
+2025-11-24 12:00:00,Humidité relative,Humidité relative,%,31.7
+2025-11-24 12:00:00,Température,Température,°c,16.6
+2025-11-24 12:00:00,Direction du vent,Direction du vent,Deg,89.4
+2025-11-24 12:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 10:00:00,Direction du vent,Direction du vent,Deg,6.5
+2025-11-24 10:00:00,Vitesse du vent,Vitesse du vent,m/s,0.78
+2025-11-24 10:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 10:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 10:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.9
+2025-11-24 10:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,181.0
+2025-11-24 10:00:00,Point de Rosée,Point de Rosée,°c,1.9
+2025-11-24 10:00:00,Humidité relative,Humidité relative,%,54.0
+2025-11-24 10:00:00,Température,Température,°c,10.8
+2025-11-24 08:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 08:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 08:00:00,Pression atmosphérique,Pression atmosphérique,hPa,988.4
+2025-11-24 08:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,177.0
+2025-11-24 08:00:00,Point de Rosée,Point de Rosée,°c,-1.9
+2025-11-24 08:00:00,Humidité relative,Humidité relative,%,51.4
+2025-11-24 08:00:00,Température,Température,°c,7.4
+2025-11-24 08:00:00,Direction du vent,Direction du vent,Deg,289.1
+2025-11-24 08:00:00,Vitesse du vent,Vitesse du vent,m/s,1.04
+2025-11-24 04:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 04:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 04:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.6
+2025-11-24 04:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-24 04:00:00,Point de Rosée,Point de Rosée,°c,-1.6
+2025-11-24 04:00:00,Humidité relative,Humidité relative,%,50.1
+2025-11-24 04:00:00,Température,Température,°c,8.1
+2025-11-24 04:00:00,Direction du vent,Direction du vent,Deg,314.8
+2025-11-24 04:00:00,Vitesse du vent,Vitesse du vent,m/s,1.24
+2025-11-24 02:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-24 02:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 02:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.5
+2025-11-24 02:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-24 02:00:00,Point de Rosée,Point de Rosée,°c,-1.7
+2025-11-24 02:00:00,Humidité relative,Humidité relative,%,48.5
+2025-11-24 02:00:00,Température,Température,°c,8.5
+2025-11-24 02:00:00,Direction du vent,Direction du vent,Deg,281.3
+2025-11-24 02:00:00,Vitesse du vent,Vitesse du vent,m/s,1.34
+2025-11-24 00:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-24 00:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-24 00:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.8
+2025-11-24 00:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-24 00:00:00,Point de Rosée,Point de Rosée,°c,-1.5
+2025-11-24 00:00:00,Humidité relative,Humidité relative,%,49.6
+2025-11-24 00:00:00,Température,Température,°c,8.3
+2025-11-24 00:00:00,Direction du vent,Direction du vent,Deg,298.6
+2025-11-24 00:00:00,Vitesse du vent,Vitesse du vent,m/s,2.62
+2025-11-23 20:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 20:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 20:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.9
+2025-11-23 20:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-23 20:00:00,Vitesse du vent,Vitesse du vent,m/s,1.96
+2025-11-23 20:00:00,Point de Rosée,Point de Rosée,°c,-0.6
+2025-11-23 20:00:00,Humidité relative,Humidité relative,%,49.2
+2025-11-23 20:00:00,Température,Température,°c,9.4
+2025-11-23 20:00:00,Direction du vent,Direction du vent,Deg,292.6
+2025-11-23 18:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-23 18:00:00,Vitesse du vent,Vitesse du vent,m/s,0.5
+2025-11-23 18:00:00,Direction du vent,Direction du vent,Deg,218.8
+2025-11-23 18:00:00,Température,Température,°c,12.0
+2025-11-23 18:00:00,Humidité relative,Humidité relative,%,41.9
+2025-11-23 18:00:00,Point de Rosée,Point de Rosée,°c,-0.5
+2025-11-23 18:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.9
+2025-11-23 18:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 18:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 16:00:00,Vitesse du vent,Vitesse du vent,m/s,1.12
+2025-11-23 16:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 16:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.1
+2025-11-23 16:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,115.0
+2025-11-23 16:00:00,Point de Rosée,Point de Rosée,°c,1.2
+2025-11-23 16:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 16:00:00,Humidité relative,Humidité relative,%,39.3
+2025-11-23 16:00:00,Température,Température,°c,15.0
+2025-11-23 16:00:00,Direction du vent,Direction du vent,Deg,357.3
+2025-11-23 14:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,411.0
+2025-11-23 14:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 14:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 14:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.9
+2025-11-23 14:00:00,Point de Rosée,Point de Rosée,°c,-0.9
+2025-11-23 14:00:00,Humidité relative,Humidité relative,%,32.6
+2025-11-23 14:00:00,Température,Température,°c,15.4
+2025-11-23 14:00:00,Direction du vent,Direction du vent,Deg,294.4
+2025-11-23 14:00:00,Vitesse du vent,Vitesse du vent,m/s,0.68
+2025-11-23 12:00:00,Direction du vent,Direction du vent,Deg,340.6
+2025-11-23 12:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 12:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 12:00:00,Pression atmosphérique,Pression atmosphérique,hPa,992.0
+2025-11-23 12:00:00,Vitesse du vent,Vitesse du vent,m/s,2.14
+2025-11-23 12:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,589.0
+2025-11-23 12:00:00,Point de Rosée,Point de Rosée,°c,1.0
+2025-11-23 12:00:00,Humidité relative,Humidité relative,%,38.4
+2025-11-23 12:00:00,Température,Température,°c,15.0
+2025-11-23 10:00:00,Pression atmosphérique,Pression atmosphérique,hPa,992.8
+2025-11-23 10:00:00,Direction du vent,Direction du vent,Deg,293.9
+2025-11-23 10:00:00,Température,Température,°c,13.1
+2025-11-23 10:00:00,Humidité relative,Humidité relative,%,42.6
+2025-11-23 10:00:00,Point de Rosée,Point de Rosée,°c,0.7
+2025-11-23 10:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,391.0
+2025-11-23 10:00:00,Vitesse du vent,Vitesse du vent,m/s,1.92
+2025-11-23 10:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 10:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 08:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 08:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 08:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.4
+2025-11-23 08:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,120.0
+2025-11-23 08:00:00,Point de Rosée,Point de Rosée,°c,0.9
+2025-11-23 08:00:00,Humidité relative,Humidité relative,%,50.9
+2025-11-23 08:00:00,Température,Température,°c,10.6
+2025-11-23 08:00:00,Direction du vent,Direction du vent,Deg,314.2
+2025-11-23 08:00:00,Vitesse du vent,Vitesse du vent,m/s,7.5
+2025-11-23 06:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 06:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 06:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.3
+2025-11-23 06:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-23 06:00:00,Point de Rosée,Point de Rosée,°c,1.4
+2025-11-23 06:00:00,Humidité relative,Humidité relative,%,55.0
+2025-11-23 06:00:00,Température,Température,°c,10.0
+2025-11-23 06:00:00,Direction du vent,Direction du vent,Deg,308.6
+2025-11-23 06:00:00,Vitesse du vent,Vitesse du vent,m/s,9.82
+2025-11-23 04:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.6
+2025-11-23 04:00:00,Vitesse du vent,Vitesse du vent,m/s,10.41
+2025-11-23 04:00:00,Direction du vent,Direction du vent,Deg,296.9
+2025-11-23 04:00:00,Température,Température,°c,10.3
+2025-11-23 04:00:00,Humidité relative,Humidité relative,%,54.5
+2025-11-23 04:00:00,Point de Rosée,Point de Rosée,°c,1.5
+2025-11-23 04:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-23 04:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 04:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 02:00:00,Direction du vent,Direction du vent,Deg,318.7
+2025-11-23 02:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.12
+2025-11-23 02:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 02:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.9
+2025-11-23 02:00:00,Vitesse du vent,Vitesse du vent,m/s,4.5
+2025-11-23 02:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-23 02:00:00,Point de Rosée,Point de Rosée,°c,0.9
+2025-11-23 02:00:00,Humidité relative,Humidité relative,%,51.9
+2025-11-23 02:00:00,Température,Température,°c,10.3
+2025-11-23 00:00:00,Vitesse du vent,Vitesse du vent,m/s,7.79
+2025-11-23 00:00:00,Direction du vent,Direction du vent,Deg,303.4
+2025-11-23 00:00:00,Température,Température,°c,9.9
+2025-11-23 00:00:00,Humidité relative,Humidité relative,%,54.7
+2025-11-23 00:00:00,Point de Rosée,Point de Rosée,°c,1.2
+2025-11-23 00:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-23 00:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.9
+2025-11-23 00:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-23 00:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 22:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 22:00:00,Vitesse du vent,Vitesse du vent,m/s,5.75
+2025-11-22 22:00:00,Direction du vent,Direction du vent,Deg,300.1
+2025-11-22 22:00:00,Température,Température,°c,9.2
+2025-11-22 22:00:00,Humidité relative,Humidité relative,%,57.7
+2025-11-22 22:00:00,Point de Rosée,Point de Rosée,°c,1.3
+2025-11-22 22:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-22 22:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.1
+2025-11-22 22:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 20:00:00,Point de Rosée,Point de Rosée,°c,0.6
+2025-11-22 20:00:00,Température,Température,°c,9.7
+2025-11-22 20:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-22 20:00:00,Direction du vent,Direction du vent,Deg,264.6
+2025-11-22 20:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.4
+2025-11-22 20:00:00,Humidité relative,Humidité relative,%,53.2
+2025-11-22 20:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 20:00:00,Vitesse du vent,Vitesse du vent,m/s,2.75
+2025-11-22 20:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 19:00:00,Vitesse du vent,Vitesse du vent,m/s,5.93
+2025-11-22 19:00:00,Direction du vent,Direction du vent,Deg,275.2
+2025-11-22 19:00:00,Température,Température,°c,10.1
+2025-11-22 19:00:00,Humidité relative,Humidité relative,%,50.9
+2025-11-22 19:00:00,Point de Rosée,Point de Rosée,°c,0.4
+2025-11-22 19:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-22 19:00:00,Pression atmosphérique,Pression atmosphérique,hPa,988.2
+2025-11-22 19:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 19:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 17:00:00,Vitesse du vent,Vitesse du vent,m/s,4.38
+2025-11-22 17:00:00,Direction du vent,Direction du vent,Deg,279.5
+2025-11-22 17:00:00,Température,Température,°c,10.5
+2025-11-22 17:00:00,Humidité relative,Humidité relative,%,46.1
+2025-11-22 17:00:00,Point de Rosée,Point de Rosée,°c,-0.5
+2025-11-22 17:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,6.0
+2025-11-22 17:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.8
+2025-11-22 17:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 17:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 15:00:00,Humidité relative,Humidité relative,%,37.7
+2025-11-22 15:00:00,Vitesse du vent,Vitesse du vent,m/s,6.58
+2025-11-22 15:00:00,Direction du vent,Direction du vent,Deg,272.3
+2025-11-22 15:00:00,Température,Température,°c,11.8
+2025-11-22 15:00:00,Point de Rosée,Point de Rosée,°c,-2.0
+2025-11-22 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,51.0
+2025-11-22 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.6
+2025-11-22 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 13:00:00,Vitesse du vent,Vitesse du vent,m/s,5.0
+2025-11-22 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.9
+2025-11-22 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,508.0
+2025-11-22 13:00:00,Point de Rosée,Point de Rosée,°c,-0.9
+2025-11-22 13:00:00,Humidité relative,Humidité relative,%,39.7
+2025-11-22 13:00:00,Température,Température,°c,12.3
+2025-11-22 13:00:00,Direction du vent,Direction du vent,Deg,305.5
+2025-11-22 11:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 11:00:00,Vitesse du vent,Vitesse du vent,m/s,8.11
+2025-11-22 11:00:00,Direction du vent,Direction du vent,Deg,270.0
+2025-11-22 11:00:00,Température,Température,°c,10.6
+2025-11-22 11:00:00,Humidité relative,Humidité relative,%,43.7
+2025-11-22 11:00:00,Point de Rosée,Point de Rosée,°c,-1.1
+2025-11-22 11:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,517.0
+2025-11-22 11:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.8
+2025-11-22 11:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.4
+2025-11-22 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,299.0
+2025-11-22 09:00:00,Point de Rosée,Point de Rosée,°c,-0.6
+2025-11-22 09:00:00,Humidité relative,Humidité relative,%,51.7
+2025-11-22 09:00:00,Température,Température,°c,8.7
+2025-11-22 09:00:00,Direction du vent,Direction du vent,Deg,295.1
+2025-11-22 09:00:00,Vitesse du vent,Vitesse du vent,m/s,8.78
+2025-11-22 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.4
+2025-11-22 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,3.0
+2025-11-22 07:00:00,Point de Rosée,Point de Rosée,°c,-2.1
+2025-11-22 07:00:00,Humidité relative,Humidité relative,%,47.8
+2025-11-22 07:00:00,Température,Température,°c,8.2
+2025-11-22 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 07:00:00,Direction du vent,Direction du vent,Deg,283.1
+2025-11-22 07:00:00,Vitesse du vent,Vitesse du vent,m/s,6.04
+2025-11-22 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-22 05:00:00,Vitesse du vent,Vitesse du vent,m/s,4.47
+2025-11-22 05:00:00,Direction du vent,Direction du vent,Deg,283.4
+2025-11-22 05:00:00,Température,Température,°c,7.8
+2025-11-22 05:00:00,Humidité relative,Humidité relative,%,48.5
+2025-11-22 05:00:00,Point de Rosée,Point de Rosée,°c,-2.3
+2025-11-22 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.7
+2025-11-22 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 03:00:00,Vitesse du vent,Vitesse du vent,m/s,4.7
+2025-11-22 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.2
+2025-11-22 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-22 03:00:00,Point de Rosée,Point de Rosée,°c,-1.0
+2025-11-22 03:00:00,Humidité relative,Humidité relative,%,50.6
+2025-11-22 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 03:00:00,Température,Température,°c,8.5
+2025-11-22 03:00:00,Direction du vent,Direction du vent,Deg,295.0
+2025-11-22 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-22 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.93
+2025-11-22 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-22 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,983.9
+2025-11-22 01:00:00,Point de Rosée,Point de Rosée,°c,0.3
+2025-11-22 01:00:00,Humidité relative,Humidité relative,%,54.7
+2025-11-22 01:00:00,Température,Température,°c,9.0
+2025-11-22 01:00:00,Direction du vent,Direction du vent,Deg,301.1
+2025-11-22 01:00:00,Vitesse du vent,Vitesse du vent,m/s,8.07
+2025-11-21 23:00:00,Direction du vent,Direction du vent,Deg,269.8
+2025-11-21 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.0
+2025-11-21 23:00:00,Vitesse du vent,Vitesse du vent,m/s,4.88
+2025-11-21 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-21 23:00:00,Point de Rosée,Point de Rosée,°c,1.7
+2025-11-21 23:00:00,Humidité relative,Humidité relative,%,57.5
+2025-11-21 23:00:00,Température,Température,°c,9.7
+2025-11-21 21:00:00,Humidité relative,Humidité relative,%,51.0
+2025-11-21 21:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 21:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 21:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.6
+2025-11-21 21:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-21 21:00:00,Point de Rosée,Point de Rosée,°c,1.3
+2025-11-21 21:00:00,Vitesse du vent,Vitesse du vent,m/s,7.62
+2025-11-21 21:00:00,Température,Température,°c,11.1
+2025-11-21 21:00:00,Direction du vent,Direction du vent,Deg,305.3
+2025-11-21 19:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 19:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 19:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.5
+2025-11-21 19:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-21 19:00:00,Point de Rosée,Point de Rosée,°c,3.8
+2025-11-21 19:00:00,Humidité relative,Humidité relative,%,55.6
+2025-11-21 19:00:00,Température,Température,°c,12.4
+2025-11-21 19:00:00,Direction du vent,Direction du vent,Deg,297.5
+2025-11-21 19:00:00,Vitesse du vent,Vitesse du vent,m/s,4.2
+2025-11-21 17:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 17:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 17:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.4
+2025-11-21 17:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,6.0
+2025-11-21 17:00:00,Point de Rosée,Point de Rosée,°c,0.7
+2025-11-21 17:00:00,Humidité relative,Humidité relative,%,36.4
+2025-11-21 17:00:00,Température,Température,°c,15.6
+2025-11-21 17:00:00,Direction du vent,Direction du vent,Deg,276.6
+2025-11-21 17:00:00,Vitesse du vent,Vitesse du vent,m/s,1.6
+2025-11-21 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.8
+2025-11-21 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,84.0
+2025-11-21 15:00:00,Point de Rosée,Point de Rosée,°c,1.2
+2025-11-21 15:00:00,Humidité relative,Humidité relative,%,35.4
+2025-11-21 15:00:00,Température,Température,°c,16.6
+2025-11-21 15:00:00,Direction du vent,Direction du vent,Deg,315.1
+2025-11-21 15:00:00,Vitesse du vent,Vitesse du vent,m/s,2.76
+2025-11-21 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.0
+2025-11-21 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,519.0
+2025-11-21 13:00:00,Point de Rosée,Point de Rosée,°c,3.7
+2025-11-21 13:00:00,Humidité relative,Humidité relative,%,41.9
+2025-11-21 13:00:00,Température,Température,°c,16.7
+2025-11-21 13:00:00,Direction du vent,Direction du vent,Deg,304.0
+2025-11-21 13:00:00,Vitesse du vent,Vitesse du vent,m/s,6.42
+2025-11-21 11:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 11:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 11:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.9
+2025-11-21 11:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,497.0
+2025-11-21 11:00:00,Point de Rosée,Point de Rosée,°c,4.1
+2025-11-21 11:00:00,Humidité relative,Humidité relative,%,44.4
+2025-11-21 11:00:00,Température,Température,°c,16.3
+2025-11-21 11:00:00,Direction du vent,Direction du vent,Deg,343.1
+2025-11-21 11:00:00,Vitesse du vent,Vitesse du vent,m/s,1.54
+2025-11-21 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 09:00:00,Vitesse du vent,Vitesse du vent,m/s,8.22
+2025-11-21 09:00:00,Direction du vent,Direction du vent,Deg,303.9
+2025-11-21 09:00:00,Température,Température,°c,14.0
+2025-11-21 09:00:00,Humidité relative,Humidité relative,%,52.3
+2025-11-21 09:00:00,Point de Rosée,Point de Rosée,°c,4.4
+2025-11-21 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,285.0
+2025-11-21 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.2
+2025-11-21 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 07:00:00,Point de Rosée,Point de Rosée,°c,3.8
+2025-11-21 07:00:00,Vitesse du vent,Vitesse du vent,m/s,4.37
+2025-11-21 07:00:00,Direction du vent,Direction du vent,Deg,265.0
+2025-11-21 07:00:00,Température,Température,°c,13.3
+2025-11-21 07:00:00,Humidité relative,Humidité relative,%,52.5
+2025-11-21 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,2.0
+2025-11-21 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.4
+2025-11-21 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 05:00:00,Vitesse du vent,Vitesse du vent,m/s,1.32
+2025-11-21 05:00:00,Direction du vent,Direction du vent,Deg,255.1
+2025-11-21 05:00:00,Température,Température,°c,13.9
+2025-11-21 05:00:00,Humidité relative,Humidité relative,%,48.4
+2025-11-21 05:00:00,Point de Rosée,Point de Rosée,°c,3.2
+2025-11-21 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-21 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.7
+2025-11-21 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 03:00:00,Direction du vent,Direction du vent,Deg,19.1
+2025-11-21 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.6
+2025-11-21 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-21 03:00:00,Point de Rosée,Point de Rosée,°c,5.4
+2025-11-21 03:00:00,Humidité relative,Humidité relative,%,61.1
+2025-11-21 03:00:00,Température,Température,°c,12.7
+2025-11-21 03:00:00,Vitesse du vent,Vitesse du vent,m/s,0.42
+2025-11-21 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.1
+2025-11-21 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.9
+2025-11-21 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-21 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-21 01:00:00,Point de Rosée,Point de Rosée,°c,5.9
+2025-11-21 01:00:00,Humidité relative,Humidité relative,%,53.7
+2025-11-21 01:00:00,Température,Température,°c,15.2
+2025-11-21 01:00:00,Direction du vent,Direction du vent,Deg,239.6
+2025-11-21 01:00:00,Vitesse du vent,Vitesse du vent,m/s,1.37
+2025-11-20 23:00:00,Vitesse du vent,Vitesse du vent,m/s,2.8
+2025-11-20 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.5
+2025-11-20 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-20 23:00:00,Point de Rosée,Point de Rosée,°c,8.4
+2025-11-20 23:00:00,Humidité relative,Humidité relative,%,63.7
+2025-11-20 23:00:00,Température,Température,°c,15.3
+2025-11-20 23:00:00,Direction du vent,Direction du vent,Deg,297.8
+2025-11-20 21:00:00,Direction du vent,Direction du vent,Deg,297.7
+2025-11-20 21:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 21:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 21:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.9
+2025-11-20 21:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-20 21:00:00,Point de Rosée,Point de Rosée,°c,7.0
+2025-11-20 21:00:00,Humidité relative,Humidité relative,%,53.3
+2025-11-20 21:00:00,Température,Température,°c,16.5
+2025-11-20 21:00:00,Vitesse du vent,Vitesse du vent,m/s,1.61
+2025-11-20 19:00:00,Température,Température,°c,17.7
+2025-11-20 19:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 19:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 19:00:00,Vitesse du vent,Vitesse du vent,m/s,1.2
+2025-11-20 19:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.2
+2025-11-20 19:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-20 19:00:00,Point de Rosée,Point de Rosée,°c,3.3
+2025-11-20 19:00:00,Humidité relative,Humidité relative,%,38.3
+2025-11-20 19:00:00,Direction du vent,Direction du vent,Deg,285.7
+2025-11-20 17:00:00,Vitesse du vent,Vitesse du vent,m/s,1.66
+2025-11-20 17:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 17:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 17:00:00,Pression atmosphérique,Pression atmosphérique,hPa,977.7
+2025-11-20 17:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,4.0
+2025-11-20 17:00:00,Point de Rosée,Point de Rosée,°c,2.5
+2025-11-20 17:00:00,Humidité relative,Humidité relative,%,30.1
+2025-11-20 17:00:00,Température,Température,°c,20.6
+2025-11-20 17:00:00,Direction du vent,Direction du vent,Deg,259.5
+2025-11-20 15:00:00,Vitesse du vent,Vitesse du vent,m/s,2.24
+2025-11-20 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,977.5
+2025-11-20 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,268.0
+2025-11-20 15:00:00,Point de Rosée,Point de Rosée,°c,4.1
+2025-11-20 15:00:00,Humidité relative,Humidité relative,%,32.3
+2025-11-20 15:00:00,Température,Température,°c,21.4
+2025-11-20 15:00:00,Direction du vent,Direction du vent,Deg,295.2
+2025-11-20 13:00:00,Direction du vent,Direction du vent,Deg,178.6
+2025-11-20 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.7
+2025-11-20 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,586.0
+2025-11-20 13:00:00,Point de Rosée,Point de Rosée,°c,4.5
+2025-11-20 13:00:00,Humidité relative,Humidité relative,%,30.5
+2025-11-20 13:00:00,Température,Température,°c,22.7
+2025-11-20 13:00:00,Vitesse du vent,Vitesse du vent,m/s,0.82
+2025-11-20 09:00:00,Direction du vent,Direction du vent,Deg,146.2
+2025-11-20 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,981.3
+2025-11-20 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,296.0
+2025-11-20 09:00:00,Point de Rosée,Point de Rosée,°c,7.6
+2025-11-20 09:00:00,Humidité relative,Humidité relative,%,54.2
+2025-11-20 09:00:00,Température,Température,°c,16.9
+2025-11-20 09:00:00,Vitesse du vent,Vitesse du vent,m/s,2.23
+2025-11-20 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,3.0
+2025-11-20 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,981.2
+2025-11-20 07:00:00,Point de Rosée,Point de Rosée,°c,6.0
+2025-11-20 07:00:00,Humidité relative,Humidité relative,%,72.0
+2025-11-20 07:00:00,Température,Température,°c,10.8
+2025-11-20 07:00:00,Direction du vent,Direction du vent,Deg,280.0
+2025-11-20 07:00:00,Vitesse du vent,Vitesse du vent,m/s,1.14
+2025-11-20 05:00:00,Vitesse du vent,Vitesse du vent,m/s,1.45
+2025-11-20 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,981.3
+2025-11-20 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-20 05:00:00,Point de Rosée,Point de Rosée,°c,5.9
+2025-11-20 05:00:00,Humidité relative,Humidité relative,%,71.7
+2025-11-20 05:00:00,Température,Température,°c,10.8
+2025-11-20 05:00:00,Direction du vent,Direction du vent,Deg,273.9
+2025-11-20 03:00:00,Direction du vent,Direction du vent,Deg,275.0
+2025-11-20 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.1
+2025-11-20 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-20 03:00:00,Point de Rosée,Point de Rosée,°c,5.3
+2025-11-20 03:00:00,Humidité relative,Humidité relative,%,68.0
+2025-11-20 03:00:00,Température,Température,°c,11.0
+2025-11-20 03:00:00,Vitesse du vent,Vitesse du vent,m/s,1.72
+2025-11-20 01:00:00,Température,Température,°c,11.6
+2025-11-20 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.4
+2025-11-20 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-20 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.6
+2025-11-20 01:00:00,Vitesse du vent,Vitesse du vent,m/s,1.0
+2025-11-20 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-20 01:00:00,Point de Rosée,Point de Rosée,°c,5.3
+2025-11-20 01:00:00,Humidité relative,Humidité relative,%,65.5
+2025-11-20 01:00:00,Direction du vent,Direction du vent,Deg,266.2
+2025-11-19 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.0
+2025-11-19 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-19 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,983.1
+2025-11-19 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-19 23:00:00,Point de Rosée,Point de Rosée,°c,4.7
+2025-11-19 23:00:00,Humidité relative,Humidité relative,%,60.7
+2025-11-19 23:00:00,Température,Température,°c,12.1
+2025-11-19 23:00:00,Direction du vent,Direction du vent,Deg,250.9
+2025-11-19 23:00:00,Vitesse du vent,Vitesse du vent,m/s,0.56
+2025-11-19 21:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-19 21:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.7
+2025-11-19 21:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-19 21:00:00,Point de Rosée,Point de Rosée,°c,6.3
+2025-11-19 21:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.0
+2025-11-19 21:00:00,Humidité relative,Humidité relative,%,53.9
+2025-11-19 21:00:00,Température,Température,°c,15.6
+2025-11-19 21:00:00,Direction du vent,Direction du vent,Deg,10.0
+2025-11-19 21:00:00,Vitesse du vent,Vitesse du vent,m/s,0.38
+2025-11-19 19:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.0
+2025-11-19 19:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-19 19:00:00,Pression atmosphérique,Pression atmosphérique,hPa,981.9
+2025-11-19 19:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-19 19:00:00,Point de Rosée,Point de Rosée,°c,6.3
+2025-11-19 19:00:00,Humidité relative,Humidité relative,%,52.3
+2025-11-19 19:00:00,Température,Température,°c,16.1
+2025-11-19 19:00:00,Direction du vent,Direction du vent,Deg,341.2
+2025-11-19 19:00:00,Vitesse du vent,Vitesse du vent,m/s,2.61
+2025-11-19 17:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.0
+2025-11-19 17:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-19 17:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.7
+2025-11-19 17:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,6.0
+2025-11-19 17:00:00,Point de Rosée,Point de Rosée,°c,3.6
+2025-11-19 17:00:00,Humidité relative,Humidité relative,%,38.7
+2025-11-19 17:00:00,Température,Température,°c,17.9
+2025-11-19 17:00:00,Direction du vent,Direction du vent,Deg,354.6
+2025-11-19 17:00:00,Vitesse du vent,Vitesse du vent,m/s,0.64
+2025-11-19 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.0
+2025-11-19 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-19 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.4
+2025-11-19 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,261.0
+2025-11-19 15:00:00,Point de Rosée,Point de Rosée,°c,4.3
+2025-11-19 15:00:00,Humidité relative,Humidité relative,%,36.5
+2025-11-19 15:00:00,Température,Température,°c,19.6
+2025-11-19 15:00:00,Direction du vent,Direction du vent,Deg,349.7
+2025-11-19 15:00:00,Vitesse du vent,Vitesse du vent,m/s,2.82
+2025-11-19 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.0
+2025-11-19 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-19 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.9
+2025-11-19 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,496.0
+2025-11-19 13:00:00,Point de Rosée,Point de Rosée,°c,4.5
+2025-11-19 13:00:00,Humidité relative,Humidité relative,%,36.6
+2025-11-19 13:00:00,Température,Température,°c,19.8
+2025-11-19 13:00:00,Direction du vent,Direction du vent,Deg,20.0
+2025-11-19 13:00:00,Vitesse du vent,Vitesse du vent,m/s,0.91
+2025-11-18 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.39
+2025-11-18 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-18 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,978.9
+2025-11-18 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-18 05:00:00,Point de Rosée,Point de Rosée,°c,10.4
+2025-11-18 05:00:00,Humidité relative,Humidité relative,%,70.2
+2025-11-18 05:00:00,Température,Température,°c,15.8
+2025-11-18 05:00:00,Direction du vent,Direction du vent,Deg,359.3
+2025-11-18 05:00:00,Vitesse du vent,Vitesse du vent,m/s,3.59
+2025-11-18 03:00:00,Point de Rosée,Point de Rosée,°c,10.1
+2025-11-18 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.39
+2025-11-18 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-18 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.4
+2025-11-18 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-18 03:00:00,Humidité relative,Humidité relative,%,63.9
+2025-11-18 03:00:00,Température,Température,°c,17.0
+2025-11-18 03:00:00,Direction du vent,Direction du vent,Deg,189.5
+2025-11-18 03:00:00,Vitesse du vent,Vitesse du vent,m/s,1.79
+2025-11-18 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.39
+2025-11-18 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-18 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.0
+2025-11-18 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-18 01:00:00,Point de Rosée,Point de Rosée,°c,8.4
+2025-11-18 01:00:00,Humidité relative,Humidité relative,%,50.1
+2025-11-18 01:00:00,Température,Température,°c,19.0
+2025-11-18 01:00:00,Direction du vent,Direction du vent,Deg,280.4
+2025-11-18 01:00:00,Vitesse du vent,Vitesse du vent,m/s,4.16
+2025-11-17 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,3.65
+2025-11-17 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-17 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.2
+2025-11-17 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-17 05:00:00,Point de Rosée,Point de Rosée,°c,5.5
+2025-11-17 05:00:00,Humidité relative,Humidité relative,%,46.6
+2025-11-17 05:00:00,Température,Température,°c,17.0
+2025-11-17 05:00:00,Direction du vent,Direction du vent,Deg,305.7
+2025-11-17 05:00:00,Vitesse du vent,Vitesse du vent,m/s,1.18
+2025-11-16 13:00:00,Vitesse du vent,Vitesse du vent,m/s,3.87
+2025-11-16 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-16 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-16 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.7
+2025-11-16 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,530.0
+2025-11-16 13:00:00,Point de Rosée,Point de Rosée,°c,-0.5
+2025-11-16 13:00:00,Humidité relative,Humidité relative,%,14.0
+2025-11-16 13:00:00,Température,Température,°c,29.8
+2025-11-16 13:00:00,Direction du vent,Direction du vent,Deg,177.1
+2025-11-16 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-16 09:00:00,Vitesse du vent,Vitesse du vent,m/s,2.23
+2025-11-16 09:00:00,Direction du vent,Direction du vent,Deg,65.7
+2025-11-16 09:00:00,Température,Température,°c,20.7
+2025-11-16 09:00:00,Humidité relative,Humidité relative,%,32.2
+2025-11-16 09:00:00,Point de Rosée,Point de Rosée,°c,3.5
+2025-11-16 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,298.0
+2025-11-16 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,983.1
+2025-11-16 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-16 07:00:00,Vitesse du vent,Vitesse du vent,m/s,1.13
+2025-11-16 07:00:00,Direction du vent,Direction du vent,Deg,321.6
+2025-11-16 07:00:00,Température,Température,°c,15.5
+2025-11-16 07:00:00,Humidité relative,Humidité relative,%,45.8
+2025-11-16 07:00:00,Point de Rosée,Point de Rosée,°c,3.9
+2025-11-16 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,3.0
+2025-11-16 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.8
+2025-11-16 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-16 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-15 23:00:00,Vitesse du vent,Vitesse du vent,m/s,1.98
+2025-11-15 23:00:00,Direction du vent,Direction du vent,Deg,273.1
+2025-11-15 23:00:00,Température,Température,°c,16.8
+2025-11-15 23:00:00,Humidité relative,Humidité relative,%,28.9
+2025-11-15 23:00:00,Point de Rosée,Point de Rosée,°c,-1.3
+2025-11-15 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-15 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.0
+2025-11-15 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-15 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-15 09:00:00,Vitesse du vent,Vitesse du vent,m/s,1.0
+2025-11-15 09:00:00,Direction du vent,Direction du vent,Deg,141.7
+2025-11-15 09:00:00,Température,Température,°c,22.3
+2025-11-15 09:00:00,Humidité relative,Humidité relative,%,18.7
+2025-11-15 09:00:00,Point de Rosée,Point de Rosée,°c,-2.6
+2025-11-15 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,186.0
+2025-11-15 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.9
+2025-11-15 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-15 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-15 07:00:00,Point de Rosée,Point de Rosée,°c,-1.9
+2025-11-15 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-15 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,3.0
+2025-11-15 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.9
+2025-11-15 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-15 07:00:00,Humidité relative,Humidité relative,%,31.7
+2025-11-15 07:00:00,Température,Température,°c,14.7
+2025-11-15 07:00:00,Direction du vent,Direction du vent,Deg,288.4
+2025-11-15 07:00:00,Vitesse du vent,Vitesse du vent,m/s,2.03
+2025-11-15 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-15 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-15 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.4
+2025-11-15 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-15 03:00:00,Point de Rosée,Point de Rosée,°c,3.8
+2025-11-15 03:00:00,Humidité relative,Humidité relative,%,46.7
+2025-11-15 03:00:00,Température,Température,°c,15.1
+2025-11-15 03:00:00,Direction du vent,Direction du vent,Deg,352.0
+2025-11-15 03:00:00,Vitesse du vent,Vitesse du vent,m/s,1.05
+2025-11-15 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.37
+2025-11-15 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-15 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.7
+2025-11-15 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-15 01:00:00,Point de Rosée,Point de Rosée,°c,-1.1
+2025-11-15 01:00:00,Humidité relative,Humidité relative,%,31.0
+2025-11-15 01:00:00,Température,Température,°c,15.9
+2025-11-15 01:00:00,Direction du vent,Direction du vent,Deg,28.7
+2025-11-15 01:00:00,Vitesse du vent,Vitesse du vent,m/s,0.66
+2025-11-14 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.64
+2025-11-14 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-14 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.6
+2025-11-14 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-14 23:00:00,Point de Rosée,Point de Rosée,°c,-1.9
+2025-11-14 23:00:00,Humidité relative,Humidité relative,%,23.7
+2025-11-14 23:00:00,Température,Température,°c,19.2
+2025-11-14 23:00:00,Direction du vent,Direction du vent,Deg,213.2
+2025-11-14 23:00:00,Vitesse du vent,Vitesse du vent,m/s,0.51
+2025-11-14 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.64
+2025-11-14 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-14 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.1
+2025-11-14 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,557.0
+2025-11-14 13:00:00,Point de Rosée,Point de Rosée,°c,-2.2
+2025-11-14 13:00:00,Humidité relative,Humidité relative,%,15.7
+2025-11-14 13:00:00,Température,Température,°c,25.6
+2025-11-14 13:00:00,Direction du vent,Direction du vent,Deg,168.2
+2025-11-14 13:00:00,Vitesse du vent,Vitesse du vent,m/s,3.8
+2025-11-14 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.64
+2025-11-14 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-14 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.0
+2025-11-14 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-14 05:00:00,Point de Rosée,Point de Rosée,°c,2.6
+2025-11-14 05:00:00,Humidité relative,Humidité relative,%,57.8
+2025-11-14 05:00:00,Température,Température,°c,10.6
+2025-11-14 05:00:00,Direction du vent,Direction du vent,Deg,291.8
+2025-11-14 05:00:00,Vitesse du vent,Vitesse du vent,m/s,1.56
+2025-11-14 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.64
+2025-11-14 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-14 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.6
+2025-11-14 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-14 01:00:00,Point de Rosée,Point de Rosée,°c,4.2
+2025-11-14 01:00:00,Humidité relative,Humidité relative,%,64.0
+2025-11-14 01:00:00,Température,Température,°c,10.8
+2025-11-14 01:00:00,Direction du vent,Direction du vent,Deg,303.1
+2025-11-14 01:00:00,Vitesse du vent,Vitesse du vent,m/s,1.27
+2025-11-13 15:00:00,Point de Rosée,Point de Rosée,°c,3.0
+2025-11-13 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.04
+2025-11-13 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-13 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,989.1
+2025-11-13 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,279.0
+2025-11-13 15:00:00,Humidité relative,Humidité relative,%,24.2
+2025-11-13 15:00:00,Température,Température,°c,24.8
+2025-11-13 15:00:00,Direction du vent,Direction du vent,Deg,193.4
+2025-11-13 15:00:00,Vitesse du vent,Vitesse du vent,m/s,4.22
+2025-11-13 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-13 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.2
+2025-11-13 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,524.0
+2025-11-13 13:00:00,Point de Rosée,Point de Rosée,°c,3.9
+2025-11-13 13:00:00,Humidité relative,Humidité relative,%,27.4
+2025-11-13 13:00:00,Température,Température,°c,23.8
+2025-11-13 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.04
+2025-11-13 13:00:00,Direction du vent,Direction du vent,Deg,166.9
+2025-11-13 13:00:00,Vitesse du vent,Vitesse du vent,m/s,3.22
+2025-11-13 11:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.04
+2025-11-13 11:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-13 11:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.9
+2025-11-13 11:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,530.0
+2025-11-13 11:00:00,Point de Rosée,Point de Rosée,°c,7.6
+2025-11-13 11:00:00,Humidité relative,Humidité relative,%,47.0
+2025-11-13 11:00:00,Température,Température,°c,19.2
+2025-11-13 11:00:00,Direction du vent,Direction du vent,Deg,163.3
+2025-11-13 11:00:00,Vitesse du vent,Vitesse du vent,m/s,2.09
+2025-11-12 08:00:00,Température,Température,°c,12.7
+2025-11-12 08:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.19
+2025-11-12 08:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.0
+2025-11-12 08:00:00,Pression atmosphérique,Pression atmosphérique,hPa,990.6
+2025-11-12 08:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,159.0
+2025-11-12 08:00:00,Point de Rosée,Point de Rosée,°c,9.0
+2025-11-12 08:00:00,Humidité relative,Humidité relative,%,78.0
+2025-11-12 08:00:00,Direction du vent,Direction du vent,Deg,300.6
+2025-11-12 08:00:00,Vitesse du vent,Vitesse du vent,m/s,1.12
+2025-11-06 20:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-06 20:00:00,Température,Température,°c,21.1
+2025-11-06 20:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 20:00:00,Point de Rosée,Point de Rosée,°c,11.6
+2025-11-06 20:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 20:00:00,Humidité relative,Humidité relative,%,54.5
+2025-11-06 20:00:00,Vitesse du vent,Vitesse du vent,m/s,1.92
+2025-11-06 20:00:00,Direction du vent,Direction du vent,Deg,346.0
+2025-11-06 20:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.8
+2025-11-06 19:00:00,Direction du vent,Direction du vent,Deg,316.5
+2025-11-06 19:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.3
+2025-11-06 19:00:00,Point de Rosée,Point de Rosée,°c,11.7
+2025-11-06 19:00:00,Humidité relative,Humidité relative,%,58.9
+2025-11-06 19:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-06 19:00:00,Température,Température,°c,20.0
+2025-11-06 19:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 19:00:00,Vitesse du vent,Vitesse du vent,m/s,0.92
+2025-11-06 19:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 18:00:00,Vitesse du vent,Vitesse du vent,m/s,0.83
+2025-11-06 18:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 18:00:00,Direction du vent,Direction du vent,Deg,303.1
+2025-11-06 18:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 18:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.9
+2025-11-06 18:00:00,Point de Rosée,Point de Rosée,°c,11.5
+2025-11-06 18:00:00,Température,Température,°c,19.4
+2025-11-06 18:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-06 18:00:00,Humidité relative,Humidité relative,%,60.3
+2025-11-06 17:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 17:00:00,Direction du vent,Direction du vent,Deg,356.4
+2025-11-06 17:00:00,Vitesse du vent,Vitesse du vent,m/s,0.16
+2025-11-06 17:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,8.0
+2025-11-06 17:00:00,Point de Rosée,Point de Rosée,°c,11.7
+2025-11-06 17:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 17:00:00,Humidité relative,Humidité relative,%,48.3
+2025-11-06 17:00:00,Température,Température,°c,23.2
+2025-11-06 17:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.4
+2025-11-06 16:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,133.0
+2025-11-06 16:00:00,Vitesse du vent,Vitesse du vent,m/s,1.12
+2025-11-06 16:00:00,Direction du vent,Direction du vent,Deg,52.3
+2025-11-06 16:00:00,Température,Température,°c,24.7
+2025-11-06 16:00:00,Humidité relative,Humidité relative,%,43.2
+2025-11-06 16:00:00,Point de Rosée,Point de Rosée,°c,11.3
+2025-11-06 16:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.4
+2025-11-06 16:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 16:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 15:00:00,Vitesse du vent,Vitesse du vent,m/s,0.63
+2025-11-06 15:00:00,Point de Rosée,Point de Rosée,°c,11.3
+2025-11-06 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,268.0
+2025-11-06 15:00:00,Humidité relative,Humidité relative,%,42.8
+2025-11-06 15:00:00,Température,Température,°c,24.8
+2025-11-06 15:00:00,Direction du vent,Direction du vent,Deg,213.1
+2025-11-06 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.5
+2025-11-06 14:00:00,Température,Température,°c,23.5
+2025-11-06 14:00:00,Humidité relative,Humidité relative,%,48.3
+2025-11-06 14:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 14:00:00,Direction du vent,Direction du vent,Deg,352.0
+2025-11-06 14:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 14:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,324.0
+2025-11-06 14:00:00,Vitesse du vent,Vitesse du vent,m/s,0.54
+2025-11-06 14:00:00,Point de Rosée,Point de Rosée,°c,12.0
+2025-11-06 14:00:00,Pression atmosphérique,Pression atmosphérique,hPa,979.7
+2025-11-06 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,511.0
+2025-11-06 13:00:00,Point de Rosée,Point de Rosée,°c,13.0
+2025-11-06 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 13:00:00,Vitesse du vent,Vitesse du vent,m/s,2.41
+2025-11-06 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,980.5
+2025-11-06 13:00:00,Température,Température,°c,22.4
+2025-11-06 13:00:00,Direction du vent,Direction du vent,Deg,143.5
+2025-11-06 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 13:00:00,Humidité relative,Humidité relative,%,55.5
+2025-11-06 12:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 12:00:00,Vitesse du vent,Vitesse du vent,m/s,2.79
+2025-11-06 12:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,580.0
+2025-11-06 12:00:00,Humidité relative,Humidité relative,%,58.8
+2025-11-06 12:00:00,Pression atmosphérique,Pression atmosphérique,hPa,981.8
+2025-11-06 12:00:00,Température,Température,°c,21.7
+2025-11-06 12:00:00,Point de Rosée,Point de Rosée,°c,13.3
+2025-11-06 12:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 12:00:00,Direction du vent,Direction du vent,Deg,219.6
+2025-11-06 11:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.6
+2025-11-06 11:00:00,Température,Température,°c,20.1
+2025-11-06 11:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 11:00:00,Direction du vent,Direction du vent,Deg,160.8
+2025-11-06 11:00:00,Humidité relative,Humidité relative,%,64.7
+2025-11-06 11:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,575.0
+2025-11-06 11:00:00,Point de Rosée,Point de Rosée,°c,13.2
+2025-11-06 11:00:00,Vitesse du vent,Vitesse du vent,m/s,2.0
+2025-11-06 11:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 10:00:00,Vitesse du vent,Vitesse du vent,m/s,1.09
+2025-11-06 10:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,456.0
+2025-11-06 10:00:00,Direction du vent,Direction du vent,Deg,170.0
+2025-11-06 10:00:00,Température,Température,°c,19.1
+2025-11-06 10:00:00,Pression atmosphérique,Pression atmosphérique,hPa,983.2
+2025-11-06 10:00:00,Humidité relative,Humidité relative,%,68.0
+2025-11-06 10:00:00,Point de Rosée,Point de Rosée,°c,13.0
+2025-11-06 10:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 10:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 09:00:00,Température,Température,°c,17.7
+2025-11-06 09:00:00,Point de Rosée,Point de Rosée,°c,13.2
+2025-11-06 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,314.0
+2025-11-06 09:00:00,Humidité relative,Humidité relative,%,75.0
+2025-11-06 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,983.5
+2025-11-06 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-06 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.91
+2025-11-06 09:00:00,Direction du vent,Direction du vent,Deg,244.1
+2025-11-06 09:00:00,Vitesse du vent,Vitesse du vent,m/s,0.61
+2025-11-04 07:00:00,Vitesse du vent,Vitesse du vent,m/s,0.95
+2025-11-04 07:00:00,Direction du vent,Direction du vent,Deg,45.7
+2025-11-04 07:00:00,Température,Température,°c,16.0
+2025-11-04 07:00:00,Humidité relative,Humidité relative,%,68.9
+2025-11-04 07:00:00,Point de Rosée,Point de Rosée,°c,10.3
+2025-11-04 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,19.0
+2025-11-04 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,991.6
+2025-11-04 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-04 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.89
+2025-11-03 04:00:00,Vitesse du vent,Vitesse du vent,m/s,0.56
+2025-11-03 04:00:00,Direction du vent,Direction du vent,Deg,281.3
+2025-11-03 04:00:00,Température,Température,°c,18.8
+2025-11-03 04:00:00,Humidité relative,Humidité relative,%,65.0
+2025-11-03 04:00:00,Point de Rosée,Point de Rosée,°c,12.0
+2025-11-03 04:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-11-03 04:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.1
+2025-11-03 04:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-11-03 04:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.35
+2025-10-31 01:00:00,Point de Rosée,Point de Rosée,°c,11.5
+2025-10-31 01:00:00,Vitesse du vent,Vitesse du vent,m/s,5.84
+2025-10-31 01:00:00,Direction du vent,Direction du vent,Deg,311.0
+2025-10-31 01:00:00,Température,Température,°c,22.2
+2025-10-31 01:00:00,Humidité relative,Humidité relative,%,50.6
+2025-10-31 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-31 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,982.5
+2025-10-31 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-31 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,1.64
+2025-10-29 15:00:00,Vitesse du vent,Vitesse du vent,m/s,3.77
+2025-10-29 15:00:00,Direction du vent,Direction du vent,Deg,174.3
+2025-10-29 15:00:00,Température,Température,°c,24.1
+2025-10-29 15:00:00,Humidité relative,Humidité relative,%,41.7
+2025-10-29 15:00:00,Point de Rosée,Point de Rosée,°c,10.3
+2025-10-29 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,189.0
+2025-10-29 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.3
+2025-10-29 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-29 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.76
+2025-10-29 13:00:00,Vitesse du vent,Vitesse du vent,m/s,4.35
+2025-10-29 13:00:00,Direction du vent,Direction du vent,Deg,175.1
+2025-10-29 13:00:00,Température,Température,°c,24.4
+2025-10-29 13:00:00,Humidité relative,Humidité relative,%,39.5
+2025-10-29 13:00:00,Point de Rosée,Point de Rosée,°c,9.8
+2025-10-29 13:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,628.0
+2025-10-29 13:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.6
+2025-10-29 13:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-29 13:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.76
+2025-10-29 11:00:00,Vitesse du vent,Vitesse du vent,m/s,6.78
+2025-10-29 11:00:00,Direction du vent,Direction du vent,Deg,161.5
+2025-10-29 11:00:00,Température,Température,°c,22.7
+2025-10-29 11:00:00,Humidité relative,Humidité relative,%,41.3
+2025-10-29 11:00:00,Point de Rosée,Point de Rosée,°c,8.9
+2025-10-29 11:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,602.0
+2025-10-29 11:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.9
+2025-10-29 11:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-29 11:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.76
+2025-10-29 09:00:00,Vitesse du vent,Vitesse du vent,m/s,1.08
+2025-10-29 09:00:00,Direction du vent,Direction du vent,Deg,148.5
+2025-10-29 09:00:00,Température,Température,°c,18.8
+2025-10-29 09:00:00,Humidité relative,Humidité relative,%,56.7
+2025-10-29 09:00:00,Point de Rosée,Point de Rosée,°c,10.0
+2025-10-29 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,360.0
+2025-10-29 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,988.8
+2025-10-29 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-29 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.76
+2025-10-29 07:00:00,Vitesse du vent,Vitesse du vent,m/s,1.13
+2025-10-29 07:00:00,Direction du vent,Direction du vent,Deg,284.7
+2025-10-29 07:00:00,Température,Température,°c,13.1
+2025-10-29 07:00:00,Humidité relative,Humidité relative,%,76.3
+2025-10-29 07:00:00,Point de Rosée,Point de Rosée,°c,9.0
+2025-10-29 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,22.0
+2025-10-29 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,988.5
+2025-10-29 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-29 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.76
+2025-10-28 05:00:00,Vitesse du vent,Vitesse du vent,m/s,0.76
+2025-10-28 05:00:00,Direction du vent,Direction du vent,Deg,258.1
+2025-10-28 05:00:00,Température,Température,°c,15.5
+2025-10-28 05:00:00,Humidité relative,Humidité relative,%,58.1
+2025-10-28 05:00:00,Point de Rosée,Point de Rosée,°c,7.3
+2025-10-28 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-28 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.1
+2025-10-28 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-28 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.73
+2025-10-28 03:00:00,Vitesse du vent,Vitesse du vent,m/s,1.34
+2025-10-28 03:00:00,Direction du vent,Direction du vent,Deg,270.7
+2025-10-28 03:00:00,Température,Température,°c,15.7
+2025-10-28 03:00:00,Humidité relative,Humidité relative,%,56.0
+2025-10-28 03:00:00,Point de Rosée,Point de Rosée,°c,7.0
+2025-10-28 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-28 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.0
+2025-10-28 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-28 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.73
+2025-10-28 01:00:00,Vitesse du vent,Vitesse du vent,m/s,1.5
+2025-10-28 01:00:00,Direction du vent,Direction du vent,Deg,305.1
+2025-10-28 01:00:00,Température,Température,°c,16.8
+2025-10-28 01:00:00,Humidité relative,Humidité relative,%,46.8
+2025-10-28 01:00:00,Point de Rosée,Point de Rosée,°c,5.3
+2025-10-28 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-10-28 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.5
+2025-10-28 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-28 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.73
+2025-10-27 23:00:00,Vitesse du vent,Vitesse du vent,m/s,1.15
+2025-10-27 23:00:00,Direction du vent,Direction du vent,Deg,6.5
+2025-10-27 23:00:00,Température,Température,°c,16.3
+2025-10-27 23:00:00,Humidité relative,Humidité relative,%,55.7
+2025-10-27 23:00:00,Point de Rosée,Point de Rosée,°c,7.4
+2025-10-27 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,7.08
+2025-10-27 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.1
+2025-10-27 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.7
+2025-10-27 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,1.0

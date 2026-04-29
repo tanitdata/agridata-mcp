@@ -1,0 +1,163 @@
+﻿Date,nom_ar,nom_fr,unite,valeur
+2025-09-26 23:00:00,درجة الحرارة,Température,°C,17.8
+2025-09-26 23:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 23:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 23:00:00,Point de Rosée,Point de Rosée,°C,14.5
+2025-09-26 23:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.3
+2025-09-26 23:00:00,Humidité relative,Humidité relative,%,81.1
+2025-09-26 23:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 23:00:00,اتجاه الرياح,Direction du vent,Deg,106.4
+2025-09-26 23:00:00,سرعة الرياح,Vitesse du vent,m/s,2.03
+2025-09-26 22:00:00,Humidité relative,Humidité relative,%,74.2
+2025-09-26 22:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 22:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 22:00:00,درجة الحرارة,Température,°C,18.5
+2025-09-26 22:00:00,اتجاه الرياح,Direction du vent,Deg,109.9
+2025-09-26 22:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 22:00:00,سرعة الرياح,Vitesse du vent,m/s,0.72
+2025-09-26 22:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.3
+2025-09-26 22:00:00,Point de Rosée,Point de Rosée,°C,13.8
+2025-09-26 21:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 21:00:00,Humidité relative,Humidité relative,%,74.9
+2025-09-26 21:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 21:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.9
+2025-09-26 21:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 21:00:00,Point de Rosée,Point de Rosée,°C,14.0
+2025-09-26 21:00:00,اتجاه الرياح,Direction du vent,Deg,127.1
+2025-09-26 21:00:00,درجة الحرارة,Température,°C,18.6
+2025-09-26 21:00:00,سرعة الرياح,Vitesse du vent,m/s,1.38
+2025-09-26 20:00:00,اتجاه الرياح,Direction du vent,Deg,133.8
+2025-09-26 20:00:00,درجة الحرارة,Température,°C,18.6
+2025-09-26 20:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,1.0
+2025-09-26 20:00:00,Humidité relative,Humidité relative,%,77.3
+2025-09-26 20:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.9
+2025-09-26 20:00:00,سرعة الرياح,Vitesse du vent,m/s,1.4
+2025-09-26 20:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 20:00:00,Point de Rosée,Point de Rosée,°C,14.5
+2025-09-26 20:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 19:00:00,Humidité relative,Humidité relative,%,79.5
+2025-09-26 19:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 19:00:00,اتجاه الرياح,Direction du vent,Deg,45.2
+2025-09-26 19:00:00,درجة الحرارة,Température,°C,18.9
+2025-09-26 19:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.4
+2025-09-26 19:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 19:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 19:00:00,Point de Rosée,Point de Rosée,°C,15.2
+2025-09-26 19:00:00,سرعة الرياح,Vitesse du vent,m/s,1.84
+2025-09-26 18:00:00,Humidité relative,Humidité relative,%,71.6
+2025-09-26 18:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,4.0
+2025-09-26 18:00:00,درجة الحرارة,Température,°C,20.0
+2025-09-26 18:00:00,سرعة الرياح,Vitesse du vent,m/s,0.13
+2025-09-26 18:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.6
+2025-09-26 18:00:00,Point de Rosée,Point de Rosée,°C,14.7
+2025-09-26 18:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 18:00:00,اتجاه الرياح,Direction du vent,Deg,334.1
+2025-09-26 18:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 17:00:00,سرعة الرياح,Vitesse du vent,m/s,1.49
+2025-09-26 17:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,29.0
+2025-09-26 17:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 17:00:00,اتجاه الرياح,Direction du vent,Deg,173.6
+2025-09-26 17:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.3
+2025-09-26 17:00:00,Point de Rosée,Point de Rosée,°C,16.0
+2025-09-26 17:00:00,Humidité relative,Humidité relative,%,75.4
+2025-09-26 17:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 17:00:00,درجة الحرارة,Température,°C,20.5
+2025-09-26 16:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 16:00:00,سرعة الرياح,Vitesse du vent,m/s,1.19
+2025-09-26 16:00:00,Humidité relative,Humidité relative,%,72.1
+2025-09-26 16:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.2
+2025-09-26 16:00:00,درجة الحرارة,Température,°C,21.3
+2025-09-26 16:00:00,اتجاه الرياح,Direction du vent,Deg,304.7
+2025-09-26 16:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,63.0
+2025-09-26 16:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 16:00:00,Point de Rosée,Point de Rosée,°C,16.0
+2025-09-26 15:00:00,اتجاه الرياح,Direction du vent,Deg,217.6
+2025-09-26 15:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,145.0
+2025-09-26 15:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.9
+2025-09-26 15:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 15:00:00,سرعة الرياح,Vitesse du vent,m/s,1.7
+2025-09-26 15:00:00,Humidité relative,Humidité relative,%,73.4
+2025-09-26 15:00:00,Point de Rosée,Point de Rosée,°C,16.1
+2025-09-26 15:00:00,درجة الحرارة,Température,°C,21.1
+2025-09-26 15:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 14:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,89.0
+2025-09-26 14:00:00,اتجاه الرياح,Direction du vent,Deg,266.9
+2025-09-26 14:00:00,Humidité relative,Humidité relative,%,73.5
+2025-09-26 14:00:00,سرعة الرياح,Vitesse du vent,m/s,1.27
+2025-09-26 14:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.3
+2025-09-26 14:00:00,Point de Rosée,Point de Rosée,°C,15.8
+2025-09-26 14:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 14:00:00,درجة الحرارة,Température,°C,20.7
+2025-09-26 14:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 12:00:00,Point de Rosée,Point de Rosée,°C,15.1
+2025-09-26 12:00:00,درجة الحرارة,Température,°C,20.1
+2025-09-26 12:00:00,سرعة الرياح,Vitesse du vent,m/s,2.83
+2025-09-26 12:00:00,Humidité relative,Humidité relative,%,73.3
+2025-09-26 12:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,210.0
+2025-09-26 12:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 12:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 12:00:00,اتجاه الرياح,Direction du vent,Deg,298.7
+2025-09-26 12:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.8
+2025-09-26 11:00:00,درجة الحرارة,Température,°C,18.9
+2025-09-26 11:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 11:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 11:00:00,Pression atmosphérique,Pression atmosphérique,hPa,986.3
+2025-09-26 11:00:00,Humidité relative,Humidité relative,%,78.8
+2025-09-26 11:00:00,سرعة الرياح,Vitesse du vent,m/s,3.31
+2025-09-26 11:00:00,Point de Rosée,Point de Rosée,°C,15.1
+2025-09-26 11:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,61.0
+2025-09-26 11:00:00,اتجاه الرياح,Direction du vent,Deg,231.0
+2025-09-26 10:00:00,درجة الحرارة,Température,°C,20.1
+2025-09-26 10:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 10:00:00,Humidité relative,Humidité relative,%,80.9
+2025-09-26 10:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,103.0
+2025-09-26 10:00:00,Pression atmosphérique,Pression atmosphérique,hPa,987.1
+2025-09-26 10:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 10:00:00,سرعة الرياح,Vitesse du vent,m/s,2.56
+2025-09-26 10:00:00,Point de Rosée,Point de Rosée,°C,16.7
+2025-09-26 10:00:00,اتجاه الرياح,Direction du vent,Deg,253.4
+2025-09-26 09:00:00,Point de Rosée,Point de Rosée,°C,15.0
+2025-09-26 09:00:00,سرعة الرياح,Vitesse du vent,m/s,1.39
+2025-09-26 09:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 09:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.2
+2025-09-26 09:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,214.0
+2025-09-26 09:00:00,درجة الحرارة,Température,°C,20.8
+2025-09-26 09:00:00,اتجاه الرياح,Direction du vent,Deg,284.0
+2025-09-26 09:00:00,Humidité relative,Humidité relative,%,69.4
+2025-09-26 09:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 07:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 07:00:00,اتجاه الرياح,Direction du vent,Deg,312.0
+2025-09-26 07:00:00,Humidité relative,Humidité relative,%,85.6
+2025-09-26 07:00:00,سرعة الرياح,Vitesse du vent,m/s,0.36
+2025-09-26 07:00:00,Point de Rosée,Point de Rosée,°C,15.0
+2025-09-26 07:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,86.0
+2025-09-26 07:00:00,درجة الحرارة,Température,°C,17.5
+2025-09-26 07:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.4
+2025-09-26 07:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 05:00:00,سرعة الرياح,Vitesse du vent,m/s,1.62
+2025-09-26 05:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 05:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 05:00:00,اتجاه الرياح,Direction du vent,Deg,3.9
+2025-09-26 05:00:00,Point de Rosée,Point de Rosée,°C,15.4
+2025-09-26 05:00:00,درجة الحرارة,Température,°C,16.7
+2025-09-26 05:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.2
+2025-09-26 05:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 05:00:00,Humidité relative,Humidité relative,%,92.3
+2025-09-26 03:00:00,درجة الحرارة,Température,°C,17.1
+2025-09-26 03:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 03:00:00,اتجاه الرياح,Direction du vent,Deg,162.6
+2025-09-26 03:00:00,Pression atmosphérique,Pression atmosphérique,hPa,984.9
+2025-09-26 03:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 03:00:00,Point de Rosée,Point de Rosée,°C,16.4
+2025-09-26 03:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 03:00:00,سرعة الرياح,Vitesse du vent,m/s,1.6
+2025-09-26 03:00:00,Humidité relative,Humidité relative,%,95.6
+2025-09-26 01:00:00,اتجاه الرياح,Direction du vent,Deg,8.9
+2025-09-26 01:00:00,Évapotranspiration journalière,Évapotranspiration journalière,mm/j,2.99
+2025-09-26 01:00:00,Évapotranspiration Horaire,Évapotranspiration Horaire,mm/h,0.04
+2025-09-26 01:00:00,Pression atmosphérique,Pression atmosphérique,hPa,985.5
+2025-09-26 01:00:00,درجة الحرارة,Température,°C,17.7
+2025-09-26 01:00:00,Rayonnement solaire,Rayonnement solaire,W/m²,0.0
+2025-09-26 01:00:00,Humidité relative,Humidité relative,%,96.3
+2025-09-26 01:00:00,Point de Rosée,Point de Rosée,°C,17.1
+2025-09-26 01:00:00,سرعة الرياح,Vitesse du vent,m/s,1.04

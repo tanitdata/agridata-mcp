@@ -1,0 +1,937 @@
+Gouvernorats,Annee,superficie_emblavees_1000_ha
+"Tunis,1980 ,""6,6 """
+Ariana,1980 ,
+Manouba,1980 ,
+Ben Arous,1980 ,
+"Nabeul,1980 ,""12,9 """
+Bizerte,1980 ,50 
+"Béja,1980 ,""66,5 """
+"Jendouba,1980 ,""51,9 """
+Kef,1980 ,161 
+"Siliana,1980 ,""100,7 """
+"Zaghouan,1980 ,""57,3 """
+"Sousse,1980 ,""12,4 """
+"Monastir,1980 ,""0,2 """
+"Mahdia,1980 ,""3,7 """
+"Sfax,1980 ,""1,1 """
+"Kairouan,1980 ,""48,9 """
+"Kasserine,1980 ,""122,5 """
+"Sidi Bouzid,1980 ,""58,6 """
+"Gafsa,1980 ,""54,6 """
+"Gabès,1980 ,""7,7 """
+"Medenine,1980 ,""0,9 """
+Tozeur,1980 ,
+Kébili,1980 ,
+Tataouine,1980 ,
+"Tunis,1981 ,""3,9 """
+Ariana,1981 ,
+Manouba,1981 ,
+Ben Arous,1981 ,
+"Nabeul,1981 ,""12,5 """
+"Bizerte,1981 ,""59,2 """
+"Béja,1981 ,""82,7 """
+"Jendouba,1981 ,""60,3 """
+"Kef,1981 ,""128,3 """
+"Siliana,1981 ,""109,9 """
+"Zaghouan,1981 ,""46,1 """
+"Sousse,1981 ,""13,3 """
+"Monastir,1981 ,""3,8 """
+"Mahdia,1981 ,""14,3 """
+"Sfax,1981 ,""13,7 """
+"Kairouan,1981 ,""45,8 """
+"Kasserine,1981 ,""108,8 """
+"Sidi Bouzid,1981 ,""33,3 """
+"Gafsa,1981 ,""51,6 """
+Gabès,1981 ,20 
+"Medenine,1981 ,""14,2 """
+Tozeur,1981 ,
+Kébili,1981 ,
+Tataouine,1981 ,
+"Tunis,1982 ,""4,3 """
+Ariana,1982 ,
+Manouba,1982 ,
+Ben Arous,1982 ,
+"Nabeul,1982 ,""9,9 """
+"Bizerte,1982 ,""53,2 """
+"Béja,1982 ,""68,6 """
+Jendouba,1982 ,56 
+"Kef,1982 ,""155,8 """
+"Siliana,1982 ,""96,3 """
+"Zaghouan,1982 ,""42,6 """
+"Sousse,1982 ,""9,5 """
+"Monastir,1982 ,""3,1 """
+"Mahdia,1982 ,""11,9 """
+"Sfax,1982 ,""4,6 """
+"Kairouan,1982 ,""60,5 """
+"Kasserine,1982 ,""78,5 """
+"Sidi Bouzid,1982 ,""4,7 """
+"Gafsa,1982 ,""5,7 """
+"Gabès,1982 ,""0,4 """
+Medenine,1982 ,
+Tozeur,1982 ,
+Kébili,1982 ,
+Tataouine,1982 ,
+"Tunis,1983 ,""3,9 """
+Ariana,1983 ,
+Manouba,1983 ,
+Ben Arous,1983 ,
+"Nabeul,1983 ,""14,4 """
+"Bizerte,1983 ,""48,5 """
+"Béja,1983 ,""77,5 """
+Jendouba,1983 ,49 
+"Kef,1983 ,""150,1 """
+"Siliana,1983 ,""96,6 """
+"Zaghouan,1983 ,""40,6 """
+"Sousse,1983 ,""29,6 """
+"Monastir,1983 ,""9,1 """
+"Mahdia,1983 ,""27,4 """
+"Sfax,1983 ,""25,5 """
+"Kairouan,1983 ,""84,8 """
+"Kasserine,1983 ,""102,3 """
+"Sidi Bouzid,1983 ,""115,8 """
+Gafsa,1983 ,32 
+"Gabès,1983 ,""21,1 """
+"Medenine,1983 ,""3,6 """
+Tozeur,1983 ,
+"Kébili,1983 ,""10,8 """
+"Tataouine,1983 ,""12,8 """
+"Tunis,1984 ,""5,6 """
+Ariana,1984 ,
+Manouba,1984 ,
+Ben Arous,1984 ,
+"Nabeul,1984 ,""12,7 """
+Bizerte,1984 ,69 
+"Béja,1984 ,""80,8 """
+Jendouba,1984 ,50 
+"Kef,1984 ,""128,6 """
+"Siliana,1984 ,""92,8 """
+Zaghouan,1984 ,57 
+"Sousse,1984 ,""31,7 """
+"Monastir,1984 ,""2,2 """
+"Mahdia,1984 ,""21,4 """
+"Sfax,1984 ,""12,8 """
+"Kairouan,1984 ,""74,4 """
+"Kasserine,1984 ,""79,6 """
+Sidi Bouzid,1984 ,40 
+Gafsa,1984 ,26 
+"Gabès,1984 ,""1,5 """
+"Medenine,1984 ,""1,3 """
+Tozeur,1984 ,
+Kébili,1984 ,
+"Tataouine,1984 ,""0,4 """
+"Tunis,1985 ,""0,6 """
+"Ariana,1985 ,""18,6 """
+Manouba,1985 ,
+"Ben Arous,1985 ,""2,2 """
+"Nabeul,1985 ,""11,6 """
+Bizerte,1985 ,57 
+"Béja,1985 ,""71,1 """
+Jendouba,1985 ,50 
+"Kef,1985 ,""129,2 """
+"Siliana,1985 ,""86,9 """
+Zaghouan,1985 ,30 
+"Sousse,1985 ,""29,2 """
+"Monastir,1985 ,""7,6 """
+"Mahdia,1985 ,""24,8 """
+Sfax,1985 ,36 
+"Kairouan,1985 ,""85,5 """
+"Kasserine,1985 ,""95,5 """
+"Sidi Bouzid,1985 ,""63,6 """
+"Gafsa,1985 ,""59,2 """
+"Gabès,1985 ,""15,2 """
+"Medenine,1985 ,""4,9 """
+"Tozeur,1985 ,""0,3 """
+Kébili,1985 ,
+Tataouine,1985 ,4 
+"Tunis,1986 ,""0,8 """
+"Ariana,1986 ,""21,2 """
+Manouba,1986 ,
+"Ben Arous,1986 ,""5,6 """
+"Nabeul,1986 ,""12,2 """
+"Bizerte,1986 ,""61,5 """
+"Béja,1986 ,""84,4 """
+Jendouba,1986 ,50 
+"Kef,1986 ,""126,3 """
+"Siliana,1986 ,""97,5 """
+"Zaghouan,1986 ,""26,2 """
+"Sousse,1986 ,""11,6 """
+"Monastir,1986 ,""1,5 """
+"Mahdia,1986 ,""6,8 """
+"Sfax,1986 ,""17,6 """
+"Kairouan,1986 ,""44,6 """
+Kasserine,1986 ,93 
+"Sidi Bouzid,1986 ,""24,7 """
+Gafsa,1986 ,36 
+"Gabès,1986 ,""1,2 """
+"Medenine,1986 ,""0,7 """
+Tozeur,1986 ,
+Kébili,1986 ,
+Tataouine,1986 ,
+"Tunis,1987 ,""0,6 """
+"Ariana,1987 ,""23,3 """
+Manouba,1987 ,
+"Ben Arous,1987 ,""5,9 """
+"Nabeul,1987 ,""10,5 """
+Bizerte,1987 ,56 
+"Béja,1987 ,""77,9 """
+"Jendouba,1987 ,""47,8 """
+"Kef,1987 ,""139,8 """
+"Siliana,1987 ,""91,9 """
+"Zaghouan,1987 ,""34,6 """
+"Sousse,1987 ,""33,1 """
+"Monastir,1987 ,""3,4 """
+Mahdia,1987 ,22 
+"Sfax,1987 ,""18,1 """
+"Kairouan,1987 ,""72,7 """
+"Kasserine,1987 ,""69,5 """
+"Sidi Bouzid,1987 ,""56,5 """
+Gafsa,1987 ,69 
+Gabès,1987 ,21 
+Medenine,1987 ,13 
+"Tozeur,1987 ,""0,2 """
+Kébili,1987 ,
+Tataouine,1987 ,
+"Tunis,1988 ,""0,9 """
+"Ariana,1988 ,""20,7 """
+Manouba,1988 ,
+"Ben Arous,1988 ,""6,9 """
+"Nabeul,1988 ,""9,4 """
+"Bizerte,1988 ,""61,5 """
+"Béja,1988 ,""81,6 """
+Jendouba,1988 ,48 
+Kef,1988 ,100 
+"Siliana,1988 ,""87,8 """
+"Zaghouan,1988 ,""29,9 """
+"Sousse,1988 ,""14,5 """
+Monastir,1988 ,1 
+"Mahdia,1988 ,""4,6 """
+"Sfax,1988 ,""2,7 """
+Kairouan,1988 ,28 
+"Kasserine,1988 ,""52,7 """
+"Sidi Bouzid,1988 ,""7,9 """
+"Gafsa,1988 ,""6,5 """
+"Gabès,1988 ,""6,1 """
+"Medenine,1988 ,""10,4 """
+Tozeur,1988 ,
+Kébili,1988 ,
+Tataouine,1988 ,7 
+"Tunis,1989 ,""1,1 """
+"Ariana,1989 ,""21,5 """
+Manouba,1989 ,
+"Ben Arous,1989 ,""6,9 """
+"Nabeul,1989 ,""14,6 """
+"Bizerte,1989 ,""64,5 """
+Béja,1989 ,79 
+Jendouba,1989 ,49 
+Kef,1989 ,110 
+Siliana,1989 ,98 
+"Zaghouan,1989 ,""40,2 """
+Sousse,1989 ,36 
+"Monastir,1989 ,""4,3 """
+Mahdia,1989 ,23 
+"Sfax,1989 ,""13,8 """
+Kairouan,1989 ,68 
+Kasserine,1989 ,69 
+"Sidi Bouzid,1989 ,""85,7 """
+"Gafsa,1989 ,""8,5 """
+Gabès,1989 ,15 
+Medenine,1989 ,12 
+Tozeur,1989 ,
+Kébili,1989 ,
+Tataouine,1989 ,5 
+"Tunis,1990 ,""0,7 """
+"Ariana,1990 ,""25,5 """
+Manouba,1990 ,
+"Ben Arous,1990 ,""7,8 """
+"Nabeul,1990 ,""14,1 """
+"Bizerte,1990 ,""60,4 """
+"Béja,1990 ,""80,1 """
+"Jendouba,1990 ,""54,1 """
+"Kef,1990 ,""106,5 """
+"Siliana,1990 ,""93,7 """
+"Zaghouan,1990 ,""47,5 """
+"Sousse,1990 ,""35,9 """
+"Monastir,1990 ,""3,5 """
+Mahdia,1990 ,24 
+"Sfax,1990 ,""7,3 """
+"Kairouan,1990 ,""71,3 """
+Kasserine,1990 ,83 
+"Sidi Bouzid,1990 ,""40,4 """
+Gafsa,1990 ,23 
+Gabès,1990 ,9 
+Medenine,1990 ,6 
+Tozeur,1990 ,
+Kébili,1990 ,
+Tataouine,1990 ,1 
+Tunis,1991 ,1 
+"Ariana,1991 ,""30,6 """
+Manouba,1991 ,
+"Ben Arous,1991 ,""6,5 """
+"Nabeul,1991 ,""13,7 """
+Bizerte,1991 ,65 
+"Béja,1991 ,""80,9 """
+"Jendouba,1991 ,""55,7 """
+Kef,1991 ,105 
+Siliana,1991 ,98 
+"Zaghouan,1991 ,""43,1 """
+"Sousse,1991 ,""35,1 """
+Monastir,1991 ,3 
+"Mahdia,1991 ,""15,8 """
+"Sfax,1991 ,""4,8 """
+"Kairouan,1991 ,""77,4 """
+"Kasserine,1991 ,""91,4 """
+"Sidi Bouzid,1991 ,""62,9 """
+"Gafsa,1991 ,""81,5 """
+Gabès,1991 ,16 
+"Medenine,1991 ,""4,8 """
+"Tozeur,1991 ,""0,3 """
+Kébili,1991 ,
+Tataouine,1991 ,1 
+"Tunis,1992 ,""0,8 """
+"Ariana,1992 ,""29,2 """
+Manouba,1992 ,
+"Ben Arous,1992 ,""8,2 """
+"Nabeul,1992 ,""17,3 """
+Bizerte,1992 ,59 
+"Béja,1992 ,""82,1 """
+Jendouba,1992 ,60 
+"Kef,1992 ,""114,6 """
+"Siliana,1992 ,""85,5 """
+"Zaghouan,1992 ,""45,8 """
+"Sousse,1992 ,""31,9 """
+"Monastir,1992 ,""2,7 """
+"Mahdia,1992 ,""18,5 """
+"Sfax,1992 ,""8,1 """
+"Kairouan,1992 ,""93,5 """
+Kasserine,1992 ,87 
+"Sidi Bouzid,1992 ,""58,4 """
+"Gafsa,1992 ,""31,9 """
+"Gabès,1992 ,""0,8 """
+"Medenine,1992 ,""0,2 """
+"Tozeur,1992 ,""0,2 """
+Kébili,1992 ,
+"Tataouine,1992 ,""0,2 """
+"Tunis,1993 ,""0,6 """
+"Ariana,1993 ,""33,7 """
+Manouba,1993 ,
+"Ben Arous,1993 ,""5,7 """
+Nabeul,1993 ,20 
+Bizerte,1993 ,64 
+Béja,1993 ,81 
+"Jendouba,1993 ,""63,6 """
+"Kef,1993 ,""106,1 """
+Siliana,1993 ,92 
+"Zaghouan,1993 ,""39,4 """
+"Sousse,1993 ,""37,4 """
+"Monastir,1993 ,""3,2 """
+"Mahdia,1993 ,""22,2 """
+"Sfax,1993 ,""12,3 """
+"Kairouan,1993 ,""92,7 """
+Kasserine,1993 ,102 
+"Sidi Bouzid,1993 ,""67,8 """
+Gafsa,1993 ,49 
+"Gabès,1993 ,""13,3 """
+"Medenine,1993 ,""2,4 """
+Tozeur,1993 , 
+Kébili,1993 ,
+"Tataouine,1993 ,""0,6 """
+"Tunis,1994 ,""0,8 """
+Ariana,1994 ,37 
+Manouba,1994 ,
+"Ben Arous,1994 ,""6,7 """
+"Nabeul,1994 ,""17,8 """
+"Bizerte,1994 ,""70,3 """
+"Béja,1994 ,""85,1 """
+Jendouba,1994 ,64 
+"Kef,1994 ,""108,1 """
+Siliana,1994 ,88 
+"Zaghouan,1994 ,""36,9 """
+"Sousse,1994 ,""31,2 """
+"Monastir,1994 ,""1,7 """
+"Mahdia,1994 ,""18,4 """
+"Sfax,1994 ,""6,9 """
+"Kairouan,1994 ,""88,8 """
+Kasserine,1994 ,80 
+"Sidi Bouzid,1994 ,""45,6 """
+Gafsa,1994 ,9 
+"Gabès,1994 ,""2,7 """
+"Medenine,1994 ,""5,2 """
+Tozeur,1994 , 
+Kébili,1994 ,
+"Tataouine,1994 ,""5,4 """
+"Tunis,1995 ,""0,4 """
+"Ariana,1995 ,""37,6 """
+Manouba,1995 ,
+Ben Arous,1995 ,6 
+"Nabeul,1995 ,""18,8 """
+Bizerte,1995 ,72 
+"Béja,1995 ,""86,7 """
+"Jendouba,1995 ,""60,8 """
+"Kef,1995 ,""120,8 """
+"Siliana,1995 ,""93,1 """
+"Zaghouan,1995 ,""49,9 """
+Sousse,1995 ,20 
+"Monastir,1995 ,""0,5 """
+Mahdia,1995 ,3 
+"Sfax,1995 ,""0,4 """
+"Kairouan,1995 ,""40,4 """
+"Kasserine,1995 ,""89,2 """
+"Sidi Bouzid,1995 ,""26,9 """
+"Gafsa,1995 ,""30,1 """
+Gabès,1995 ,7 
+Medenine,1995 ,5 
+Tozeur,1995 , 
+Kébili,1995 ,2 
+"Tataouine,1995 ,""3,8 """
+"Tunis,1996 ,""1,4 """
+"Ariana,1996 ,""34,8 """
+Manouba,1996 ,
+"Ben Arous,1996 ,""7,4 """
+"Nabeul,1996 ,""16,8 """
+"Bizerte,1996 ,""67,6 """
+"Béja,1996 ,""92,6 """
+"Jendouba,1996 ,""65,8 """
+"Kef,1996 ,""126,3 """
+Siliana,1996 ,103 
+Zaghouan,1996 ,54 
+Sousse,1996 ,40 
+Monastir,1996 ,4 
+Mahdia,1996 ,16 
+"Sfax,1996 ,""26,5 """
+"Kairouan,1996 ,""91,1 """
+"Kasserine,1996 ,""109,6 """
+"Sidi Bouzid,1996 ,""120,8 """
+"Gafsa,1996 ,""85,3 """
+Gabès,1996 ,24 
+Medenine,1996 ,10 
+Tozeur,1996 ,1 
+"Kébili,1996 ,""6,5 """
+"Tataouine,1996 ,""4,3 """
+Tunis,1997 ,1 
+"Ariana,1997 ,""30,67 """
+Manouba,1997 ,
+"Ben Arous,1997 ,""6,5 """
+"Nabeul,1997 ,""19,53 """
+"Bizerte,1997 ,""66,69 """
+"Béja,1997 ,""87,1 """
+"Jendouba,1997 ,""62,13 """
+"Kef,1997 ,""116,26 """
+"Siliana,1997 ,""94,28 """
+"Zaghouan,1997 ,""38,9 """
+"Sousse,1997 ,""8,97 """
+"Monastir,1997 ,""0,57 """
+"Mahdia,1997 ,""3,8 """
+"Sfax,1997 ,""0,09 """
+"Kairouan,1997 ,""51,63 """
+"Kasserine,1997 ,""74,89 """
+"Sidi Bouzid,1997 ,""9,68 """
+"Gafsa,1997 ,""0,57 """
+"Gabès,1997 ,""0,08 """
+"Medenine,1997 ,""0,19 """
+Tozeur,1997 , 
+Kébili,1997 ,
+Tataouine,1997 , 
+"Tunis,1998 ,""0,98 """
+"Ariana,1998 ,""33,89 """
+Manouba,1998 ,
+"Ben Arous,1998 ,""6,3 """
+"Nabeul,1998 ,""19,58 """
+"Bizerte,1998 ,""61,22 """
+"Béja,1998 ,""89,2 """
+"Jendouba,1998 ,""63,56 """
+"Kef,1998 ,""121,58 """
+"Siliana,1998 ,""98,63 """
+"Zaghouan,1998 ,""41,15 """
+"Sousse,1998 ,""36,34 """
+"Monastir,1998 ,""2,15 """
+"Mahdia,1998 ,""23,6 """
+"Sfax,1998 ,""2,22 """
+"Kairouan,1998 ,""89,27 """
+"Kasserine,1998 ,""76,4 """
+"Sidi Bouzid,1998 ,""32,5 """
+"Gafsa,1998 ,""21,87 """
+"Gabès,1998 ,""0,28 """
+"Medenine,1998 ,""0,71 """
+"Tozeur,1998 ,""0,35 """
+Kébili,1998 ,
+"Tataouine,1998 ,""0,05 """
+"Tunis,1999 ,""0,95 """
+"Ariana,1999 ,""31,46 """
+Manouba,1999 ,
+"Ben Arous,1999 ,""6,48 """
+Nabeul,1999 ,19 
+"Bizerte,1999 ,""73,56 """
+"Béja,1999 ,""91,68 """
+"Jendouba,1999 ,""62,44 """
+"Kef,1999 ,""122,09 """
+"Siliana,1999 ,""96,3 """
+"Zaghouan,1999 ,""44,65 """
+Sousse,1999 ,21 
+"Monastir,1999 ,""1,75 """
+"Mahdia,1999 ,""15,51 """
+"Sfax,1999 ,""14,03 """
+"Kairouan,1999 ,""79,52 """
+"Kasserine,1999 ,""98,28 """
+"Sidi Bouzid,1999 ,""29,97 """
+"Gafsa,1999 ,""21,04 """
+Gabès,1999 ,11 
+"Medenine,1999 ,""6,35 """
+"Tozeur,1999 ,""0,13 """
+"Kébili,1999 ,""2,6 """
+"Tataouine,1999 ,""1,02 """
+"Tunis,2000 ,""1,05 """
+"Ariana,2000 ,""28,83 """
+Manouba,2000 ,
+"Ben Arous,2000 ,""6,58 """
+"Nabeul,2000 ,""18,1 """
+"Bizerte,2000 ,""65,57 """
+"Béja,2000 ,""91,73 """
+"Jendouba,2000 ,""61,12 """
+"Kef,2000 ,""122,8 """
+"Siliana,2000 ,""87,15 """
+"Zaghouan,2000 ,""36,1 """
+"Sousse,2000 ,""35,2 """
+"Monastir,2000 ,""2,86 """
+Mahdia,2000 ,28 
+Sfax,2000 ,18 
+"Kairouan,2000 ,""86,49 """
+"Kasserine,2000 ,""76,45 """
+"Sidi Bouzid,2000 ,""55,2 """
+"Gafsa,2000 ,""21,03 """
+"Gabès,2000 ,""13,1 """
+"Medenine,2000 ,""1,41 """
+Tozeur,2000 , 
+"Kébili,2000 ,""0,7 """
+"Tataouine,2000 ,""0,04 """
+"Tunis,2001 ,""1,02 """
+"Ariana,2001 ,""3,55 """
+"Manouba,2001 ,""23,45 """
+"Ben Arous,2001 ,""4,4 """
+"Nabeul,2001 ,""18,1 """
+"Bizerte,2001 ,""60,8 """
+"Béja,2001 ,""92,5 """
+"Jendouba,2001 ,""60,55 """
+"Kef,2001 ,""112,78 """
+"Siliana,2001 ,""85,56 """
+"Zaghouan,2001 ,""37,14 """
+"Sousse,2001 ,""4,41 """
+"Monastir,2001 ,""0,18 """
+"Mahdia,2001 ,""2,5 """
+"Sfax,2001 ,""0,63 """
+"Kairouan,2001 ,""63,5 """
+Kasserine,2001 ,99 
+"Sidi Bouzid,2001 ,""15,1 """
+"Gafsa,2001 ,""9,821 """
+"Gabès,2001 ,""5,9 """
+"Medenine,2001 ,""1,64 """
+Tozeur,2001 , 
+Kébili,2001 ,
+"Tataouine,2001 ,""2,5 """
+"Tunis,2002 ,""0,96 """
+"Ariana,2002 ,""4,08 """
+"Manouba,2002 ,""21,21 """
+"Ben Arous,2002 ,""3,63 """
+Nabeul,2002 ,17 
+"Bizerte,2002 ,""74,88 """
+"Béja,2002 ,""88,71 """
+"Jendouba,2002 ,""55,23 """
+"Kef,2002 ,""110,01 """
+"Siliana,2002 ,""78,18 """
+"Zaghouan,2002 ,""34,23 """
+"Sousse,2002 ,""14,65 """
+"Monastir,2002 ,""1,21 """
+"Mahdia,2002 ,""13,74 """
+"Sfax,2002 ,""2,57 """
+"Kairouan,2002 ,""34,16 """
+"Kasserine,2002 ,""62,13 """
+"Sidi Bouzid,2002 ,""14,52 """
+"Gafsa,2002 ,""5,85 """
+Gabès,2002 , 
+"Medenine,2002 ,""2,12 """
+Tozeur,2002 , 
+Kébili,2002 ,
+Tataouine,2002 , 
+Tunis,2003 ,1 
+"Ariana,2003 ,""3,95 """
+"Manouba,2003 ,""26,25 """
+Ben Arous,2003 ,5 
+"Nabeul,2003 ,""17,45 """
+"Bizerte,2003 ,""64,18 """
+"Béja,2003 ,""95,4 """
+"Jendouba,2003 ,""59,33 """
+"Kef,2003 ,""104,91 """
+"Siliana,2003 ,""99,99 """
+"Zaghouan,2003 ,""34,12 """
+"Sousse,2003 ,""21,09 """
+"Monastir,2003 ,""2,14 """
+"Mahdia,2003 ,""10,8 """
+"Sfax,2003 ,""8,69 """
+"Kairouan,2003 ,""64,68 """
+"Kasserine,2003 ,""79,45 """
+"Sidi Bouzid,2003 ,""63,2 """
+"Gafsa,2003 ,""23,13 """
+"Gabès,2003 ,""0,5 """
+"Medenine,2003 ,""2,4 """
+"Tozeur,2003 ,""0,19 """
+"Kébili,2003 ,""0,3 """
+"Tataouine,2003 ,""5,7 """
+"Tunis,2004 ,""0,73 """
+"Ariana,2004 ,""4,95 """
+"Manouba,2004 ,""23,4 """
+"Ben Arous,2004 ,""4,69 """
+"Nabeul,2004 ,""17,6 """
+"Bizerte,2004 ,""69,12 """
+"Béja,2004 ,""92,4 """
+"Jendouba,2004 ,""60,7 """
+"Kef,2004 ,""107,53 """
+"Siliana,2004 ,""85,5 """
+"Zaghouan,2004 ,""34,56 """
+"Sousse,2004 ,""39,49 """
+"Monastir,2004 ,""1,73 """
+"Mahdia,2004 ,""18,5 """
+Sfax,2004 ,9 
+"Kairouan,2004 ,""75,7 """
+"Kasserine,2004 ,""97,95 """
+"Sidi Bouzid,2004 ,""59,6 """
+"Gafsa,2004 ,""52,2 """
+Gabès,2004 ,8 
+"Medenine,2004 ,""2,4 """
+"Tozeur,2004 ,""0,7 """
+Kébili,2004 ,12 
+"Tataouine,2004 ,""2,58 """
+"Tunis,2005 ,""0,67 """
+"Ariana,2005 ,""4,1 """
+"Manouba,2005 ,""17,29 """
+"Ben Arous,2005 ,""4,55 """
+"Nabeul,2005 ,""17,8 """
+"Bizerte,2005 ,""70,5 """
+"Béja,2005 ,""94,73 """
+Jendouba,2005 ,61 
+"Kef,2005 ,""110,5 """
+"Siliana,2005 ,""89,45 """
+"Zaghouan,2005 ,""33,31 """
+"Sousse,2005 ,""27,31 """
+"Monastir,2005 ,""1,53 """
+"Mahdia,2005 ,""18,8 """
+"Sfax,2005 ,""4,82 """
+"Kairouan,2005 ,""73,64 """
+"Kasserine,2005 ,""89,7 """
+"Sidi Bouzid,2005 ,""52,18 """
+"Gafsa,2005 ,""30,57 """
+"Gabès,2005 ,""9,5 """
+"Medenine,2005 ,""0,48 """
+"Tozeur,2005 ,""0,65 """
+Kébili,2005 ,
+Tataouine,2005 , 
+"Tunis,2006 ,""0,63 """
+"Ariana,2006 ,""4,22 """
+"Manouba,2006 ,""22,62 """
+"Ben Arous,2006 ,""4,95 """
+"Nabeul,2006 ,""17,5 """
+"Bizerte,2006 ,""70,52 """
+"Béja,2006 ,""94,83 """
+"Jendouba,2006 ,""61,9 """
+"Kef,2006 ,""110,78 """
+"Siliana,2006 ,""101,39 """
+"Zaghouan,2006 ,""36,88 """
+Sousse,2006 ,22 
+"Monastir,2006 ,""4,84 """
+"Mahdia,2006 ,""17,2 """
+"Sfax,2006 ,""14,86 """
+Kairouan,2006 ,81 
+"Kasserine,2006 ,""83,6 """
+"Sidi Bouzid,2006 ,""58,02 """
+"Gafsa,2006 ,""23,99 """
+"Gabès,2006 ,""15,3 """
+"Medenine,2006 ,""1,75 """
+Tozeur,2006 , 
+Kébili,2006 ,7 
+"Tataouine,2006 ,""0,81 """
+"Tunis,2007 ,""0,7 """
+"Ariana,2007 ,""3,7 """
+"Manouba,2007 ,""23,2 """
+Ben Arous,2007 ,5 
+Nabeul,2007 ,17 
+"Bizerte,2007 ,""70,8 """
+"Béja,2007 ,""92,74 """
+"Jendouba,2007 ,""62,29 """
+"Kef,2007 ,""107,76 """
+"Siliana,2007 ,""84,9 """
+"Zaghouan,2007 ,""35,77 """
+Sousse,2007 ,22 
+"Monastir,2007 ,""3,43 """
+"Mahdia,2007 ,""15,45 """
+"Sfax,2007 ,""18,03 """
+"Kairouan,2007 ,""59,8 """
+"Kasserine,2007 ,""55,2 """
+"Sidi Bouzid,2007 ,""24,89 """
+"Gafsa,2007 ,""15,22 """
+"Gabès,2007 ,""12,12 """
+"Medenine,2007 ,""1,24 """
+Tozeur,2007 , 
+Kébili,2007 ,
+"Tataouine,2007 ,""0,5 """
+"Tunis,2008 ,""0,64 """
+"Ariana,2008 ,""2,19 """
+Manouba,2008 ,18 
+"Ben Arous,2008 ,""5,4 """
+Nabeul,2008 ,17 
+"Bizerte,2008 ,""70,13 """
+"Béja,2008 ,""90,84 """
+"Jendouba,2008 ,""64,82 """
+"Kef,2008 ,""86,5 """
+"Siliana,2008 ,""80,8 """
+"Zaghouan,2008 ,""30,66 """
+"Sousse,2008 ,""17,44 """
+"Monastir,2008 ,""1,83 """
+"Mahdia,2008 ,""14,07 """
+"Sfax,2008 ,""5,82 """
+"Kairouan,2008 ,""45,36 """
+"Kasserine,2008 ,""56,62 """
+"Sidi Bouzid,2008 ,""24,59 """
+"Gafsa,2008 ,""4,25 """
+Gabès,2008 ,4 
+"Medenine,2008 ,""6,11 """
+Tozeur,2008 ,
+Kébili,2008 ,2 
+Tataouine,2008 ,
+"Tunis,2009 ,""0,74 """
+"Ariana,2009 ,""3,5 """
+"Manouba,2009 ,""18,26 """
+"Ben Arous,2009 ,""4,83 """
+"Nabeul,2009 ,""19,29 """
+"Bizerte,2009 ,""74,78 """
+"Béja,2009 ,""97,97 """
+"Jendouba,2009 ,""66,4 """
+"Kef,2009 ,""71,8 """
+"Siliana,2009 ,""87,1 """
+"Zaghouan,2009 ,""29,89 """
+"Sousse,2009 ,""14,75 """
+"Monastir,2009 ,""2,18 """
+"Mahdia,2009 ,""15,23 """
+"Sfax,2009 ,""14,64 """
+"Kairouan,2009 ,""41,46 """
+"Kasserine,2009 ,""66,44 """
+"Sidi Bouzid,2009 ,""19,22 """
+"Gafsa,2009 ,""23,7 """
+"Gabès,2009 ,""5,1 """
+"Medenine,2009 ,""1,77 """
+"Tozeur,2009 ,""0,1 """
+"Kébili,2009 ,""0,1 """
+"Tataouine,2009 ,""0,11 """
+"Tunis,2010 ,""0,5 """
+"Ariana,2010 ,""3,22 """
+Manouba,2010 ,18 
+"Ben Arous,2010 ,""4,7 """
+"Nabeul,2010 ,""18,7 """
+"Bizerte,2010 ,""67,93 """
+Béja,2010 ,101 
+"Jendouba,2010 ,""65,76 """
+"Kef,2010 ,""72,17 """
+"Siliana,2010 ,""89,64 """
+"Zaghouan,2010 ,""27,54 """
+"Sousse,2010 ,""11,75 """
+"Monastir,2010 ,""0,87 """
+"Mahdia,2010 ,""6,8 """
+"Sfax,2010 ,""0,53 """
+"Kairouan,2010 ,""25,98 """
+"Kasserine,2010 ,""50,78 """
+"Sidi Bouzid,2010 ,""9,93 """
+"Gafsa,2010 ,""19,4 """
+Gabès,2010 ,
+"Medenine,2010 ,""0,05 """
+Tozeur,2010 ,
+Kébili,2010 ,1 
+Tataouine,2010 ,
+"Tunis,2011 ,""0,42 """
+"Ariana,2011 ,""3,8 """
+"Manouba,2011 ,""17,6 """
+"Ben Arous,2011 ,""4,14 """
+Nabeul,2011 ,18 
+"Bizerte,2011 ,""59,93 """
+"Béja,2011 ,""99,13 """
+"Jendouba,2011 ,""67,66 """
+"Kef,2011 ,""71,25 """
+"Siliana,2011 ,""88,4 """
+"Zaghouan,2011 ,""22,92 """
+"Sousse,2011 ,""19,45 """
+"Monastir,2011 ,""1,05 """
+"Mahdia,2011 ,""11,4 """
+"Sfax,2011 ,""3,55 """
+"Kairouan,2011 ,""47,57 """
+"Kasserine,2011 ,""68,35 """
+"Sidi Bouzid,2011 ,""37,6 """
+"Gafsa,2011 ,""20,58 """
+"Gabès,2011 ,""3,39 """
+"Medenine,2011 ,""2,76 """
+Tozeur,2011 ,
+Kébili,2011 ,8 
+"Tataouine,2011 ,""1,04 """
+"Tunis,2012 ,""0,62 """
+"Ariana,2012 ,""4,07 """
+"Manouba,2012 ,""17,2 """
+"Ben Arous,2012 ,""4,16 """
+"Nabeul,2012 ,""18,5 """
+"Bizerte,2012 ,""68,45 """
+"Béja,2012 ,""96,89 """
+"Jendouba,2012 ,""62,9 """
+"Kef,2012 ,""80,21 """
+Siliana,2012 ,84 
+"Zaghouan,2012 ,""22,69 """
+"Sousse,2012 ,""23,15 """
+"Monastir,2012 ,""2,8 """
+"Mahdia,2012 ,""8,35 """
+"Sfax,2012 ,""4,55 """
+"Kairouan,2012 ,""56,43 """
+Kasserine,2012 ,58 
+"Sidi Bouzid,2012 ,""18,61 """
+"Gafsa,2012 ,""19,28 """
+"Gabès,2012 ,""1,45 """
+"Medenine,2012 ,""3,73 """
+Tozeur,2012 ,
+Kébili,2012 ,7 
+"Tataouine,2012 ,""0,96 """
+"Tunis,2013 ,""0,64 """
+"Ariana,2013 ,""2,98 """
+"Manouba,2013 ,""18,4 """
+"Ben Arous,2013 ,""5,55 """
+Nabeul,2013 ,18 
+"Bizerte,2013 ,""73,64 """
+"Béja,2013 ,""94,48 """
+"Jendouba,2013 ,""63,8 """
+"Kef,2013 ,""61,75 """
+"Siliana,2013 ,""83,51 """
+"Zaghouan,2013 ,""21,45 """
+"Sousse,2013 ,""13,82 """
+"Monastir,2013 ,""0,05 """
+"Mahdia,2013 ,""0,35 """
+"Sfax,2013 ,""0,39 """
+"Kairouan,2013 ,""47,22 """
+"Kasserine,2013 ,""36,61 """
+"Sidi Bouzid,2013 ,""3,39 """
+"Gafsa,2013 ,""2,34 """
+Gabès,2013 ,
+Medenine,2013 ,
+Tozeur,2013 ,
+Kébili,2013 ,
+Tataouine,2013 ,
+"Tunis,2014 ,""0,68 """
+"Ariana,2014 ,""3,9 """
+"Manouba,2014 ,""19,2 """
+"Ben Arous,2014 ,""5,8 """
+"Nabeul,2014 ,""19,29 """
+"Bizerte,2014 ,""71,97 """
+"Béja,2014 ,""90,73 """
+"Jendouba,2014 ,""61,36 """
+"Kef,2014 ,""84,44 """
+"Siliana,2014 ,""82,5 """
+"Zaghouan,2014 ,""20,41 """
+"Sousse,2014 ,""21,15 """
+"Monastir,2014 ,""1,1 """
+Mahdia,2014 ,14 
+"Sfax,2014 ,""2,23 """
+"Kairouan,2014 ,""53,27 """
+"Kasserine,2014 ,""30,73 """
+"Sidi Bouzid,2014 ,""10,23 """
+"Gafsa,2014 ,""1,7 """
+"Gabès,2014 ,""1,25 """
+Medenine,2014 ,
+Tozeur,2014 ,
+Kébili,2014 ,
+"Tataouine,2014 ,""0,17 """
+"Tunis,2015 ,""0,69 """
+"Ariana,2015 ,""3,51 """
+Manouba,2015 ,19 
+"Ben Arous,2015 ,""4,48 """
+"Nabeul,2015 ,""18,86 """
+"Bizerte,2015 ,""66,32 """
+"Béja,2015 ,""98,14 """
+"Jendouba,2015 ,""62,51 """
+"Kef,2015 ,""54,46 """
+"Siliana,2015 ,""78,6 """
+"Zaghouan,2015 ,""20,59 """
+"Sousse,2015 ,""8,36 """
+"Monastir,2015 ,""0,96 """
+"Mahdia,2015 ,""5,7 """
+"Sfax,2015 ,""0,1 """
+"Kairouan,2015 ,""44,6 """
+"Kasserine,2015 ,""36,82 """
+"Sidi Bouzid,2015 ,""9,1 """
+"Gafsa,2015 ,""5,6 """
+"Gabès,2015 ,""0,05 """
+"Medenine,2015 ,""1,07 """
+Tozeur,2015 ,
+Kébili,2015 ,
+"Tataouine,2015 ,""0,52 """
+"Tunis,2016 ,""0,52 """
+"Ariana,2016 ,""4,32 """
+"Manouba,2016 ,""18,5 """
+"Ben Arous,2016 ,""4,395 """
+"Nabeul,2016 ,""20,08 """
+"Bizerte,2016 ,""73,09 """
+"Béja,2016 ,""94,11 """
+"Jendouba,2016 ,""63,57 """
+"Kef,2016 ,""51,8 """
+"Siliana,2016 ,""77,9 """
+"Zaghouan,2016 ,""20,59 """
+"Sousse,2016 ,""4,77 """
+"Monastir,2016 ,""0,69 """
+"Mahdia,2016 ,""0,2 """
+Sfax,2016 ,
+"Kairouan,2016 ,""38,31 """
+"Kasserine,2016 ,""36,66 """
+"Sidi Bouzid,2016 ,""3,58 """
+"Gafsa,2016 ,""0,6 """
+"Gabès,2016 ,""0,62 """
+"Medenine,2016 ,""1,1 """
+Tozeur,2016 ,
+Kébili,2016 ,
+Tataouine,2016 ,
+"Tunis,2017 ,""0,591 """
+"Ariana,2017 ,""4,29 """
+"Manouba,2017 ,""16,5 """
+"Ben Arous,2017 ,""3,26 """
+"Nabeul,2017 ,""20,66 """
+"Bizerte,2017 ,""65,225 """
+"Béja,2017 ,""96,63 """
+"Jendouba,2017 ,""65,24 """
+"Kef,2017 ,""50,635 """
+"Siliana,2017 ,""76,86 """
+"Zaghouan,2017 ,""18,895 """
+"Sousse,2017 ,""19,35 """
+"Monastir,2017 ,""1,25 """
+"Mahdia,2017 ,""10,484 """
+"Sfax,2017 ,""1,315 """
+"Kairouan,2017 ,""45,01 """
+"Kasserine,2017 ,""40,75"""
+"Sidi Bouzid,2017 ,""15,47 """
+"Gafsa,2017 ,""20,5 """
+"Gabès,2017 ,""4,7 """
+"Medenine,2017 ,""0,6 """
+Tozeur,2017 ,
+"Kébili,2017 ,""1,5 """
+"Tataouine,2017 ,""0,116 """
+"Tunis,2018 ,""0,55 """
+"Ariana,2018 ,""4,5 """
+"Manouba,2018 ,""16,3 """
+"Ben Arous,2018 ,""3,3 """
+"Nabeul,2018 ,""21,22 """
+"Bizerte,2018 ,""72,703 """
+"Béja,2018 ,""100,87 """
+"Jendouba,2018 ,""66,598 """
+"Kef,2018 ,""50,54 """
+"Siliana,2018 ,""76,28 """
+"Zaghouan,2018 ,""19,93 """
+"Sousse,2018 ,""10,936 """
+Monastir,2018 ,
+"Mahdia,2018 ,""1,2 """
+"Sfax,2018 ,""0,07 """
+"Kairouan,2018 ,""34,06 """
+"Kasserine,2018 ,""31,56"""
+"Sidi Bouzid,2018 ,""3,92 """
+"Gafsa,2018 ,""5,5 """
+"Gabès,2018 ,""6,0 """
+"Medenine,2018 ,""6,02 """
+Tozeur,2018 ,
+"Kébili,2018 ,""1,5 """
+"Tataouine,2018 ,""0,7 """
