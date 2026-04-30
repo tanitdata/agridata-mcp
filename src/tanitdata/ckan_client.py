@@ -121,8 +121,24 @@ class CKANClient:
         """Get metadata for a single resource (URL, format, name, etc.)."""
         return await self.api_call("resource_show", {"id": resource_id})
 
-    async def download_file(self, url: str, max_bytes: int = 5_242_880) -> bytes | None:
-        """Download a file from a URL, respecting a size cap. Returns None if too large."""
+    async def download_file(
+        self,
+        url: str,
+        max_bytes: int = 5_242_880,
+    ) -> tuple[bytes | None, str | None]:
+        """Download a file from a URL, respecting a size cap.
+
+        Returns a tuple ``(bytes, reason)``:
+          - On success: ``(data, None)``.
+          - On failure: ``(None, reason)`` where ``reason`` is one of
+            ``"size_cap"`` (content longer than ``max_bytes``),
+            ``"http_<status>"`` (non-2xx from the portal, e.g. ``"http_500"``),
+            ``"network"`` (timeouts, DNS, connection reset, …).
+
+        Callers use the reason to choose a user-facing message that
+        accurately describes what happened, rather than conflating every
+        failure mode under a single generic error.
+        """
         client = await self._ensure_client()
         await self._rate_limit()
         try:
@@ -130,18 +146,19 @@ class CKANClient:
                 resp.raise_for_status()
                 length = resp.headers.get("content-length")
                 if length and int(length) > max_bytes:
-                    return None
+                    return None, "size_cap"
                 chunks: list[bytes] = []
                 total = 0
                 async for chunk in resp.aiter_bytes():
                     total += len(chunk)
                     if total > max_bytes:
-                        return None
+                        return None, "size_cap"
                     chunks.append(chunk)
-            return b"".join(chunks)
+            return b"".join(chunks), None
         except httpx.HTTPStatusError as exc:
-            logger.warning("Download %s returned %s", url, exc.response.status_code)
-            return None
+            status = exc.response.status_code
+            logger.warning("Download %s returned %s", url, status)
+            return None, f"http_{status}"
         except httpx.HTTPError as exc:
             logger.warning("Download %s failed: %s", url, exc)
-            return None
+            return None, "network"

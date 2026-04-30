@@ -64,6 +64,47 @@ def _parse_xlsx(data: bytes) -> tuple[list[str], list[dict[str, str]]]:
     return fields, rows
 
 
+def _download_error_message(
+    resource_id: str,
+    name: str,
+    url: str,
+    reason: str | None,
+) -> str:
+    """Render a user-facing message for a failed `download_file` call.
+
+    The reason codes come from `CKANClient.download_file`: "size_cap",
+    "http_<status>" (e.g. "http_500" when the portal's file storage is
+    broken but the API is up), or "network" for connection-level errors.
+    We pick wording that matches what actually went wrong so the LLM
+    doesn't report a spurious size-limit message on an HTTP failure.
+    """
+    header = f"Resource `{resource_id}` ({name})"
+    if reason == "size_cap":
+        return (
+            f"{header} exceeds the 5 MB size limit. "
+            f"Download manually: {url}"
+        )
+    if reason and reason.startswith("http_"):
+        status = reason[len("http_") :]
+        return (
+            f"{header}: the portal's file download returned HTTP {status}. "
+            f"The portal's file storage may be temporarily unavailable "
+            f"(the API is a separate service — structured DataStore queries "
+            f"via `query_datastore` still work). "
+            f"Try again later or download manually: {url}"
+        )
+    if reason == "network":
+        return (
+            f"{header}: network error while fetching the file. "
+            f"Try again later or download manually: {url}"
+        )
+    # Unknown reason — keep the message honest rather than inventing one
+    return (
+        f"{header}: file download failed (reason: {reason or 'unknown'}). "
+        f"Download manually: {url}"
+    )
+
+
 async def read_resource(
     client: CKANClient,
     registry: SchemaRegistry,
@@ -109,13 +150,11 @@ async def read_resource(
             f"Download manually: {url}"
         )
 
-    # Download
-    data = await client.download_file(url)
+    # Download. Use the (data, reason) tuple so failure messages accurately
+    # describe what happened rather than defaulting to a size-cap excuse.
+    data, reason = await client.download_file(url)
     if data is None:
-        return (
-            f"Resource `{resource_id}` ({name}) exceeds the 5 MB size limit. "
-            f"Download manually: {url}"
-        )
+        return _download_error_message(resource_id, name, url, reason)
 
     # Parse
     try:
