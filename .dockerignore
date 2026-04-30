@@ -10,29 +10,14 @@ __pycache__/
 *.egg-info/
 .pytest_cache/
 .mypy_cache/
+audit_full.json
 test_*.py
 CLAUDE.md
 RESEARCH.md
 research/
+memory/
 claude_desktop_config.json
-
-# Skip non-tabular scrape folders only. v3.1.0 ships the tabular
-# folders (format_xlsx / format_xls / format_csv / format_api, ~94 MB)
-# so read_resource can serve non-DataStore XLSX/XLS/CSV files from the
-# image without needing the live portal.
-agridata_TN_Scraped_*/format_pdf/
-agridata_TN_Scraped_*/format_jpeg/
-agridata_TN_Scraped_*/format_png/
-agridata_TN_Scraped_*/format_docx/
-agridata_TN_Scraped_*/format_word/
-agridata_TN_Scraped_*/format_geojson/
-agridata_TN_Scraped_*/format_ods/
-agridata_TN_Scraped_*/format_xml/
-agridata_TN_Scraped_*/Master_Climate_Data_Stitched.csv
-agridata_TN_Scraped_*/TanitData_Solar_Map_*.html
-agridata_TN_Scraped_*/TanitData_Stitching_Map.csv
-
-# Development / offline-analysis artifacts (regeneratable, not needed at runtime)
+agridata_TN_Scraped_*/
+snapshot/
 vocabulary_raw.json
 value_catalog.json
-memory/

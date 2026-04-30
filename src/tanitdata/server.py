@@ -17,7 +17,7 @@ logging.getLogger("anyio").setLevel(logging.WARNING)
 from mcp.server.fastmcp import FastMCP
 
 from tanitdata import __version__
-from tanitdata.ckan_client import SnapshotClient, make_client
+from tanitdata.ckan_client import CKANClient
 from tanitdata.schema_registry import SchemaRegistry
 from tanitdata.tools.bibliography import search_bibliography
 from tanitdata.tools.climate import query_climate_stations
@@ -32,7 +32,7 @@ from tanitdata.tools.search import (
 
 logger = logging.getLogger(__name__)
 
-client = make_client()
+client = CKANClient()
 
 _schemas_path = os.environ.get("SCHEMAS_PATH")
 registry = SchemaRegistry(schemas_path=_schemas_path)
@@ -40,41 +40,23 @@ registry = SchemaRegistry(schemas_path=_schemas_path)
 
 @asynccontextmanager
 async def lifespan(server: FastMCP):
-    """Load the static registry, then populate the live layer.
-
-    Two refresh paths:
-      - Live mode   — kick off a background task that calls the CKAN API.
-      - Snapshot mode — do a single synchronous pass from audit_full.json.
-        No background task, no periodic refresh.
-    """
+    """Load the static registry synchronously, then kick off a background live refresh."""
     # Load schemas.json — fast (~28ms), must complete before tools are callable
     registry.load()
+    logger.info("tanitdata: static registry ready, starting background live refresh")
 
-    task: asyncio.Task | None = None
+    # Background refresh so the first tool call is never blocked by a network request
+    task = asyncio.create_task(_background_refresh())
 
-    if isinstance(client, SnapshotClient):
-        # Offline refresh is a pure file read — no reason to background it.
-        registry.load_snapshot()
-        logger.info(
-            "tanitdata: snapshot registry ready (snapshot_date=%s)",
-            registry.snapshot_date or "unknown",
-        )
-    else:
-        logger.info("tanitdata: static registry ready, starting background live refresh")
-        # Background refresh so the first tool call is never blocked by a network request
-        task = asyncio.create_task(_background_refresh())
+    yield
 
+    # Cleanup
+    task.cancel()
     try:
-        yield
-    finally:
-        # Cleanup
-        if task is not None:
-            task.cancel()
-            try:
-                await task
-            except (asyncio.CancelledError, Exception):
-                pass
-        await client.close()
+        await task
+    except (asyncio.CancelledError, Exception):
+        pass
+    await client.close()
 
 
 async def _background_refresh():

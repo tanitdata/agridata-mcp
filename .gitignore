@@ -20,34 +20,16 @@ venv/
 .vscode/
 .idea/
 
-# Offline-analysis artifacts (regeneratable by scripts/; too large + not
-# needed at runtime). These were gitignored pre-v3 and stay gitignored.
+# Regeneratable data (run scripts/ to rebuild)
+audit_full.json
 vocabulary_raw.json
 value_catalog.json
 
-# Raw scrape (268 MB source of truth for the snapshot). The derived
-# artifacts (snapshot/parquet/, snapshot/scrape_index.json, audit_full.json)
-# ARE committed so the repo is self-contained and reproducible.
-#
-# v3.1.0 also commits the tabular source folders (~94 MB) so read_resource
-# works fully offline on non-DataStore XLSX/XLS/CSV files. The non-tabular
-# scrape folders (PDFs, images, DOCX, GeoJSON, ODS, XML, WORD) remain
-# ignored — they're ~174 MB and not queryable anyway.
-agridata_TN_Scraped_*/format_pdf/
-agridata_TN_Scraped_*/format_jpeg/
-agridata_TN_Scraped_*/format_png/
-agridata_TN_Scraped_*/format_docx/
-agridata_TN_Scraped_*/format_word/
-agridata_TN_Scraped_*/format_geojson/
-agridata_TN_Scraped_*/format_ods/
-agridata_TN_Scraped_*/format_xml/
-agridata_TN_Scraped_*/Master_Climate_Data_Stitched.csv
-agridata_TN_Scraped_*/TanitData_Solar_Map_*.html
-agridata_TN_Scraped_*/TanitData_Stitching_Map.csv
-
-# Local memory / scratch
-memory/
-_phase*
+# Raw scrape (local-only). The snapshot architecture that used these
+# files lives on tag v3.1.3; see CLAUDE.md "Snapshot fallback" for the
+# recovery procedure if the portal goes down again.
+agridata_TN_Scraped_*/
+snapshot/
 
 # Research (local only, not for public repo)
 RESEARCH.md
@@ -56,14 +38,10 @@ research/
 # Claude Code development context (local only, not for public repo)
 CLAUDE.md
 
-# Ad-hoc scripts (local only)
+# Ad-hoc scripts and assets (local only)
 list_stations.py
 test_domain.py
 trust-policy-final.json
 tanitdata_logo_v2.png
-
-# NOTE v3.0.0: audit_full.json and snapshot/ are now intentionally TRACKED.
-# audit_full.json cannot be regenerated while the portal is down and is
-# the single source of truth for catalog metadata in snapshot mode.
-# snapshot/parquet/ is deterministic given the scrape + audit; we commit
-# it so clones are self-contained without needing the 268 MB scrape.
+_phase*
+memory/
