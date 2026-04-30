@@ -14,6 +14,10 @@ The portal covers climate, crops, fisheries, water resources, livestock, prices,
 
 Built for researchers, data scientists, agricultural policy analysts, and journalists covering food security in Tunisia and North Africa.
 
+![tanitdata in ChatGPT answering a per-delegation cereal yield question for Kairouan](docs/screenshots/example-kairouan-yields.png)
+
+*Example: tanitdata returning a per-delegation rainfed-vs-irrigated cereal yield breakdown for the 2022/2023 campaign in Kairouan, sourced from CRDA Kairouan via catalog.agridata.tn.*
+
 ---
 
 ## Quick Start — Hosted Instance
