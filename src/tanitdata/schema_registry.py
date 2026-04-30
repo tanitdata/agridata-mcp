@@ -18,6 +18,7 @@ import asyncio
 import json
 import logging
 import re
+import unicodedata
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from typing import TYPE_CHECKING, Any
@@ -26,6 +27,16 @@ if TYPE_CHECKING:
     from tanitdata.ckan_client import CKANClient
 
 logger = logging.getLogger(__name__)
+
+
+def _fold(s: str) -> str:
+    """Accent- and case-insensitive ASCII fold for tolerant name matching.
+
+    `Délégation` → `delegation`, `BLÉ DUR` → `ble dur`. Whitespace is
+    preserved so multi-word column names still collide on the same key.
+    """
+    nfkd = unicodedata.normalize("NFKD", s).lower()
+    return "".join(c for c in nfkd if not unicodedata.combining(c))
 
 # ---------------------------------------------------------------------------
 # Governorate normalisation tables
@@ -885,17 +896,31 @@ class SchemaRegistry:
         Used by query_datastore to append value hints to tool responses,
         so the LLM knows exact strings for follow-up WHERE clauses.
 
-        Returns: {column_name: [value1, value2, ...]} for columns with
-        known categorical values.  Omits columns with no hints.
+        Matching is exact first, then falls back to an accent-folded
+        comparison. CKAN's DataStore strips diacritics from column names
+        (`Délégation` → `Delegation`) but some sources (openpyxl parses
+        of raw XLSX) preserve them. The fallback makes hint retrieval
+        resilient to either spelling. Returned dict is keyed by the
+        *requested* column name so tool output stays aligned with the
+        actual headers shown to the LLM.
         """
         resource_hints = self._value_hints.get(resource_id, {})
         if not resource_hints:
             return {}
-        return {
+
+        exact = {
             col: resource_hints[col]
             for col in column_names
             if col in resource_hints
         }
+        missing = [c for c in column_names if c not in exact]
+        if missing:
+            folded_map = {_fold(k): v for k, v in resource_hints.items()}
+            for col in missing:
+                folded_hits = folded_map.get(_fold(col))
+                if folded_hits is not None:
+                    exact[col] = folded_hits
+        return exact
 
     def get_arabic_field_mapping(self) -> dict[str, Any]:
         self._ensure_loaded()
