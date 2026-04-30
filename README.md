@@ -231,18 +231,42 @@ Contributions are welcome.
 
 ## Citation
 
-If you use tanitdata in your research, please cite:
+If you use tanitdata in your research, please cite both the software and the data source.
+
+### Software
 
 ```bibtex
 @software{tanitdata2026,
-  title     = {tanitdata: Domain-Adapted MCP Server for Tunisia's Agricultural Open Data},
+  title     = {tanitdata: Domain-Adapted MCP Server for Tunisia's
+               Agricultural Open Data},
   author    = {Gasmi, Tarek},
   year      = {2026},
   url       = {https://github.com/tanitdata/agridata-mcp},
-  note      = {MCP server providing AI-mediated access to catalog.agridata.tn
-               with semantic layer for vocabulary bridging}
+  note      = {MCP server providing AI-mediated access to
+               catalog.agridata.tn with semantic layer for
+               vocabulary bridging}
 }
 ```
+
+### Data
+
+Data served by tanitdata originates from catalog.agridata.tn, operated by the Tunisian Ministry of Agriculture, Water Resources and Fisheries, under the Licence Nationale de Données Publiques Ouvertes (Décret 2021-3, Article 11). Per-dataset attribution is included in every tool response (organization name, dataset title, portal URL). When publishing results, cite the originating portal:
+
+```bibtex
+@misc{agridata_tn,
+  title        = {Portail des Données Agricoles Ouvertes en Tunisie},
+  author       = {{Ministère de l'Agriculture, des Ressources
+                   Hydrauliques et de la Pêche}},
+  year         = {2024},
+  url          = {https://catalog.agridata.tn},
+  note         = {Licensed under Licence Nationale de Données
+                  Publiques Ouvertes (Décret 2021-3). Data accessed
+                  via tanitdata MCP server. Users must cite the
+                  originating organization for each dataset used.}
+}
+```
+
+For individual datasets, cite the producing organization shown in the tool response footer (e.g., CRDA Beja, DGEDA, ONAGRI).
 
 ---
 
