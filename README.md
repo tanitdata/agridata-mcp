@@ -20,89 +20,9 @@ Built for researchers, data scientists, agricultural policy analysts, and journa
 
 ---
 
-## Quick Start — Hosted Instance
+## Getting Started
 
-**No installation required.** Connect any MCP-compatible client to:
-
-```
-https://mcp.tanitdata.org/mcp
-```
-
-No authentication needed — all data is public.
-
-### Claude Code
-
-```bash
-claude mcp add --transport http tanitdata https://mcp.tanitdata.org/mcp
-```
-
-### Claude Desktop
-
-Add to your config (`%APPDATA%\Claude\claude_desktop_config.json` on Windows, `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
-
-```json
-{
-  "mcpServers": {
-    "tanitdata": {
-      "command": "npx",
-      "args": ["mcp-remote", "https://mcp.tanitdata.org/mcp"]
-    }
-  }
-}
-```
-
-Requires Node.js installed. The `mcp-remote` package is fetched automatically on first launch.
-
-### VS Code / GitHub Copilot
-
-Add to `.vscode/mcp.json` in your workspace:
-
-```json
-{
-  "servers": {
-    "tanitdata": {
-      "url": "https://mcp.tanitdata.org/mcp",
-      "type": "http"
-    }
-  }
-}
-```
-
-### Cursor / Windsurf
-
-```json
-{
-  "mcpServers": {
-    "tanitdata": {
-      "url": "https://mcp.tanitdata.org/mcp"
-    }
-  }
-}
-```
-
-### Gemini CLI
-
-Add to `~/.gemini/settings.json`:
-
-```json
-{
-  "mcpServers": {
-    "tanitdata": {
-      "url": "https://mcp.tanitdata.org/mcp"
-    }
-  }
-}
-```
-
-### Any MCP-compatible client
-
-Point your client to `https://mcp.tanitdata.org/mcp` using its remote server configuration. No headers or tokens needed.
-
----
-
-## Local Development
-
-For developers who want to run their own instance or contribute.
+tanitdata runs locally as a stdio MCP server. Clone the repo, install dependencies, and point your MCP client at the local process.
 
 ### Prerequisites
 
@@ -118,7 +38,9 @@ uv sync
 uv run tanitdata          # starts stdio server
 ```
 
-### Connect locally (Claude Desktop)
+### Connect to Claude Desktop
+
+Add to your config (`%APPDATA%\Claude\claude_desktop_config.json` on Windows, `~/Library/Application Support/Claude/claude_desktop_config.json` on macOS):
 
 ```json
 {
